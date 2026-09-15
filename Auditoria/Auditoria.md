@@ -1,4 +1,4 @@
-## 6. Auditoria
+Auditoria
 
 | Integrante | Cédula | Aporte individual en este mini avance |
 |---|---|---|
