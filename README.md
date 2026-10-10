@@ -351,24 +351,24 @@ classDiagram
 
 ```mermaid
 flowchart TD
-    A["🏠 Página de Inicio"] --> B["📝 Registro"]
-    A --> C["🔐 Inicio de Sesión"]
+    A["Página de Inicio"] --> B["Registro"]
+    A --> C["Inicio de Sesión"]
 
     C --> D{"¿Rol del usuario?"}
 
-    D -->|Cliente| E["🏟️ Catálogo de Canchas"]
-    D -->|Administrador| K["📊 Panel de Administración"]
+    D -->|Cliente| E["Catálogo de Canchas"]
+    D -->|Administrador| K["Panel de Administración"]
 
-    E --> F["🔍 Buscador con Filtros"]
-    F --> G["📅 Calendario de Disponibilidad"]
-    G --> H["✅ Confirmar Reserva"]
-    E --> I["📋 Mis Reservas / Historial"]
-    I --> J["❌ Cancelar Reserva"]
+    E --> F["Buscador con Filtros"]
+    F --> G["Calendario de Disponibilidad"]
+    G --> H["Confirmar Reserva"]
+    E --> I["Mis Reservas / Historial"]
+    I --> J["Cancelar Reserva"]
 
-    K --> L["➕ Agregar / Editar Cancha"]
-    K --> M["📄 Listado de Reservas"]
-    M --> N["🔄 Cambiar Estado de Reserva"]
-    K --> O["🚧 Bloquear Horarios"]
+    K --> L["Agregar / Editar Cancha"]
+    K --> M["Listado de Reservas"]
+    M --> N["Cambiar Estado de Reserva"]
+    K --> O["Bloquear Horarios"]
 
     B --> C
 
