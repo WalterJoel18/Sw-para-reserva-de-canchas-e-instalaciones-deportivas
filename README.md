@@ -411,18 +411,102 @@ La siguiente matriz conecta los objetivos del proyecto con los requisitos funcio
 | Gestionar las reservas del complejo | RF-08 | Administrador | Cambiar el estado de una reserva | CU-09 | Reserva |
 | Bloquear horarios por mantenimiento | RF-09 | Administrador | Bloquear horario por mantenimiento | CU-10 | Horario, Cancha |
 
-## 10. Autoría e IA
+### Trazabilidad visual
 
-### Tabla de aportes individuales
+```mermaid
+flowchart LR
+    %% Requisitos Funcionales
+    subgraph Requisitos Funcionales
+        direction TB
+        RF1[RF-01]
+        RF2[RF-02]
+        RF3[RF-03]
+        RF4[RF-04]
+        RF5[RF-05]
+        RF6[RF-06]
+        RF7[RF-07]
+        RF8[RF-08]
+        RF9[RF-09]
+    end
 
-| Sección | Integrante(s) | Herramienta y Link al prompt | Aporte de la IA | Aporte intelectual del equipo |
-| :--- | :--- | :--- | :--- | :--- |
-| 1. Descripción del proyecto | Gonzalez, Walter (8-1027-2220) | Google Gemini — se usó para estructurar la redacción formal del problema, propósito y alcance. | Generó un borrador inicial de la descripción con lenguaje técnico adecuado para un documento de ingeniería. | El equipo definió el problema real a resolver, el nombre del proyecto y los límites del alcance basándose en la experiencia como usuarios de canchas deportivas. |
-| 2. Identificación de usuarios | Sanchez, Jose (8-1038-670) | Google Gemini — se usó para detallar las características y necesidades de cada tipo de usuario. | Propuso una estructura de características, necesidades y funciones para organizar la información de cada actor. | El equipo identificó los dos tipos de usuario (Cliente y Administrador) y definió sus roles basándose en cómo funciona un complejo deportivo real. |
-| 3. Requisitos funcionales | Rozette, Jose (8-1025-306) | Google Gemini — se usó para validar la completitud de los requisitos y su codificación. | Sugirió el formato de tabla con código, módulo, descripción y usuario. Ayudó a verificar que cada funcionalidad tuviera su RF correspondiente. | El equipo decidió qué funcionalidades incluir en el sistema, cómo agruparlas por módulo y a qué usuario asignar cada una. La decisión del código de acceso para administradores fue propuesta por el equipo. |
-| 4. Requisitos no funcionales | Meneses, Alexander (8-1035-623) | Google Gemini — se usó para identificar categorías relevantes de RNF. | Propuso categorías estándar (usabilidad, rendimiento, seguridad, etc.) y ayudó a redactar descripciones medibles. | El equipo definió los valores específicos (3 segundos, 95% disponibilidad) y priorizó qué atributos de calidad eran más relevantes para el proyecto. |
-| 5. Escenarios de uso | Meneses, Alexander (8-1035-623) | Google Gemini — se usó para estructurar los escenarios en formato tabular. | Generó el formato de 5 columnas (usuario, objetivo, contexto, secuencia, resultado) y ayudó a redactar las secuencias paso a paso. | El equipo definió los escenarios basándose en situaciones reales de uso y verificó que cada escenario correspondiera a un RF existente. |
-| 6. Casos de uso | Gonzalez, Walter (8-1027-2220) | Google Gemini — revisión de coherencia. | Ayudó a revisar la coherencia de la descripción de los casos de uso con los requisitos funcionales previamente definidos. | Walter definió los casos de uso, redactó los flujos, diseñó el diagrama UML y ajustó los escenarios alternos manualmente. |
-| 7. Modelo de clases | Gonzalez, Walter (8-1027-2220) | Google Gemini — apoyo en sintaxis. | Ayudó a estructurar la sintaxis del diagrama de clases en código Mermaid. | Walter diseñó la estructura de la base de datos, identificando entidades, atributos y relaciones, y armó la tabla descriptiva. |
-| 8. Modelo de navegación | Gonzalez, Walter (8-1027-2220) | *No se usó IA en esta sección.* | *Ninguno.* | Walter diseñó la arquitectura de pantallas, el flujo de navegación según el rol del usuario y elaboró el diagrama. |
-| 9. Matriz de trazabilidad | Gonzalez, Walter (8-1027-2220) | *No se usó IA en esta sección.* | *Ninguno.* | Walter estructuró la tabla cruzada y verificó que cada RF tuviera correspondencia con un caso de uso, escenario y clase de forma independiente. |
+    %% Casos de Uso
+    subgraph Casos de Uso
+        direction TB
+        CU01[CU-01]
+        CU02[CU-02]
+        CU03[CU-03]
+        CU04[CU-04]
+        CU05[CU-05]
+        CU06[CU-06]
+        CU07[CU-07]
+        CU08[CU-08]
+        CU09[CU-09]
+        CU10[CU-10]
+    end
+
+    %% Clases
+    subgraph Clases
+        direction TB
+        Usu[Usuario]
+        Cod[CodigoAcceso]
+        Can[Cancha]
+        Hor[Horario]
+        Res[Reserva]
+    end
+
+    %% Conexiones RF -> CU
+    RF1 -.-> CU01
+    RF2 -.-> CU02
+    RF3 -.-> CU08
+    RF4 -.-> CU03
+    RF5 -.-> CU04
+    RF6 -.-> CU05
+    RF7 -.-> CU06
+    RF7 -.-> CU07
+    RF8 -.-> CU09
+    RF9 -.-> CU10
+
+    %% Conexiones CU -> Clases
+    CU01 -.-> Usu
+    CU01 -.-> Cod
+    CU02 -.-> Usu
+    CU08 -.-> Can
+    CU03 -.-> Can
+    CU04 -.-> Can
+    CU04 -.-> Hor
+    CU05 -.-> Res
+    CU05 -.-> Hor
+    CU05 -.-> Can
+    CU06 -.-> Res
+    CU07 -.-> Res
+    CU09 -.-> Res
+    CU10 -.-> Hor
+    CU10 -.-> Can
+```
+
+## 10. Auditoria y uso de ia
+
+### Aportes individuales fase 1 (Mini avance 1)
+
+| Integrante | Cédula | Aporte individual en este mini avance |
+| :--- | :--- | :--- |
+| Gonzalez, Walter | 8-1027-2220 | Se encargó de montar el repositorio en GitHub y dejarlo organizado por carpetas, además de subir la página con GitHub Pages para que se pudiera ver el avance en línea. También ayudó a redactar la parte de la descripción del proyecto (el problema que resuelve, el propósito y hasta dónde llega el alcance). |
+| Sanchez, Jose | 8-1038-670 | Trabajó en la parte de los usuarios del sistema, pensando en cómo es un cliente típico y un administrador, qué necesitan y qué deberían poder hacer cada uno dentro de la plataforma. |
+| Rozette, Jose | 8-1025-306 | Se metió de lleno en los requisitos funcionales, armando la tabla completa con lo que el sistema debe hacer (registro, búsqueda, reservas, gestión de canchas, etc.) y a qué usuario le corresponde cada uno. |
+| Meneses, Alexander | 8-1035-623 | Redactó los requisitos no funcionales (usabilidad, rendimiento, seguridad, etc.) y armó los escenarios de uso, describiendo paso a paso cómo un cliente o un administrador usaría el sistema en distintas situaciones. |
+
+### Aportes individuales fase 1 (Parte 2)
+
+| Integrante | Cedula | Aporte individual |
+| :--- | :--- | :--- |
+| Gonzalez, Walter | 8-1027-2220 | Diseñó la arquitectura de la Fase 1 (Puntos 6 al 10): elaboración de los Casos de Uso (diagrama y descripción), diseño del Modelo de Clases, mapeo del Modelo de Navegación, estructuración de la Matriz de Trazabilidad y levantamiento de la auditoría de uso de Inteligencia Artificial para validación de procesos. |
+| Sanchez, Jose | 8-1038-670 | Revisión de ortografía |
+| Rozette, Jose | 8-1025-306 | Revisión de los requisitos |
+| Meneses, Alexander | 8-1035-623 | Revisión de la estructura del documento |
+
+### Registro de herramientas de ia utilizadas
+
+| Herramientas | Aporte de la ia |
+| :--- | :--- |
+| Gemini y antigravity | Ayudaron estructurar el diagrama de clases en formato Mermaid y a revisar la coherencia de la descripción de los Casos de Uso con los Requisitos Funcionales. La ayuda mas relevante fue pasar al estructura del pdf al read.me (Para que se fuera visualmente atractivo). |
+| Obsidian | No es una herramienta IA, pero si ayudó a diagramar mejor y mas rápido. |
