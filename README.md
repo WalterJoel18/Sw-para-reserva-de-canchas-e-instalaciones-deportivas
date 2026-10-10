@@ -1,4 +1,4 @@
-# Avance 1: Sistema Web para Reserva de Canchas e Instalaciones Deportivas
+# Sistema Web para Reserva de Canchas e Instalaciones Deportivas
 
 ## 1. Descripción del proyecto
 *   **Nombre del Proyecto:** Sistema web para reserva de canchas e instalaciones deportivas
@@ -85,3 +85,344 @@
 | Administrador | Bloquear horario por mantenimiento | Una cancha presenta daños y debe repararse durante dos días | Accede a la gestión de la cancha → selecciona bloquear fechas u horarios → indica el rango → guarda | Los horarios bloqueados dejan de estar disponibles para nuevas reservas |
 | Administrador | Cambiar el estado de una reserva | El administrador debe marcar una reserva como completada después de finalizar el uso de la cancha | Accede al listado de reservas → selecciona la reserva → cambia su estado (confirmada, cancelada o completada) → guarda | El estado de la reserva queda actualizado en el sistema |
 
+## 6. Casos de uso
+
+### 6.1 Diagrama de casos de uso
+
+```mermaid
+flowchart LR
+    %% Estilos UML
+    classDef actor fill:transparent,stroke:transparent,color:#000,font-size:18px;
+    classDef usecase fill:#2C52D1,stroke:#111,stroke-width:1px,color:#fff;
+    classDef system fill:transparent,stroke:#000,stroke-width:2px;
+
+    %% Actores
+    Cliente["🧍<br/>Cliente"]:::actor
+    Admin["🧍<br/>Administrador"]:::actor
+
+    %% Sistema
+    subgraph Sistema["Sistema de Reserva de Canchas"]
+        direction TB
+        CU01(["CU-01: Registrarse"]):::usecase
+        CU02(["CU-02: Iniciar sesión"]):::usecase
+        CU03(["CU-03: Buscar canchas"]):::usecase
+        CU04(["CU-04: Ver disponibilidad"]):::usecase
+        CU05(["CU-05: Reservar cancha"]):::usecase
+        CU06(["CU-06: Cancelar reserva"]):::usecase
+        CU07(["CU-07: Consultar historial"]):::usecase
+        CU08(["CU-08: Gestionar canchas (CRUD)"]):::usecase
+        CU09(["CU-09: Gestionar reservas"]):::usecase
+        CU10(["CU-10: Bloquear horarios"]):::usecase
+    end
+    class Sistema system;
+
+    %% Relaciones Cliente
+    Cliente --- CU01
+    Cliente --- CU02
+    Cliente --- CU03
+    Cliente --- CU04
+    Cliente --- CU05
+    Cliente --- CU06
+    Cliente --- CU07
+
+    %% Relaciones Administrador
+    CU02 --- Admin
+    CU08 --- Admin
+    CU09 --- Admin
+    CU10 --- Admin
+```
+
+### 6.2 Descripción de casos de uso
+
+#### CU-01: Registrarse en el sistema
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Código** | CU-01 |
+| **Nombre** | Registrarse en el sistema |
+| **Actor(es)** | Cliente, Administrador |
+| **Precondición** | El usuario no tiene una cuenta en el sistema. |
+| **Flujo principal** | 1. El usuario accede a la página de registro. <br> 2. Completa los campos: nombre, correo, teléfono y contraseña. <br> 3. (Opcional) Ingresa un código de acceso de empleado. <br> 4. El sistema valida que el correo no esté registrado. <br> 5. El sistema crea la cuenta con el rol correspondiente (Cliente por defecto, o Administrador si el código es válido). <br> 6. Se muestra un mensaje de confirmación. |
+| **Flujo alterno** | 4a. Si el correo ya está registrado, el sistema muestra un error: "Este correo ya tiene una cuenta asociada". <br> 5a. Si el código de empleado es incorrecto, el sistema muestra un error: "Código de acceso inválido". |
+| **Postcondición** | La cuenta queda creada y el usuario puede iniciar sesión. |
+| **RF relacionado** | RF-01 |
+
+#### CU-02: Iniciar sesión
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Código** | CU-02 |
+| **Nombre** | Iniciar sesión |
+| **Actor(es)** | Cliente, Administrador |
+| **Precondición** | El usuario tiene una cuenta registrada en el sistema. |
+| **Flujo principal** | 1. El usuario accede a la página de inicio de sesión. <br> 2. Ingresa su correo y contraseña. <br> 3. El sistema valida las credenciales. <br> 4. Si el rol es "Cliente", se redirige a la página principal del catálogo. <br> 5. Si el rol es "Administrador", se redirige al panel de gestión (Dashboard). |
+| **Flujo alterno** | 3a. Si las credenciales son incorrectas, el sistema muestra un error: "Correo o contraseña incorrectos". |
+| **Postcondición** | El usuario accede al sistema con los permisos de su rol. |
+| **RF relacionado** | RF-02 |
+
+#### CU-03: Buscar canchas con filtros
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Código** | CU-03 |
+| **Nombre** | Buscar canchas con filtros |
+| **Actor(es)** | Cliente |
+| **Precondición** | El cliente ha iniciado sesión. |
+| **Flujo principal** | 1. El cliente accede al buscador de canchas. <br> 2. Aplica los filtros deseados: tipo de deporte, fecha, horario y/o rango de precio. <br> 3. El sistema consulta la base de datos y devuelve las canchas que cumplen con los criterios. <br> 4. Se muestran los resultados con nombre, deporte, precio y ubicación de cada cancha. |
+| **Flujo alterno** | 3a. Si no se encuentran canchas que coincidan, se muestra el mensaje: "No se encontraron canchas con los filtros seleccionados". |
+| **Postcondición** | El cliente visualiza una lista de canchas filtradas según sus criterios. |
+| **RF relacionado** | RF-04 |
+
+#### CU-04: Visualizar disponibilidad de horarios
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Código** | CU-04 |
+| **Nombre** | Visualizar disponibilidad de horarios |
+| **Actor(es)** | Cliente |
+| **Precondición** | El cliente ha seleccionado una cancha de la lista de resultados. |
+| **Flujo principal** | 1. El cliente selecciona una cancha específica. <br> 2. El sistema muestra un calendario o bloques de tiempo con los horarios de la cancha. <br> 3. Los horarios libres se muestran en un color (ej. verde) y los ocupados o bloqueados en otro (ej. rojo/gris). |
+| **Flujo alterno** | 2a. Si la cancha no tiene horarios disponibles para la fecha seleccionada, se muestra: "No hay horarios disponibles para esta fecha". |
+| **Postcondición** | El cliente puede identificar claramente qué horarios están libres para reservar. |
+| **RF relacionado** | RF-05 |
+
+#### CU-05: Reservar una cancha
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Código** | CU-05 |
+| **Nombre** | Reservar una cancha |
+| **Actor(es)** | Cliente |
+| **Precondición** | El cliente ha iniciado sesión y ha visualizado un horario libre. |
+| **Flujo principal** | 1. El cliente selecciona un bloque de tiempo disponible. <br> 2. El sistema muestra un resumen de la reserva (cancha, fecha, hora, precio). <br> 3. El cliente confirma la reserva. <br> 4. El sistema guarda la reserva y cambia el estado del horario a "ocupado". <br> 5. Se muestra un mensaje de confirmación con los detalles de la reserva. |
+| **Flujo alterno** | 4a. Si el horario fue reservado por otro usuario justo antes (conflicto), el sistema muestra: "Este horario ya no está disponible. Seleccione otro." |
+| **Postcondición** | La reserva queda registrada en el sistema y el horario ya no está disponible para otros clientes. |
+| **RF relacionado** | RF-06 |
+
+#### CU-06: Cancelar una reserva
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Código** | CU-06 |
+| **Nombre** | Cancelar una reserva |
+| **Actor(es)** | Cliente |
+| **Precondición** | El cliente tiene al menos una reserva activa (estado: confirmada). |
+| **Flujo principal** | 1. El cliente accede a "Mis reservas". <br> 2. Selecciona la reserva que desea cancelar. <br> 3. El sistema pide una confirmación: "¿Está seguro de que desea cancelar esta reserva?". <br> 4. El cliente confirma. <br> 5. El sistema cambia el estado de la reserva a "cancelada" y libera el horario. |
+| **Flujo alterno** | 4a. Si el cliente no confirma, la reserva se mantiene sin cambios. |
+| **Postcondición** | La reserva pasa a estado "cancelada" y el horario vuelve a estar disponible. |
+| **RF relacionado** | RF-07 |
+
+#### CU-07: Consultar historial de reservas
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Código** | CU-07 |
+| **Nombre** | Consultar historial de reservas |
+| **Actor(es)** | Cliente |
+| **Precondición** | El cliente ha iniciado sesión. |
+| **Flujo principal** | 1. El cliente accede a la sección "Historial". <br> 2. El sistema muestra una lista con todas las reservas del cliente (pasadas y futuras). <br> 3. Cada reserva muestra: cancha, fecha, hora y estado (confirmada, cancelada, completada). |
+| **Flujo alterno** | 2a. Si el cliente no tiene reservas, se muestra: "Aún no tienes reservas registradas". |
+| **Postcondición** | El cliente puede visualizar el detalle y estado de todas sus reservas. |
+| **RF relacionado** | RF-07 |
+
+#### CU-08: Gestionar canchas (CRUD)
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Código** | CU-08 |
+| **Nombre** | Gestionar canchas (CRUD) |
+| **Actor(es)** | Administrador |
+| **Precondición** | El administrador ha iniciado sesión en el panel de gestión. |
+| **Flujo principal** | 1. El administrador accede al catálogo de canchas del panel. <br> 2. Puede: <br> &emsp; a) **Agregar:** Llena el formulario (nombre, deporte, precio, ubicación, condiciones) y guarda. <br> &emsp; b) **Editar:** Selecciona una cancha existente, modifica los campos necesarios y guarda. <br> &emsp; c) **Visualizar:** Revisa la lista completa de canchas registradas. <br> &emsp; d) **Eliminar/Desactivar:** Cambia el estado de la cancha a "no disponible". |
+| **Flujo alterno** | 2a. Si intenta guardar con campos obligatorios vacíos, el sistema muestra: "Complete todos los campos requeridos". |
+| **Postcondición** | El catálogo de canchas queda actualizado con los cambios realizados. |
+| **RF relacionado** | RF-03 |
+
+#### CU-09: Gestionar el estado de las reservas
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Código** | CU-09 |
+| **Nombre** | Gestionar el estado de las reservas |
+| **Actor(es)** | Administrador |
+| **Precondición** | El administrador ha iniciado sesión y existen reservas en el sistema. |
+| **Flujo principal** | 1. El administrador accede al listado general de reservas. <br> 2. Selecciona una reserva específica. <br> 3. Cambia su estado a: confirmada, cancelada o completada. <br> 4. El sistema actualiza el estado y lo refleja en el historial del cliente. |
+| **Flujo alterno** | 2a. Si no hay reservas registradas, se muestra: "No hay reservas en el sistema". |
+| **Postcondición** | El estado de la reserva queda actualizado en todo el sistema. |
+| **RF relacionado** | RF-08 |
+
+#### CU-10: Bloquear horarios por mantenimiento
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Código** | CU-10 |
+| **Nombre** | Bloquear horarios por mantenimiento |
+| **Actor(es)** | Administrador |
+| **Precondición** | El administrador ha iniciado sesión y selecciona una cancha. |
+| **Flujo principal** | 1. El administrador accede a la gestión de una cancha. <br> 2. Selecciona la opción "Bloquear horarios". <br> 3. Define el rango de fechas y/u horarios a bloquear. <br> 4. El sistema marca esos horarios como no disponibles. <br> 5. Los horarios bloqueados se muestran como "no reservables" para los clientes. |
+| **Flujo alterno** | 3a. Si ya existen reservas en el rango seleccionado, el sistema muestra una advertencia: "Existen reservas activas en este rango. Cancélelas antes de bloquear." |
+| **Postcondición** | Los horarios bloqueados dejan de estar disponibles para nuevas reservas. |
+| **RF relacionado** | RF-09 |
+
+## 7. Modelo de clases
+
+```mermaid
+classDiagram
+    class Usuario {
+        +int id_usuario
+        +String nombre
+        +String correo
+        +String telefono
+        +String contrasena_hash
+        +String rol
+        +Date fecha_registro
+        +registrar()
+        +iniciarSesion()
+        +cerrarSesion()
+    }
+
+    class Cancha {
+        +int id_cancha
+        +String nombre
+        +String deporte
+        +float precio_hora
+        +String ubicacion
+        +String condiciones
+        +String estado
+        +String imagen_url
+        +agregar()
+        +editar()
+        +desactivar()
+        +listar()
+    }
+
+    class Reserva {
+        +int id_reserva
+        +int id_usuario
+        +int id_cancha
+        +Date fecha
+        +Time hora_inicio
+        +Time hora_fin
+        +String estado
+        +Date fecha_creacion
+        +crear()
+        +cancelar()
+        +cambiarEstado()
+        +consultarHistorial()
+    }
+
+    class Horario {
+        +int id_horario
+        +int id_cancha
+        +Date fecha
+        +Time hora_inicio
+        +Time hora_fin
+        +String estado
+        +verificarDisponibilidad()
+        +bloquear()
+        +liberar()
+    }
+
+    class CodigoAcceso {
+        +int id_codigo
+        +String codigo
+        +boolean activo
+        +Date fecha_creacion
+        +validar()
+    }
+
+    Usuario "1" --> "*" Reserva : realiza
+    Cancha "1" --> "*" Reserva : se reserva en
+    Cancha "1" --> "*" Horario : tiene
+    CodigoAcceso "1" ..> "1" Usuario : valida rol admin
+```
+
+### Descripción de las clases
+
+| Clase | Descripción |
+| :--- | :--- |
+| **Usuario** | Representa a cualquier persona registrada en el sistema (cliente o administrador). Almacena credenciales, datos personales y el rol asignado. |
+| **Cancha** | Representa una instalación deportiva del complejo. Contiene toda la información visible para los clientes (nombre, deporte, precio, ubicación, condiciones y estado). |
+| **Reserva** | Registra el vínculo entre un usuario y una cancha en un horario específico. Controla el ciclo de vida de la reserva (confirmada → completada o cancelada). |
+| **Horario** | Representa los bloques de tiempo disponibles para cada cancha. Permite gestionar la disponibilidad y aplicar bloqueos por mantenimiento. |
+| **CodigoAcceso** | Almacena los códigos especiales que permiten a los trabajadores del complejo registrarse como administradores. Puede activarse o desactivarse. |
+
+## 8. Modelo de navegación inicial
+
+```mermaid
+flowchart TD
+    A["🏠 Página de Inicio"] --> B["📝 Registro"]
+    A --> C["🔐 Inicio de Sesión"]
+
+    C --> D{"¿Rol del usuario?"}
+
+    D -->|Cliente| E["🏟️ Catálogo de Canchas"]
+    D -->|Administrador| K["📊 Panel de Administración"]
+
+    E --> F["🔍 Buscador con Filtros"]
+    F --> G["📅 Calendario de Disponibilidad"]
+    G --> H["✅ Confirmar Reserva"]
+    E --> I["📋 Mis Reservas / Historial"]
+    I --> J["❌ Cancelar Reserva"]
+
+    K --> L["➕ Agregar / Editar Cancha"]
+    K --> M["📄 Listado de Reservas"]
+    M --> N["🔄 Cambiar Estado de Reserva"]
+    K --> O["🚧 Bloquear Horarios"]
+
+    B --> C
+
+    style A fill:#6C3483,stroke:#4A235A,color:#fff
+    style D fill:#F39C12,stroke:#D68910,color:#fff
+    style E fill:#2980B9,stroke:#1A5276,color:#fff
+    style K fill:#E74C3C,stroke:#922B21,color:#fff
+```
+
+### Descripción de las pantallas principales
+
+| Pantalla | Descripción | Usuario |
+| :--- | :--- | :--- |
+| **Página de Inicio** | Landing page con acceso al registro e inicio de sesión. | Público |
+| **Registro** | Formulario para crear una nueva cuenta (con campo opcional de código de empleado). | Público |
+| **Inicio de Sesión** | Formulario de login con correo y contraseña. Redirige según el rol del usuario. | Público |
+| **Catálogo de Canchas** | Lista de canchas disponibles con información resumida. Punto de entrada al buscador. | Cliente |
+| **Buscador con Filtros** | Permite filtrar canchas por deporte, fecha, horario y precio. | Cliente |
+| **Calendario de Disponibilidad** | Muestra los bloques de tiempo libres y ocupados de una cancha seleccionada. | Cliente |
+| **Confirmar Reserva** | Resumen de la reserva (cancha, fecha, hora, precio) con botón de confirmación. | Cliente |
+| **Mis Reservas / Historial** | Lista de reservas del cliente con su estado actual. Permite cancelar. | Cliente |
+| **Panel de Administración** | Dashboard con acceso a gestión de canchas, reservas y bloqueos. | Administrador |
+| **Agregar / Editar Cancha** | Formulario CRUD para las canchas del complejo. | Administrador |
+| **Listado de Reservas** | Vista general de todas las reservas con opción de cambiar estado. | Administrador |
+| **Bloquear Horarios** | Interfaz para seleccionar rangos de fecha/hora a bloquear por mantenimiento. | Administrador |
+
+## 9. Matriz de trazabilidad
+
+La siguiente matriz conecta los objetivos del proyecto con los requisitos funcionales, los usuarios responsables, los escenarios de uso, los casos de uso y las clases del modelo de datos. Esto demuestra que cada elemento del proyecto tiene una justificación y que no existen requisitos huérfanos.
+
+| Objetivo | RF | Usuario | Escenario de Uso | Caso de Uso | Clase(s) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Permitir el acceso seguro a la plataforma | RF-01 | Ambos | Registrarse en el sistema | CU-01 | Usuario, CodigoAcceso |
+| Permitir el acceso seguro a la plataforma | RF-02 | Ambos | Iniciar sesión (Cliente / Admin) | CU-02 | Usuario |
+| Gestionar el catálogo de instalaciones | RF-03 | Administrador | Agregar / Editar / Desactivar cancha | CU-08 | Cancha |
+| Facilitar la búsqueda de canchas | RF-04 | Cliente | Filtrar canchas por precio y horario | CU-03 | Cancha |
+| Mostrar la disponibilidad en tiempo real | RF-05 | Cliente | Reservar una cancha (paso de visualización) | CU-04 | Horario, Cancha |
+| Permitir la reserva de canchas | RF-06 | Cliente | Reservar una cancha | CU-05 | Reserva, Horario |
+| Consultar el historial de reservas | RF-07 | Cliente | Consultar historial / Cancelar reserva | CU-06, CU-07 | Reserva |
+| Gestionar las reservas del complejo | RF-08 | Administrador | Cambiar el estado de una reserva | CU-09 | Reserva |
+| Bloquear horarios por mantenimiento | RF-09 | Administrador | Bloquear horario por mantenimiento | CU-10 | Horario, Cancha |
+
+## 10. Autoría e IA
+
+### Tabla de aportes individuales
+
+| Sección | Integrante(s) | Herramienta y Link al prompt | Aporte de la IA | Aporte intelectual del equipo |
+| :--- | :--- | :--- | :--- | :--- |
+| 1. Descripción del proyecto | Gonzalez, Walter (8-1027-2220) | Google Gemini — se usó para estructurar la redacción formal del problema, propósito y alcance. | Generó un borrador inicial de la descripción con lenguaje técnico adecuado para un documento de ingeniería. | El equipo definió el problema real a resolver, el nombre del proyecto y los límites del alcance basándose en la experiencia como usuarios de canchas deportivas. |
+| 2. Identificación de usuarios | Sanchez, Jose (8-1038-670) | Google Gemini — se usó para detallar las características y necesidades de cada tipo de usuario. | Propuso una estructura de características, necesidades y funciones para organizar la información de cada actor. | El equipo identificó los dos tipos de usuario (Cliente y Administrador) y definió sus roles basándose en cómo funciona un complejo deportivo real. |
+| 3. Requisitos funcionales | Rozette, Jose (8-1025-306) | Google Gemini — se usó para validar la completitud de los requisitos y su codificación. | Sugirió el formato de tabla con código, módulo, descripción y usuario. Ayudó a verificar que cada funcionalidad tuviera su RF correspondiente. | El equipo decidió qué funcionalidades incluir en el sistema, cómo agruparlas por módulo y a qué usuario asignar cada una. La decisión del código de acceso para administradores fue propuesta por el equipo. |
+| 4. Requisitos no funcionales | Meneses, Alexander (8-1035-623) | Google Gemini — se usó para identificar categorías relevantes de RNF. | Propuso categorías estándar (usabilidad, rendimiento, seguridad, etc.) y ayudó a redactar descripciones medibles. | El equipo definió los valores específicos (3 segundos, 95% disponibilidad) y priorizó qué atributos de calidad eran más relevantes para el proyecto. |
+| 5. Escenarios de uso | Meneses, Alexander (8-1035-623) | Google Gemini — se usó para estructurar los escenarios en formato tabular. | Generó el formato de 5 columnas (usuario, objetivo, contexto, secuencia, resultado) y ayudó a redactar las secuencias paso a paso. | El equipo definió los escenarios basándose en situaciones reales de uso y verificó que cada escenario correspondiera a un RF existente. |
+| 6. Casos de uso | Gonzalez, Walter (8-1027-2220) | Google Gemini — revisión de coherencia. | Ayudó a revisar la coherencia de la descripción de los casos de uso con los requisitos funcionales previamente definidos. | Walter definió los casos de uso, redactó los flujos, diseñó el diagrama UML y ajustó los escenarios alternos manualmente. |
+| 7. Modelo de clases | Gonzalez, Walter (8-1027-2220) | Google Gemini — apoyo en sintaxis. | Ayudó a estructurar la sintaxis del diagrama de clases en código Mermaid. | Walter diseñó la estructura de la base de datos, identificando entidades, atributos y relaciones, y armó la tabla descriptiva. |
+| 8. Modelo de navegación | Gonzalez, Walter (8-1027-2220) | *No se usó IA en esta sección.* | *Ninguno.* | Walter diseñó la arquitectura de pantallas, el flujo de navegación según el rol del usuario y elaboró el diagrama. |
+| 9. Matriz de trazabilidad | Gonzalez, Walter (8-1027-2220) | *No se usó IA en esta sección.* | *Ninguno.* | Walter estructuró la tabla cruzada y verificó que cada RF tuviera correspondencia con un caso de uso, escenario y clase de forma independiente. |
