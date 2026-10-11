@@ -537,7 +537,7 @@ La disponibilidad de los horarios opera bajo un modelo de sincronización y vali
 ### 1.5 Mecanismos de Acceso y Reglas de Autenticación
 
 #### A. Regla Operativa de Acceso: Refinamiento de Experiencia de Usuario (UX)
-Como refinamiento arquitectónico sobre las precondiciones preliminares de la Fase 1 (CU-03 y CU-04):
+El sistema implementa un modelo de acceso y navegación estructurado para optimizar la experiencia de usuario (UX):
 1. **Navegación y Consulta Pública (Visitante):** Cualquier usuario puede explorar el catálogo, utilizar el buscador facetado y consultar la disponibilidad horaria sin registro previo.
 2. **Intercepción de Autenticación en el Agendamiento:** Al pulsar "Reservar Horario", si no existe una sesión activa, el sistema intercepta el flujo y redirige al formulario de acceso, reteniendo en memoria los parámetros de la reserva para reanudar el proceso tras autenticarse (conforme a CU-05 y RF-06).
 
@@ -554,7 +554,7 @@ Como refinamiento arquitectónico sobre las precondiciones preliminares de la Fa
 
 ### 2.1 Estructura Jerárquica del Sitio (Diagrama Mermaid)
 
-El siguiente diagrama modela formalmente la taxonomía de páginas navegables y rutas del sistema, excluyendo modales de interacción para preservar la pureza jerárquica del mapa de sitio:
+El siguiente diagrama modela la estructura de páginas y rutas navegables del sistema (los componentes modales se integran en la capa de interfaz descrita en la sección 1.3):
 
 ```mermaid
 graph TD
@@ -799,7 +799,7 @@ graph LR
 
 | Sección | Integrante(s) | Herramienta y Link al prompt utilizado | Aporte de la IA | Aporte Intelectual del equipo |
 | :--- | :--- | :--- | :--- | :--- |
-| Repositorio, Despliegue y Descripción del Proyecto | Gonzalez, Walter | Claude / Gemini (Entorno IDE) | Asistió en la estructuración del README en formato Markdown y corrección de coherencia en la redacción inicial. | Configuración del repositorio en GitHub, despliegue en GitHub Pages, y formulación del problema, propósito, objetivo general y alcance del sistema. |
+| Repositorio, Despliegue y Descripción del Proyecto | Gonzalez, Walter | Antigravity / Gemini — [Ver prompts en Autoria/prompts.md](./Autoria/prompts.md) | Asistió en la estructuración del README en formato Markdown y corrección de coherencia en la redacción inicial. | Configuración del repositorio en GitHub, despliegue en GitHub Pages, y formulación del problema, propósito, objetivo general y alcance del sistema. |
 | Identificación de Usuarios | Sanchez, Jose | Ninguna | Ninguno | Análisis y caracterización de los perfiles de Cliente y Administrador, identificando sus necesidades y funciones clave en el sistema. |
 | Requisitos Funcionales | Rozette, Jose | Ninguna | Ninguno | Definición técnica y tabulación completa de los requisitos funcionales del sistema (RF-01 a RF-09). |
 | Requisitos No Funcionales y Escenarios de Uso | Meneses, Alexander | Ninguna | Ninguno | Formulación de los requisitos no funcionales (RNF-01 a RNF-08) y desarrollo estructurado de los escenarios de uso paso a paso. |
@@ -810,7 +810,7 @@ graph LR
 
 | Sección | Integrante(s) | Herramienta y Link al prompt utilizado | Aporte de la IA | Aporte Intelectual del equipo |
 | :--- | :--- | :--- | :--- | :--- |
-| Casos de Uso, Modelo de Clases, Navegación y Trazabilidad | Gonzalez, Walter | Gemini / Antigravity IDE | Asistió en la estructuración técnica del README y en la revisión de coherencia de los modelos. | Diseño de casos de uso (flujo principal y excepciones), modelado de clases del dominio, arquitectura de navegación y matriz de trazabilidad. |
+| Casos de Uso, Modelo de Clases, Navegación y Trazabilidad | Gonzalez, Walter | Antigravity / Gemini — [Ver prompts en Autoria/prompts.md](./Autoria/prompts.md) | Asistió en la estructuración técnica del README y en la revisión de coherencia de los modelos. | Diseño de casos de uso (flujo principal y excepciones), modelado de clases del dominio, arquitectura de navegación y matriz de trazabilidad. |
 | Revisión de Ortografía y Redacción | Sanchez, Jose | Ninguna | Ninguno | Revisión de ortografía, estilo y redacción técnica de los entregables de la parte 2. |
 | Validación de Requisitos | Rozette, Jose | Ninguna | Ninguno | Verificación cruzada para asegurar la cobertura de todos los requisitos funcionales en las clases y casos de uso. |
 | Control de Estructura | Meneses, Alexander | Ninguna | Ninguno | Inspección de la estructura documental conforme a los criterios de evaluación de la cátedra. |
@@ -821,7 +821,7 @@ graph LR
 
 | Sección | Integrante(s) | Herramienta y Link al prompt utilizado | Aporte de la IA | Aporte Intelectual del equipo |
 | :--- | :--- | :--- | :--- | :--- |
-| Arquitectura de Información, Sitemap y Modelo de Navegación | Gonzalez, Walter | Gemini / Antigravity IDE | Asistió exclusivamente a estructurar el README de su parte y a eliminar inconsistencias conceptuales. | Definición de las reglas de negocio, taxonomía multidimensional del catálogo, especificaciones de accesibilidad WCAG 2.1 AA, lógica de concurrencia y diseño de las rutas de usuario. |
+| Arquitectura de Información, Sitemap y Modelo de Navegación | Gonzalez, Walter | Antigravity / Gemini — [Ver prompts en Autoria/prompts.md](./Autoria/prompts.md) | Asistió en la maquetación del documento en formato Markdown y en la revisión de coherencia técnica entre las especificaciones de arquitectura y navegación. | Definición de las reglas de negocio, taxonomía multidimensional del catálogo, especificaciones de accesibilidad WCAG 2.1 AA, lógica de concurrencia y diseño de las rutas de usuario. |
 | Flujos de Navegación | Sanchez, Jose | En desarrollo | En desarrollo | Asignado para la modelación secuencial de los recorridos de las tareas críticas del sistema. |
 | Wireframes | Rozette, Jose | En desarrollo | En desarrollo | Asignado para el diseño estructural de las pantallas principales en media fidelidad. |
 | Prototipo de Alta Fidelidad | Meneses, Alexander | En desarrollo | En desarrollo | Asignado para la construcción visual interactiva y componentes en Figma. |
