@@ -1,24 +1,32 @@
-**Auditoria**
+# Auditoria y Uso de la IA
 
-| Integrante | Cédula | Aporte individual en este mini avance |
-|---|---|---|
-| Gonzalez, Walter | 8-1027-2220 | Se encargó de montar el repositorio en GitHub y dejarlo organizado por carpetas, además de subir la página con GitHub Pages para que se pudiera ver el avance en línea. También ayudó a redactar la parte de la descripción del proyecto (el problema que resuelve, el propósito y hasta dónde llega el alcance). |
-| Sanchez, Jose | 8-1038-670 | Trabajó en la parte de los usuarios del sistema, pensando en cómo es un cliente típico y un administrador, qué necesitan y qué deberían poder hacer cada uno dentro de la plataforma. |
-| Rozette, Jose | 8-1025-306 | Se metió de lleno en los requisitos funcionales, armando la tabla completa con lo que el sistema debe hacer (registro, búsqueda, reservas, gestión de canchas, etc.) y a qué usuario le corresponde cada uno. |
-| Meneses, Alexander | 8-1035-623 | Redactó los requisitos no funcionales (usabilidad, rendimiento, seguridad, etc.) y armó los escenarios de uso, describiendo paso a paso cómo un cliente o un administrador usaría el sistema en distintas situaciones. |
+## Tabla 1. Auditoria y Uso de la IA - Fase 1 (Mini Avance 1)
 
-### Aportes individuales fase 1 (Parte 2)
+| Sección | Integrante(s) | Herramienta y Link al prompt utilizado | Aporte de la IA | Aporte Intelectual del equipo |
+| :--- | :--- | :--- | :--- | :--- |
+| Repositorio, Despliegue y Descripción del Proyecto | Gonzalez, Walter | Claude / Gemini (Entorno IDE) | Asistió en la estructuración del README en formato Markdown y corrección de coherencia en la redacción inicial. | Configuración del repositorio en GitHub, despliegue en GitHub Pages, y formulación del problema, propósito, objetivo general y alcance del sistema. |
+| Identificación de Usuarios | Sanchez, Jose | Ninguna | Ninguno | Análisis y caracterización de los perfiles de Cliente y Administrador, identificando sus necesidades y funciones clave en el sistema. |
+| Requisitos Funcionales | Rozette, Jose | Ninguna | Ninguno | Definición técnica y tabulación completa de los requisitos funcionales del sistema (RF-01 a RF-09). |
+| Requisitos No Funcionales y Escenarios de Uso | Meneses, Alexander | Ninguna | Ninguno | Formulación de los requisitos no funcionales (RNF-01 a RNF-08) y desarrollo estructurado de los escenarios de uso paso a paso. |
 
-| Integrante | Cedula | Aporte individual |
-| :--- | :--- | :--- |
-| Gonzalez, Walter | 8-1027-2220 | Diseñó la arquitectura de la Fase 1 (Puntos 6 al 10): elaboración de los Casos de Uso (diagrama y descripción), diseño del Modelo de Clases, mapeo del Modelo de Navegación, estructuración de la Matriz de Trazabilidad y levantamiento de la auditoría de uso de Inteligencia Artificial para validación de procesos. |
-| Sanchez, Jose | 8-1038-670 | Revisión de ortografía |
-| Rozette, Jose | 8-1025-306 | Revisión de los requisitos |
-| Meneses, Alexander | 8-1035-623 | Revisión de la estructura del documento |
+---
 
-### Registro de herramientas de ia utilizadas
+## Tabla 2. Auditoria y Uso de la IA - Fase 1 (Parte 2)
 
-| Herramientas | Aporte de la ia |
-| :--- | :--- |
-| Gemini y antigravity | Ayudaron estructurar el diagrama de clases en formato Mermaid y a revisar la coherencia de la descripción de los Casos de Uso con los Requisitos Funcionales. La ayuda mas relevante fue pasar al estructura del pdf al read.me (Para que se fuera visualmente atractivo). |
-| Obsidian | No es una herramienta IA, pero si ayudó a diagramar mejor y mas rápido. |
+| Sección | Integrante(s) | Herramienta y Link al prompt utilizado | Aporte de la IA | Aporte Intelectual del equipo |
+| :--- | :--- | :--- | :--- | :--- |
+| Casos de Uso, Modelo de Clases, Navegación y Trazabilidad | Gonzalez, Walter | Gemini / Antigravity IDE | Asistió en la estructuración técnica del README y en la revisión de coherencia de los modelos. | Diseño de casos de uso (flujo principal y excepciones), modelado de clases del dominio, arquitectura de navegación y matriz de trazabilidad. |
+| Revisión de Ortografía y Redacción | Sanchez, Jose | Ninguna | Ninguno | Revisión de ortografía, estilo y redacción técnica de los entregables de la parte 2. |
+| Validación de Requisitos | Rozette, Jose | Ninguna | Ninguno | Verificación cruzada para asegurar la cobertura de todos los requisitos funcionales en las clases y casos de uso. |
+| Control de Estructura | Meneses, Alexander | Ninguna | Ninguno | Inspección de la estructura documental conforme a los criterios de evaluación de la cátedra. |
+
+---
+
+## Tabla 3. Auditoria y Uso de la IA - Fase 2 (Avance Actual)
+
+| Sección | Integrante(s) | Herramienta y Link al prompt utilizado | Aporte de la IA | Aporte Intelectual del equipo |
+| :--- | :--- | :--- | :--- | :--- |
+| Arquitectura de Información, Sitemap y Modelo de Navegación | Gonzalez, Walter | Gemini / Antigravity IDE | Asistió exclusivamente a estructurar el README de su parte y a eliminar inconsistencias conceptuales. | Definición de las reglas de negocio, taxonomía multidimensional del catálogo, especificaciones de accesibilidad WCAG 2.1 AA, lógica de concurrencia y diseño de las rutas de usuario. |
+| Flujos de Navegación | Sanchez, Jose | En desarrollo | En desarrollo | Asignado para la modelación secuencial de los recorridos de las tareas críticas del sistema. |
+| Wireframes | Rozette, Jose | En desarrollo | En desarrollo | Asignado para el diseño estructural de las pantallas principales en media fidelidad. |
+| Prototipo de Alta Fidelidad | Meneses, Alexander | En desarrollo | En desarrollo | Asignado para la construcción visual interactiva y componentes en Figma. |
