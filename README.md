@@ -778,8 +778,8 @@ flowchart TD
     P2 --> P3["3. Elegir un horario Libre y\npulsar Reservar Horario"]
     P3 --> D1{"¿Hay sesión\nactiva?"}
     
-    D1 -->|No (visitante)| P4["4. Intercepción: Iniciar Sesión 6.1 o\nRegistro 6.2 (reserva retenida en memoria)"]
-    D1 -->|Sí (cliente)| P5["5. Modal de Confirmación: resumen\n(cancha, fecha, hora, precio) y Confirmar"]
+    D1 -->|No: visitante| P4["4. Intercepción: Iniciar Sesión 6.1 o\nRegistro 6.2 (reserva retenida en memoria)"]
+    D1 -->|Sí: cliente| P5["5. Modal de Confirmación: resumen\n(cancha, fecha, hora, precio) y Confirmar"]
     
     P4 --> D2{"¿Tiene\ncuenta?"}
     D2 -->|No: Registro 6.2| P4a["Registro 6.2: completar nombre, correo,\nteléfono y contraseña. Cuenta creada,\nvuelve a Iniciar Sesión 6.1"]
@@ -814,8 +814,8 @@ flowchart TD
 ```mermaid
 flowchart TD
     P1["1. Acceder a Mis Reservas 7.1\ndesde el menú de usuario"] --> D1{"¿Hay sesión de\nCliente activa?"}
-    D1 -->|No (visitante)| E1["Visitante: redirige a Iniciar Sesión 6.1\n-> regresa a Mis Reservas al autenticarse"]
-    D1 -->|Sí| P2["2. Consultar el historial: reservas\nconfirmadas, completadas y canceladas"]
+    D1 -->|No: visitante| E1["Visitante: redirige a Iniciar Sesión 6.1\n-> regresa a Mis Reservas al autenticarse"]
+    D1 -->|Sí: cliente| P2["2. Consultar el historial: reservas\nconfirmadas, completadas y canceladas"]
     P2 --> D2{"¿Tiene reservas\nregistradas?"}
     D2 -->|No| E2["Aún no tienes reservas registradas\nFin de la consulta"]
     D2 -->|Sí| P3["3. Seleccionar la reserva vigente\ny pulsar Cancelar Reserva"]
@@ -935,6 +935,6 @@ flowchart TD
 | Sección | Integrante(s) | Herramienta y Link al prompt utilizado | Aporte de la IA | Aporte Intelectual del equipo |
 | :--- | :--- | :--- | :--- | :--- |
 | Arquitectura de Información y Sitemap | Gonzalez, Walter | Antigravity / Gemini — [Ver prompts en Auditoria/prompts.md](./Auditoria/prompts.md) | Asistió en la maquetación del documento en formato Markdown y en la revisión de coherencia técnica entre las especificaciones de arquitectura y navegación. | Definición de las reglas de negocio, taxonomía multidimensional del catálogo, especificaciones de accesibilidad WCAG 2.1 AA, lógica de concurrencia y diseño jerárquico del sitemap. |
-| Modelo de Navegación Refinado y Flujos de Navegación | Sanchez, Jose | Ninguna | Ninguno | Elaboración del diagrama de navegación general, estructuración de las matrices de pantallas y roles, y modelado detallado de los cinco flujos de tareas críticas con manejo de decisiones, intercepción de sesión y excepciones. |
+| Modelo de Navegación Refinado y Flujos de Navegación | Sanchez, Jose | Gemini — [Ver prompts en Auditoria/prompts.md](./Auditoria/prompts.md) | Asistió en la estructuración de los diagramas de flujo de tareas críticas y en la depuración de pasos redundantes e inconsistencias lógicas. | Elaboración del diagrama de navegación general, estructuración de las matrices de pantallas y roles, y modelado detallado de los cinco flujos de tareas críticas con manejo de decisiones, intercepción de sesión y excepciones. |
 | Wireframes | Rozette, Jose | En desarrollo | En desarrollo | Asignado para el diseño estructural de las pantallas principales en media fidelidad. |
 | Prototipo de Alta Fidelidad | Meneses, Alexander | En desarrollo | En desarrollo | Asignado para la construcción visual interactiva y componentes en Figma. |
