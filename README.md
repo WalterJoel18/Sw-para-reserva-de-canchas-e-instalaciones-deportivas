@@ -666,130 +666,243 @@ graph TD
 
 ---
 
-## 3. Navegación del Sistema Web
+## 3. Modelo de Navegación Refinado
 
-### 3.1 Estructura y Sistemas de Navegación
+### 3.1 Diagrama de Navegación
 
-El sistema articula el desplazamiento del usuario a través de cuatro mecanismos complementarios de navegación:
-
-#### A. Navegación Principal (Global)
-Barra de navegación persistente ubicada en la cabecera (header) de todas las páginas del sitio web:
-* **Logotipo Institucional:** Enlace permanente a Inicio (`1.0`).
-* **Explorar Canchas:** Acceso directo al catálogo (`2.0`).
-* **¿Cómo Funciona?:** Enlace a la guía informativa de agendamiento (`3.0`).
-* **Normas y Calzado:** Enlace al reglamento técnico por superficie (`4.0`).
-* **Contacto:** Acceso a datos de atención y ubicación física (`5.0`).
-* **Zona de Control de Acceso (Dinámica según sesión):**
-  * *Estado No Autenticado (Visitante):* Botones "Iniciar Sesión" (`6.1`) y "Registrarse" (`6.2`).
-  * *Estado Autenticado (Cliente):* Menú de usuario con acceso a "Mis Reservas" (`7.1`) y "Cerrar Sesión".
-  * *Estado Autenticado (Administrador):* Acceso directo a "Panel de Control" (`8.0`) y "Cerrar Sesión".
-
-#### B. Navegación Secundaria (Local y Contextual)
-* **Conmutador de Vista en Catálogo (`2.0`):** Alternancia entre "Collage por Deportes" (`2.1`) y "Buscador con Filtros" (`2.2`).
-* **Filtros Facetados Laterales (`2.2`):** Panel lateral con selectores por deporte, modalidad, superficie, entorno y precio.
-* **Pestañas Contextuales en Ficha de Cancha (`2.3`):** Pestañas para alternar entre especificaciones técnicas, normativa de calzado y calendario de disponibilidad.
-* **Barra Lateral Administrativa (`Sidebar` en `8.0`):** Menú vertical persistente para alternar entre Gestión de Canchas (`8.1`), Listado de Reservas (`8.2`) y retorno a la vista pública.
-
-#### C. Navegación Suplementaria
-* **Migas de Pan (Breadcrumbs):** Ruta jerárquica ubicada bajo la cabecera en vistas profundas (ejemplo: `Inicio > Explorar Canchas > Fútbol > Cancha Sintética 1`).
-* **Pie de Página (Footer):** Bloque inferior en todas las vistas públicas con enlaces a políticas de cancelación, mapa del complejo, aviso de privacidad y canales de contacto.
-
-#### D. Enlaces Transversales y de Proceso
-* Desde el banner de Inicio (`1.0`) hacia la Ficha de Cancha (`2.3`) o el Catálogo (`2.0`) mediante llamadas a la acción (*CTAs*).
-* Desde el Calendario en Ficha de Cancha (`2.3`) hacia Inicio de Sesión (`6.1`) con retorno automático tras autenticarse.
-* Desde el Modal de Confirmación de Reserva hacia "Mis Reservas" (`7.1`) al completar un turno.
-
----
-
-### 3.2 Modelo de Navegación Refinado (Diagrama Mermaid)
+El siguiente diagrama modela las rutas disponibles, transiciones entre vistas y accesos según el rol del usuario:
 
 ```mermaid
-graph LR
-    %% Pantallas Principales
+flowchart TD
     Home["1.0 Inicio"]
-    Catalogo["2.0 Catalogo / Explorar"]
-    Ficha["2.3 Ficha de Cancha\n(con Calendario)"]
     Info["3.0 / 4.0 / 5.0\nInfo / Normas / Contacto"]
-    Login["6.1 Iniciar Sesion"]
+    Catalogo["2.0 Catálogo / Explorar"]
+    Buscador["2.2 Buscador y Filtros"]
+    Ficha["2.3 Ficha de Cancha\n(con Calendario)"]
+    Login["6.1 Iniciar Sesión"]
     Registro["6.2 Registrarse"]
     MisReservas["7.1 Mis Reservas\n(Cliente)"]
     AdminDash["8.0 Panel de Control\n(Admin)"]
-    AdminCanchas["8.1 Gestion Canchas"]
+    AdminCanchas["8.1 Gestión Canchas"]
     AdminForm["8.1.1 Formulario Cancha"]
     AdminReservas["8.2 Listado Reservas"]
 
-    %% Rutas Publicas desde Home
-    Home -->|Menu Global / CTA| Catalogo
-    Home -->|Menu Global| Info
-    Home -->|Boton Acceso| Login
-    Home -->|Boton Registro| Registro
+    Home -->|Menú Global| Info
+    Home -->|Menú Global / CTA| Catalogo
+    Home -->|Botón Acceso| Login
+    Home -->|Botón Registro| Registro
+    Home -->|Menú Global| Buscador
 
-    %% Navegacion en Catalogo
+    Catalogo -->|Barra de búsqueda / Filtros| Buscador
+    Buscador -->|Migas de pan| Catalogo
     Catalogo -->|Seleccionar Cancha| Ficha
-    Catalogo -->|Menu Global| Home
-    Info -->|Menu Global| Catalogo
+    Buscador -->|Seleccionar Cancha| Ficha
+    Ficha -->|Migas de pan| Catalogo
 
-    %% Flujo de Reserva e Intercepcion
-    Ficha -->|Usuario Autenticado: Confirmar Turno| MisReservas
-    Ficha -.->|Usuario Visitante: Requiere Sesion| Login
-    Login -->|Autenticacion Exitosa: Retoma Reserva| Ficha
+    Ficha -->|Sin sesión| Login
+    Login -->|Retoma reserva| Ficha
     Login -->|No tiene cuenta| Registro
-    Registro -->|Cuenta Creada| Login
+    Registro -->|Cuenta creada| Login
 
-    %% Flujos de Cliente Autenticado
     Login -->|Rol: Cliente| Catalogo
-    MisReservas -->|Menu Global| Catalogo
-    MisReservas -->|Menu Global| Home
-
-    %% Flujos de Administrador
     Login -->|Rol: Administrador| AdminDash
+
+    Ficha -->|Autenticado: confirmar turno| MisReservas
+    Login -->|Venía de Mis Reservas| MisReservas
+    MisReservas -->|Menú de usuario| Catalogo
+    MisReservas -->|Menú Global| Home
+    MisReservas -->|Cerrar sesión| Home
+
     AdminDash -->|Sidebar| AdminCanchas
     AdminDash -->|Sidebar| AdminReservas
-    AdminCanchas -->|Boton Agregar/Editar| AdminForm
+    AdminDash -->|Enlace Superior| Home
+    AdminDash -->|Cerrar sesión| Home
+
+    AdminCanchas -->|Botón Agregar/Editar| AdminForm
     AdminForm -->|Guardar / Cancelar| AdminCanchas
     AdminCanchas -->|Sidebar| AdminReservas
     AdminReservas -->|Sidebar| AdminCanchas
-    AdminDash -->|Enlace Superior| Home
-
-    %% Estilos Graficos
-    style Home fill:#2C3E50,stroke:#1A252F,color:#fff
-    style Catalogo fill:#34495E,stroke:#2C3E50,color:#fff
-    style Ficha fill:#2E4053,stroke:#1C2833,color:#fff
-    style Info fill:#2E4053,stroke:#1C2833,color:#fff
-    style Login fill:#7F8C8D,stroke:#616A6B,color:#fff
-    style Registro fill:#7F8C8D,stroke:#616A6B,color:#fff
-    style MisReservas fill:#1F618D,stroke:#154360,color:#fff
-    style AdminDash fill:#78281F,stroke:#511B15,color:#fff
-    style AdminCanchas fill:#78281F,stroke:#511B15,color:#fff
-    style AdminForm fill:#922B21,stroke:#641E16,color:#fff
-    style AdminReservas fill:#78281F,stroke:#511B15,color:#fff
 ```
 
 ---
 
-### 3.3 Matriz de Enlaces y Accesos por Vista
+### 3.2 Pantallas del Sistema
 
-| Vista de Origen | Elemento de Interfaz | Vista de Destino | Tipo de Navegación | Condición / Rol |
-| :--- | :--- | :--- | :--- | :--- |
-| **1.0 Inicio** | Botón CTA "Reservar Ahora" | `2.0` Explorar Canchas | Transversal | Público |
-| **1.0 Inicio** | Tarjetas de Deporte (Collage) | `2.2` Buscador (Filtro activo) | Contextual | Público |
-| **1.0 Inicio** | Menú Superior: Enlaces informativos | `3.0`, `4.0`, `5.0` | Global | Público |
-| **1.0 Inicio** | Botón "Iniciar Sesión" | `6.1` Iniciar Sesión | Global | No autenticado |
-| **2.0 Explorar** | Tarjeta de Cancha individual | `2.3` Ficha de Cancha | Local | Público |
-| **2.0 Explorar** | Barra de Migas de Pan ("Inicio") | `1.0` Inicio | Suplementaria | Público |
-| **2.3 Ficha Cancha** | Botón "Reservar Horario" (con sesión) | `7.1` Mis Reservas | Transversal (Acción) | Cliente |
-| **2.3 Ficha Cancha** | Botón "Reservar Horario" (sin sesión) | `6.1` Iniciar Sesión | Intercepción UX | Visitante |
-| **6.1 Login** | Botón "Iniciar Sesión" (Credencial válida) | `2.0` o `8.0` | Redirección por Rol | Cliente / Admin |
-| **6.1 Login** | Enlace "¿No tienes cuenta? Regístrate" | `6.2` Registro | Local | Público |
-| **7.1 Mis Reservas** | Menú Global "Explorar Canchas" | `2.0` Explorar Canchas | Global | Cliente |
-| **7.1 Mis Reservas** | Botón "Cancelar Reserva" (Modal) | `7.1` Mis Reservas | Contextual (In-situ) | Cliente |
-| **8.0 Admin Dash** | Sidebar: "Gestión de Canchas" | `8.1` Gestión Canchas | Local | Administrador |
-| **8.0 Admin Dash** | Sidebar: "Listado de Reservas" | `8.2` Listado Reservas | Local | Administrador |
-| **8.1 Canchas** | Botón "+ Nueva Cancha" | `8.1.1` Formulario Cancha | Local | Administrador |
-| **8.1 Canchas** | Icono "Editar" en fila de cancha | `8.1.1` Formulario Cancha | Local | Administrador |
-| **8.1.1 Form Cancha** | Botón "Guardar" / "Cancelar" | `8.1` Gestión Canchas | Retorno de flujo | Administrador |
-| **8.2 Reservas** | Botón "+ Reserva Asistida" (Modal) | `8.2` Listado Reservas | Contextual (In-situ) | Administrador |
-| **General** | Botón "Cerrar Sesión" | `1.0` Inicio | Global | Cliente / Admin |
+| Código | Pantalla | Descripción | Acceso |
+| :--- | :--- | :--- | :--- |
+| **1.0** | Inicio | Página de entrada con llamada a la acción, collage deportivo y acceso a registro e inicio de sesión. | Público |
+| **2.0** | Catálogo / Explorar | Listado de canchas disponibles. | Público |
+| **2.2** | Buscador y Filtros | Barra de búsqueda y panel lateral de filtros (deporte, modalidad, superficie, entorno y precio). | Público |
+| **2.3** | Ficha de Cancha | Detalle de la cancha con calendario de disponibilidad. Para reservar se requiere sesión. | Público (reservar: Cliente) |
+| **3.0 / 4.0 / 5.0** | Info / Normas / Contacto | Páginas informativas del complejo. | Público |
+| **6.1** | Iniciar Sesión | Autenticación; redirige según el rol. | Público |
+| **6.2** | Registrarse | Creación de cuenta de cliente (o de administrador con código de acceso). | Público |
+| **7.1** | Mis Reservas | Historial de reservas y cancelación. | Cliente |
+| **8.0** | Panel de Control | Inicio del área administrativa. | Administrador |
+| **8.1** | Gestión de Canchas | Tabla del catálogo, alta, edición, desactivación y bloqueo de horarios. | Administrador |
+| **8.1.1** | Formulario de Cancha | Formulario para agregar o editar una cancha. | Administrador |
+| **8.2** | Listado de Reservas | Todas las reservas del complejo, cambio de estado y reserva asistida. | Administrador |
+
+---
+
+### 3.3 Navegación Principal y Secundaria por Rol
+
+| Elemento | Visitante | Cliente | Administrador |
+| :--- | :--- | :--- | :--- |
+| **Navegación principal (menú global)** | Inicio, Catálogo, Info / Normas / Contacto | Inicio, Catálogo, Info / Normas / Contacto | Enlace superior a Inicio |
+| **Menú de usuario** | Botones Acceso (6.1) y Registro (6.2) | Mis Reservas (7.1) y Cerrar sesión | Cerrar sesión |
+| **Navegación secundaria** | Filtros y buscador (2.2); calendario de la Ficha (2.3) | Filtros y buscador (2.2); calendario; botón Cancelar reserva en 7.1 | Sidebar: Gestión de Canchas (8.1) y Listado de Reservas (8.2) |
+| **Migas de pan** | Inicio > Catálogo > Ficha | Inicio > Catálogo > Ficha | Panel > Gestión de Canchas > Formulario |
+| **Acciones contextuales (modales)** | Intercepción de sesión al reservar | Confirmación de turno; cancelación de reserva | Bloqueo de horarios; reserva asistida |
+| **Pantallas restringidas** | 7.1 y 8.x redirigen a Iniciar Sesión | 8.x no accesible | 7.1 no aplica |
+
+---
+
+## 4. Flujos de Navegación
+
+Cada flujo modela el recorrido de una tarea crítica en 5 a 7 pasos principales, con nodos de decisión (rombos) para la sesión activa, los campos obligatorios y la colisión de reservas.
+
+### Flujo 1: Búsqueda, Selección y Agendamiento de una Cancha
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Actor** | Cliente (o visitante) |
+| **Objetivo** | Buscar una cancha, elegir un horario libre y confirmar la reserva. |
+| **Precondición** | El usuario está en el Catálogo (2.0). Si es visitante, el sistema lo intercepta antes de confirmar. |
+| **Resultado esperado** | La reserva queda registrada, el horario pasa a Ocupado y se muestra Mis Reservas (7.1). |
+| **Excepción principal** | Si otro usuario confirmó el mismo bloque antes, se muestra «Este horario ya no está disponible. Seleccione otro.» y se actualiza el calendario. |
+
+```mermaid
+flowchart TD
+    P1["1. Buscar y filtrar canchas\nCatálogo 2.0 / Buscador 2.2"] --> P2["2. Abrir Ficha de Cancha 2.3\ny consultar el calendario"]
+    P2 --> P3["3. Elegir un horario Libre y\npulsar Reservar Horario"]
+    P3 --> D1{"¿Hay sesión\nactiva?"}
+    
+    D1 -->|No (visitante)| P4["4. Intercepción: Iniciar Sesión 6.1 o\nRegistro 6.2 (reserva retenida en memoria)"]
+    D1 -->|Sí (cliente)| P5["5. Modal de Confirmación: resumen\n(cancha, fecha, hora, precio) y Confirmar"]
+    
+    P4 --> D2{"¿Tiene\ncuenta?"}
+    D2 -->|No: Registro 6.2| P4a["Registro 6.2: completar nombre, correo,\nteléfono y contraseña. Cuenta creada,\nvuelve a Iniciar Sesión 6.1"]
+    D2 -->|Sí: Iniciar Sesión 6.1| D3{"¿Credenciales\nválidas?"}
+    
+    P4a --> D4{"¿Campos\ncompletos?"}
+    D4 -->|No| E1["Error de campos requeridos\nSe conservan los datos escritos\n-> vuelve al paso 4"]
+    D4 -->|Sí| D3
+    
+    D3 -->|No| E2["Correo o contraseña incorrectos\nSe conserva el correo\n-> vuelve al paso 4"]
+    D3 -->|Sí: regresa a 2.3| P5
+    
+    P5 --> P6["6. El sistema verifica la disponibilidad\njusto antes de guardar la reserva"]
+    P6 --> D5{"¿El horario\nsigue libre?"}
+    
+    D5 -->|No: otro usuario confirmó antes| E3["Este horario ya no está disponible.\nSeleccione otro.\n-> calendario actualizado (paso 2)"]
+    D5 -->|Sí| P7["7. Reserva registrada y confirmada\nSe muestra Mis Reservas 7.1"]
+```
+
+---
+
+### Flujo 2: Consulta de Historial y Cancelación de una Reserva Vigente
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Actor** | Cliente |
+| **Objetivo** | Revisar el historial de reservas y cancelar una reserva vigente. |
+| **Precondición** | El cliente tiene sesión activa (si es visitante, se redirige a Iniciar Sesión 6.1 y regresa a Mis Reservas) y accede desde el menú de usuario. |
+| **Resultado esperado** | La reserva cambia a Cancelada, el horario queda libre y la tarjeta se actualiza en Mis Reservas (7.1). |
+| **Excepción principal** | Si el cliente no tiene reservas se muestra un mensaje informativo; si no confirma la cancelación, la reserva se mantiene sin cambios. |
+
+```mermaid
+flowchart TD
+    P1["1. Acceder a Mis Reservas 7.1\ndesde el menú de usuario"] --> D1{"¿Hay sesión de\nCliente activa?"}
+    D1 -->|No (visitante)| E1["Visitante: redirige a Iniciar Sesión 6.1\n-> regresa a Mis Reservas al autenticarse"]
+    D1 -->|Sí| P2["2. Consultar el historial: reservas\nconfirmadas, completadas y canceladas"]
+    P2 --> D2{"¿Tiene reservas\nregistradas?"}
+    D2 -->|No| E2["Aún no tienes reservas registradas\nFin de la consulta"]
+    D2 -->|Sí| P3["3. Seleccionar la reserva vigente\ny pulsar Cancelar Reserva"]
+    P3 --> P4["4. Modal de Cancelación: ¿Está seguro de\nque desea cancelar esta reserva?"]
+    P4 --> D3{"¿Confirma la\ncancelación?"}
+    D3 -->|No| E3["La reserva se mantiene sin cambios\n-> vuelve a Mis Reservas 7.1"]
+    D3 -->|Sí| P5["5. El sistema cambia el estado a\nCancelada y libera el horario"]
+    P5 --> P6["6. Mis Reservas 7.1 actualizada:\nla tarjeta pasa a estado Cancelada"]
+```
+
+---
+
+### Flujo 3: Registro de una Nueva Cancha en el Catálogo (CRUD)
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Actor** | Administrador |
+| **Objetivo** | Agregar una nueva cancha con su información técnica y tarifa. |
+| **Precondición** | El administrador inició sesión y está en el Panel de Control (8.0). |
+| **Resultado esperado** | La nueva cancha aparece en la tabla de Gestión de Canchas (8.1) y en el catálogo público. |
+| **Excepción principal** | Si faltan campos obligatorios, se muestra el error sin borrar lo ya escrito. |
+
+```mermaid
+flowchart TD
+    P1["1. Ingresar al Panel de\nControl 8.0 (Administrador)"] --> P2["2. Sidebar: abrir\nGestión de Canchas 8.1"]
+    P2 --> P3["3. Pulsar + Nueva Cancha\n(abre el formulario 8.1.1)"]
+    P3 --> P4["4. Completar los datos de la cancha\n(información técnica y tarifa)"]
+    P4 --> D1{"¿Guardar o\nCancelar?"}
+    D1 -->|Cancelar| E1["Retorno a 8.1 sin cambios"]
+    D1 -->|Guardar| P5["5. Pulsar Guardar"]
+    P5 --> D2{"¿Campos obligatorios\ncompletos?"}
+    D2 -->|No| E2["Complete todos los campos requeridos\nSe conserva lo ya escrito\n-> vuelve al paso 4"]
+    D2 -->|Sí| P6["6. El sistema valida y\nactualiza la base de datos"]
+    P6 --> P7["7. Retorno a 8.1: la nueva cancha aparece\nen la tabla y en el catálogo público"]
+```
+
+---
+
+### Flujo 4: Bloqueo Manual de Horarios por Mantenimiento o Lluvia
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Actor** | Administrador |
+| **Objetivo** | Bloquear un rango de fechas y horas de una cancha por mantenimiento o lluvia. |
+| **Precondición** | El administrador inició sesión y está en Gestión de Canchas (8.1). |
+| **Resultado esperado** | Los bloques quedan no disponibles y el calendario público (2.3) los muestra como Mantenimiento. |
+| **Excepción principal** | Si hay reservas activas en el rango, no se bloquea y se pide resolverlas primero en el Listado de Reservas (8.2). |
+
+```mermaid
+flowchart TD
+    P1["1. Ingresar al Panel de\nControl 8.0 (Administrador)"] --> P2["2. Sidebar: abrir\nGestión de Canchas 8.1"]
+    P2 --> P3["3. Elegir la cancha y pulsar\nBloquear Horarios"]
+    P3 --> P4["4. Modal de Bloqueo: definir el motivo\n(mantenimiento o lluvia) y el rango de fechas y horas"]
+    P4 --> P5["5. Pulsar Confirmar bloqueo"]
+    P5 --> D1{"¿Campos obligatorios\ncompletos?"}
+    D1 -->|No| E1["Mensaje de campos requeridos\nSe conserva lo ya escrito\n-> vuelve al paso 4"]
+    D1 -->|Sí| D2{"¿Hay reservas activas\nen el rango?"}
+    D2 -->|Sí| E2["Advertencia: hay reservas activas en el rango.\nNo se bloquea. Resolverlas en Listado de\nReservas 8.2 (CU-09) -> y reintentar (paso 3)"]
+    D2 -->|No| P6["6. El sistema marca los bloques como\nno disponibles (estado Mantenimiento)"]
+    P6 --> P7["7. El calendario público 2.3 muestra\nMantenimiento: no se puede reservar"]
+```
+
+---
+
+### Flujo 5: Registro de una Reserva Asistida (Atención Presencial o Telefónica)
+
+| Campo | Descripción |
+| :--- | :--- |
+| **Actor** | Administrador |
+| **Objetivo** | Registrar una reserva a nombre de un solicitante que llegó o llamó al complejo. |
+| **Precondición** | El administrador inició sesión y está en el Listado de Reservas (8.2). |
+| **Resultado esperado** | La reserva queda registrada, el horario pasa a Ocupado y aparece en el Listado de Reservas (8.2). |
+| **Excepción principal** | Si faltan campos obligatorios se conserva lo escrito; si el bloque ya fue reservado, se pide elegir otro. |
+
+```mermaid
+flowchart TD
+    P1["1. Ingresar al Panel de\nControl 8.0 (Administrador)"] --> P2["2. Sidebar: abrir\nListado de Reservas 8.2"]
+    P2 --> P3["3. Pulsar + Reserva Asistida\n(abre el modal)"]
+    P3 --> P4["4. Registrar los datos del solicitante\ny el canal (presencial o telefónico)"]
+    P4 --> P5["5. Elegir cancha, fecha y\nbloque horario libre"]
+    P5 --> D1{"¿Campos obligatorios\ncompletos?"}
+    D1 -->|No| E1["Mensaje de campos requeridos\nSe conserva lo ya escrito\n-> vuelve al paso 4"]
+    D1 -->|Sí| P6["6. Pulsar Confirmar: el sistema verifica\nla disponibilidad antes de guardar"]
+    P6 --> D2{"¿El horario\nsigue libre?"}
+    D2 -->|No: otro bloque ya fue reservado| E2["Este horario ya no está disponible.\nSeleccione otro.\n-> vuelve al paso 5"]
+    D2 -->|Sí| P7["7. Reserva registrada: el horario pasa\na Ocupado y aparece en 8.2"]
+```
 
 ---
 
@@ -821,7 +934,7 @@ graph LR
 
 | Sección | Integrante(s) | Herramienta y Link al prompt utilizado | Aporte de la IA | Aporte Intelectual del equipo |
 | :--- | :--- | :--- | :--- | :--- |
-| Arquitectura de Información, Sitemap y Modelo de Navegación | Gonzalez, Walter | Antigravity / Gemini — [Ver prompts en Auditoria/prompts.md](./Auditoria/prompts.md) | Asistió en la maquetación del documento en formato Markdown y en la revisión de coherencia técnica entre las especificaciones de arquitectura y navegación. | Definición de las reglas de negocio, taxonomía multidimensional del catálogo, especificaciones de accesibilidad WCAG 2.1 AA, lógica de concurrencia y diseño de las rutas de usuario. |
-| Flujos de Navegación | Sanchez, Jose | En desarrollo | En desarrollo | Asignado para la modelación secuencial de los recorridos de las tareas críticas del sistema. |
+| Arquitectura de Información y Sitemap | Gonzalez, Walter | Antigravity / Gemini — [Ver prompts en Auditoria/prompts.md](./Auditoria/prompts.md) | Asistió en la maquetación del documento en formato Markdown y en la revisión de coherencia técnica entre las especificaciones de arquitectura y navegación. | Definición de las reglas de negocio, taxonomía multidimensional del catálogo, especificaciones de accesibilidad WCAG 2.1 AA, lógica de concurrencia y diseño jerárquico del sitemap. |
+| Modelo de Navegación Refinado y Flujos de Navegación | Sanchez, Jose | Ninguna | Ninguno | Elaboración del diagrama de navegación general, estructuración de las matrices de pantallas y roles, y modelado detallado de los cinco flujos de tareas críticas con manejo de decisiones, intercepción de sesión y excepciones. |
 | Wireframes | Rozette, Jose | En desarrollo | En desarrollo | Asignado para el diseño estructural de las pantallas principales en media fidelidad. |
 | Prototipo de Alta Fidelidad | Meneses, Alexander | En desarrollo | En desarrollo | Asignado para la construcción visual interactiva y componentes en Figma. |
