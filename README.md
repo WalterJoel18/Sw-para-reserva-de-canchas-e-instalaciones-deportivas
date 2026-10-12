@@ -903,7 +903,21 @@ flowchart TD
     D2 -->|No: otro bloque ya fue reservado| E2["Este horario ya no está disponible.\nSeleccione otro.\n-> vuelve al paso 5"]
     D2 -->|Sí| P7["7. Reserva registrada: el horario pasa\na Ocupado y aparece en 8.2"]
 ```
+## 5️5. Wireframes
 
+A continuación se presentan los seis wireframes aprobados, con sus descripciones
+funcionales y los criterios de accesibilidad .
+
+| Vista | Imagen | Descripción |
+|------|--------|------------|
+| **Guía de estilo (Design System)** | ![design_system_base](wireframes/design_system_base.png) | Sistema de componentes monocromático, tipografía y estados interactivos WCAG AA. |
+| **Vista 1 – Página de Inicio** | ![vista 1](wireframes/wireframe_vista1_inicio.png) | Buscador rápido (deporte / fecha / horario) y acceso a secciones principales. |
+| **Vista 2 – Catálogo de Canchas** | ![vista 2](wireframes/wireframe_vista2_catalogo.png) | Filtros laterales (deporte, superficie, precio USD) y tarjetas de resultados. |
+| **Vista 3 – Detalle (Desktop)** | ![vista 3](wireframes/wireframe_vista3_detalle_desktop.png) | Matriz semanal completa, información técnica y botón **“Reservar”**. |
+| **Vista 4 – Detalle (Mobile)** | ![vista 4](wireframes/wireframe_vista4_mobile.png) | Carrusel de días, lista horaria y modal **“Confirmar Reserva”** (pago en recepción). |
+| **Vista 5 – Mis Reservas** | ![vista 5](wireframes/wireframe_vista5_mis_reservas.png) | Tarjetas con estado **“Confirmado (Pago en Recepción)”** y modal de cancelación sin penalización. |
+| **Vista 6 – Panel Admin** | ![vista 6](wireframes/wireframe_vista6_admin.png) | Sidebar vectorial, tabla de reservas y modal de bloqueo técnico. |
+| **Tablero maestro** | ![tablero maestro](wireframes/tablero_maestro_figma.png) | Vista panorámica que agrupa los 6 wireframes en un único lienzo (útil para copiar a Figma). |
 ---
 
 # Auditoría y Uso de la IA
