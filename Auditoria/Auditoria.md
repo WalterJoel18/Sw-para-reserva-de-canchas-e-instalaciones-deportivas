@@ -26,7 +26,7 @@
 
 | Sección | Integrante(s) | Herramienta y Link al prompt utilizado | Aporte de la IA | Aporte Intelectual del equipo |
 | :--- | :--- | :--- | :--- | :--- |
-| Arquitectura de Información, Sitemap y Modelo de Navegación | Gonzalez, Walter | Antigravity / Gemini — [Ver prompts en prompts.md](./prompts.md) | Asistió en la maquetación del documento en formato Markdown y en la revisión de coherencia técnica entre las especificaciones de arquitectura y navegación. | Definición de las reglas de negocio, taxonomía multidimensional del catálogo, especificaciones de accesibilidad WCAG 2.1 AA, lógica de concurrencia y diseño de las rutas de usuario. |
-| Flujos de Navegación | Sanchez, Jose | En desarrollo | En desarrollo | Asignado para la modelación secuencial de los recorridos de las tareas críticas del sistema. |
+| Arquitectura de Información y Sitemap | Gonzalez, Walter | Antigravity / Gemini — [Ver prompts en prompts.md](./prompts.md) | Asistió en la maquetación del documento en formato Markdown y en la revisión de coherencia técnica entre las especificaciones de arquitectura y navegación. | Definición de las reglas de negocio, taxonomía multidimensional del catálogo, especificaciones de accesibilidad WCAG 2.1 AA, lógica de concurrencia y diseño jerárquico del sitemap. |
+| Modelo de Navegación Refinado y Flujos de Navegación | Sanchez, Jose | Ninguna | Ninguno | Elaboración del diagrama de navegación general, estructuración de las matrices de pantallas y roles, y modelado detallado de los cinco flujos de tareas críticas con manejo de decisiones, intercepción de sesión y excepciones. |
 | Wireframes | Rozette, Jose | En desarrollo | En desarrollo | Asignado para el diseño estructural de las pantallas principales en media fidelidad. |
 | Prototipo de Alta Fidelidad | Meneses, Alexander | En desarrollo | En desarrollo | Asignado para la construcción visual interactiva y componentes en Figma. |
