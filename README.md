@@ -945,7 +945,7 @@ trazado atenuado. El botón de confirmación dice **“Reservar”**.
 
 ## Vista 4 – Detalle de cancha (Mobile)
 
-![Vista 4 – Detalle de cancha (Mobile)](wireframes/Wireframe_vista4_mobile.png)
+![Vista 4 – Detalle de cancha (Mobile)](Wireframes/wireframe_vista4_mobile.png)
 
 **Propósito** – Versión móvil del detalle: carrusel de días en la parte
 superior, lista vertical de horarios libres y un **modal de confirmación**
