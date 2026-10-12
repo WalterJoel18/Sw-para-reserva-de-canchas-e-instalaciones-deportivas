@@ -903,21 +903,81 @@ flowchart TD
     D2 -->|No: otro bloque ya fue reservado| E2["Este horario ya no está disponible.\nSeleccione otro.\n-> vuelve al paso 5"]
     D2 -->|Sí| P7["7. Reserva registrada: el horario pasa\na Ocupado y aparece en 8.2"]
 ```
-## 5️5. Wireframes
+# 5️. Wireframes
 
 A continuación se presentan los seis wireframes aprobados, con sus descripciones
-funcionales y los criterios de accesibilidad .
+funcionales y los criterios de accesibilidad..
 
-| Vista | Imagen | Descripción |
-|------|--------|------------|
-| **Guía de estilo (Design System)** | ![design_system_base](wireframes/design_system_base.png) | Sistema de componentes monocromático, tipografía y estados interactivos WCAG AA. |
-| **Vista 1 – Página de Inicio** | ![vista 1](wireframes/wireframe_vista1_inicio.png) | Buscador rápido (deporte / fecha / horario) y acceso a secciones principales. |
-| **Vista 2 – Catálogo de Canchas** | ![vista 2](wireframes/wireframe_vista2_catalogo.png) | Filtros laterales (deporte, superficie, precio USD) y tarjetas de resultados. |
-| **Vista 3 – Detalle (Desktop)** | ![vista 3](wireframes/wireframe_vista3_detalle_desktop.png) | Matriz semanal completa, información técnica y botón **“Reservar”**. |
-| **Vista 4 – Detalle (Mobile)** | ![vista 4](wireframes/wireframe_vista4_mobile.png) | Carrusel de días, lista horaria y modal **“Confirmar Reserva”** (pago en recepción). |
-| **Vista 5 – Mis Reservas** | ![vista 5](wireframes/wireframe_vista5_mis_reservas.png) | Tarjetas con estado **“Confirmado (Pago en Recepción)”** y modal de cancelación sin penalización. |
-| **Vista 6 – Panel Admin** | ![vista 6](wireframes/wireframe_vista6_admin.png) | Sidebar vectorial, tabla de reservas y modal de bloqueo técnico. |
-| **Tablero maestro** | ![tablero maestro](wireframes/tablero_maestro_figma.png) | Vista panorámica que agrupa los 6 wireframes en un único lienzo (útil para copiar a Figma). |
+---
+
+## Vista 1 – Página de inicio
+
+![Vista 1 – Página de inicio](Wireframes/wireframe_vista1_inicio.png)
+
+**Propósito** – Dar la bienvenida al usuario y ofrecer el **buscador rápido**
+(deporte / fecha / horario) junto a accesos directos a las secciones
+principales (*Catálogo*, *¿Cómo funciona?*, *Contacto*).  
+El botón de acción principal es **“Buscar canchas”**.
+
+---
+
+## Vista 2 – Catálogo de canchas
+
+![Vista 2 – Catálogo de canchas](Wireframes/wireframe_vista2_catalogo.png)
+
+**Propósito** – Permitir la exploración del inventario mediante filtros
+laterales (deporte, superficie, precio en USD, entorno) y ordenamiento.
+Los resultados aparecen en **tarjetas** con nombre, deporte, precio y una
+imagen de placeholder.
+
+---
+
+## Vista 3 – Detalle de cancha (Desktop)
+
+![Vista 3 – Detalle de cancha (Desktop)](Wireframes/wireframe_vista3_detalle_desktop.png)
+
+**Propósito** – Mostrar la ficha completa de la cancha con galería,
+especificaciones técnicas y una **matriz semanal** de disponibilidad.
+Los bloques horarios libres aparecen en blanco; los ocupados, con
+trazado atenuado. El botón de confirmación dice **“Reservar”**.
+
+---
+
+## Vista 4 – Detalle de cancha (Mobile)
+
+![Vista 4 – Detalle de cancha (Mobile)](wireframes/Wireframe_vista4_mobile.png)
+
+**Propósito** – Versión móvil del detalle: carrusel de días en la parte
+superior, lista vertical de horarios libres y un **modal de confirmación**
+con el mensaje:
+
+> *“Confirmar Reserva – Pago en Recepción (USD $)”.*
+
+No se muestra ninguna referencia a pagos online ni a reembolsos.
+
+---
+
+## Vista 5 – Mis reservas (Cliente)
+
+![Vista 5 – Mis reservas (Cliente)](Wireframes/wireframe_vista5_mis_reservas.png)
+
+**Propósito** – Área del cliente donde aparecen tarjetas con la reserva
+actual. Cada tarjeta indica **“Estado: Confirmado (Pago en Recepción)”**.
+Al pulsar **“Cancelar Reserva”** se abre un modal que pregunta:
+
+> *“¿Está seguro de que desea cancelar esta reserva? La franja horaria
+> quedará libre sin penalización.”*
+
+---
+
+## Vista 6 – Panel de administración
+
+![Vista 6 – Panel de administración](Wireframes/wireframe_vista6_admin.png)
+
+**Propósito** – Dashboard para el administrador: sidebar vectorial,
+KPIs (canchas operativas, turnos del día, ocupación), tabla de reservas y
+un **modal de bloqueo técnico** para inhabilitar horarios por mantenimiento.
+
 ---
 
 # Auditoría y Uso de la IA
