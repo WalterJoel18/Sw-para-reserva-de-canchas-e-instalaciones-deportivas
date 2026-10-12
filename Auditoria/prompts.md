@@ -57,3 +57,22 @@ El siguiente documento recopila los prompts representativos utilizados durante e
 * **Prompt representativo:**
   > "Necesito modelar qué ocurre si dos usuarios intentan confirmar la misma cancha en el mismo horario simultáneamente. ¿Cómo justificamos técnicamente la verificación en dos pasos y el manejo de condiciones de carrera a nivel de arquitectura web para que sea coherente con el flujo alterno de casos de uso?"
 * **Uso y aporte intelectual:** Se diseñó la regla de validación transaccional inmediata en el servidor previa al registro (`COMMIT`), definiendo el mensaje de excepción controlado y la actualización automática de la vista, integrándolo en la sección 1.4 C y en el rombo de decisión del Flujo 1.
+
+### Consulta 7: Estructuración y Bifurcaciones de Flujos de Tareas Críticas
+
+* **Integrante:** Sanchez, Jose
+* **Herramienta:** Gemini
+* **Objetivo:** Estructurar el paso a paso secuencial de los flujos de navegación incorporando bifurcaciones lógicas y manejo de excepciones.
+* **Prompt representativo:**
+  > "Tengo los escenarios de agendamiento y cancelación de reservas del sistema de canchas. Ayúdame a estructurar el flujo paso a paso (entre 5 y 7 pasos) en un diagrama de flujo lógico, incluyendo los rombos de decisión para cuando el usuario no tiene sesión activa o cuando fallan los datos del formulario."
+* **Uso y aporte intelectual:** Se tomó la estructura lógica de bifurcaciones propuesta y se adaptaron manualmente los identificadores de pantallas (1.0 a 8.2), las precondiciones específicas y la conservación de datos en memoria para evitar pérdida de información.
+
+### Consulta 8: Depuración de Inconsistencias y Casos Borde en Flujos Administrativos
+
+* **Integrante:** Sanchez, Jose
+* **Herramienta:** Gemini
+* **Objetivo:** Limar impurezas, redundancias e incoherencias técnicas en los flujos de administración (bloqueo de canchas y reserva asistida).
+* **Prompt representativo:**
+  > "Revisa estos borradores de flujo para el panel de administración: bloqueo por mantenimiento y registro de reserva presencial o telefónica. Señala posibles incoherencias o pasos redundantes para que el flujo sea directo y contemple qué pasa si el horario ya fue reservado o si hay reservas activas en el rango."
+* **Uso y aporte intelectual:** Se eliminaron pasos redundantes en la interacción administrativa y se incorporaron las validaciones de colisión de turnos y advertencia previa de reservas vigentes, vinculándolas formalmente con los casos de uso CU-08 y CU-09.
+
