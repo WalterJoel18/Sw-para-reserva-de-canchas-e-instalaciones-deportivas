@@ -1,4 +1,4 @@
-# UNIVERSIDAD TECNOLÓGICA DE PANAMÁ
+﻿# UNIVERSIDAD TECNOLÓGICA DE PANAMÁ
 ## FACULTAD DE INGENIERÍA DE SISTEMAS COMPUTACIONALES
 ### DEPARTAMENTO DE INGENIERÍA DE SOFTWARE
 
@@ -626,142 +626,191 @@ flowchart LR
 
 # Fase 2: Arquitectura de Información y Diseño de Interfaz
 
-## 1. Arquitectura de Información (AI)
+# 1. Arquitectura de Información (AI)
 
-### 1.1 Contenido Principal (Inventario de Contenidos)
+## 1.1 Contenido Principal (Inventario de Contenidos)
+
 El inventario de la plataforma se organiza en tres tipologías de contenido: informativo, funcional y mixto.
 
-#### A. Contenido Informativo
-* **Presentación del Complejo (Landing):** Identidad del centro deportivo, resumen de servicios e instalaciones, y accesos directos al catálogo.
-* **Guía de Uso ("¿Cómo funciona?"):** Secuencia explicativa de cuatro pasos orientada a nuevos usuarios (exploración del catálogo, selección de cancha, consulta de disponibilidad en tiempo real y confirmación de la reserva).
-* **Normativa y Equipamiento por Superficie:**
-  * *Césped Sintético:* Uso exclusivo de calzado con suela tipo turf o multitaco; restricción estricta de tacos de aluminio y calzado de suela lisa.
-  * *Fútbol Sala (Cemento / Tabloncillo):* Uso obligatorio de suela de goma lisa (non-marking) para preservación de la superficie y prevención de deslizamientos.
-  * *Pádel / Tenis:* Calzado con suela de espiga (clay) o suela mixta; requerimientos reglamentarios para palas y raquetas.
-* **Información General y Contacto:** Horarios de operación del complejo, ubicación física, canales de atención al cliente y políticas de cancelación y tolerancia horaria.
+### A. Contenido Informativo
 
-#### B. Contenido Funcional
-* **Explorador Visual (Collage):** Navegación visual estructurada mediante paneles fotográficos organizados por disciplinas deportivas y tipos de instalación.
-* **Buscador con Filtros Facetados y Ordenamiento:** Motor de búsqueda que opera sobre las dimensiones taxonómicas del sistema (deporte, modalidad, superficie, entorno y rango de precio).
-* **Calendario de Disponibilidad:** Componente temporal dinámico que refleja los intervalos libres, ocupados o inhabilitados para cada instalación deportiva individual.
-* **Módulo de Confirmación y Agendamiento de Reserva:** Interfaz para la selección de bloques horarios, revisión del resumen del turno (cancha, fecha, hora y tarifa) y registro formal de la reserva en el sistema (sin pasarelas de pago externas, conforme al alcance establecido).
-* **Panel de Usuario ("Mi Cuenta"):** Interfaz para la consulta del historial de reservas del cliente (activas, completadas y canceladas) y gestión de cancelaciones para turnos vigentes.
-* **Panel Administrativo (Dashboard):**
-  * Gestión de Canchas (CRUD): Registro de nuevas instalaciones, actualización de especificaciones técnicas y tarifas, y desactivación lógica de canchas del catálogo público preservando la integridad del historial transaccional.
-  * Control de Reservas: Supervisión global de turnos agendados y actualización de estados operativos (confirmada, completada, cancelada).
-  * Reserva Asistida: Módulo para registrar reservas gestionadas por canales presenciales, telefónicos o mensajería directa, asociando los datos del solicitante al bloque horario.
-  * Bloqueo Preventivo: Inhabilitación manual de fechas y horarios por mantenimiento, reparaciones o factores climáticos.
+- **Presentación del Complejo (Landing):** Identidad del centro multideportivo, resumen de servicios e infraestructura para 6 disciplinas deportivas (fútbol, básquetbol, tenis, pádel, voleibol y bádminton), y accesos directos al catálogo general.
+- **Guía de Uso ("¿Cómo funciona?"):** Secuencia explicativa de cuatro pasos orientada a nuevos usuarios:
+  1. Exploración del catálogo y selección de instalación.
+  2. Consulta de disponibilidad horaria en tiempo real.
+  3. Generación de reserva web preliminar (estado *Pendiente*).
+  4. Confirmación del turno mediante transferencia de abono (Yappy / Banco) y envío de comprobante vía WhatsApp.
+- **Normativa y Equipamiento por Superficie:**
+  - *Césped Sintético (Fútbol 5, 7 y 9):* Uso exclusivo de calzado con suela tipo turf o multitaco; restricción estricta de tacos de aluminio y calzado de suela lisa para evitar desgaste y lesiones.
+  - *Fútbol Sala (Cemento / Tabloncillo):* Uso obligatorio de zapatillas con suela de goma lisa (*non-marking*) para preservación de la duela y prevención de deslizamientos.
+  - *Pádel / Tenis (Césped sintético fibrilado / Arcilla / Sintético):* Calzado con suela de espiga (*clay*) o suela mixta omni; requerimientos reglamentarios para palas de pádel con cordón de seguridad y raquetas encordadas.
+  - *Básquetbol (Techado / Cemento):* Calzado deportivo con soporte de tobillo y amortiguación de impacto; exigencia mandatoria de suela de goma limpia (*non-marking*) en tabloncillos de madera tratada.
+  - *Voleibol (Techado / Cemento / Aire libre):* Calzado deportivo con adherencia lateral; suela *non-marking* en pista interior de tabloncillo. Uso de rodilleras reglamentarias y balones con presión estándar de competencia.
+  - *Bádminton (Tabloncillo / Sintético interior):* Zapatillas livianas indoor con suela de agarre antideslizante (*non-marking*). Uso obligatorio de volantes reglamentarios (nylon o pluma) y raquetas certificadas.
+- **Información General y Contacto:** Horarios de operación física, geolocalización, canales de atención al cliente (WhatsApp institucional habilitado para recepción de comprobantes de abono), políticas de cancelación (cancelable únicamente si faltan más de 2 horas para el inicio del turno; a las 2 horas exactas o menos no se permite la cancelación ni la creación de reservas) y tolerancia de llegada.
 
-#### C. Contenido Mixto
-* **Ficha de Detalle de Cancha:** Vista que integra la especificación técnica de la instalación (galería fotográfica, características de la superficie, normativa de calzado y tarifa horaria) con el componente interactivo de calendario para la consulta y selección de turnos.
+### B. Contenido Funcional
+
+- **Explorador Visual (Collage):** Navegación visual estructurada mediante cuadrículas fotográficas organizadas por disciplinas deportivas y tipos de instalación (techadas y al aire libre).
+- **Buscador con Filtros Facetados y Ordenamiento:** Motor de búsqueda que opera sobre las dimensiones taxonómicas del sistema: deporte, modalidad/formato, superficie, entorno de cubierta y rango de precio por hora.
+- **Calendario de Disponibilidad Dinámica:** Componente temporal reactivo que presenta los intervalos horarios según el rol del usuario. La vista pública y de cliente muestra tres estados: *Libre*, *No disponible temporalmente* (agrupa reservas en estado *Pendiente* sin revelar datos del cliente ni importes) y *Ocupado* (reservas *Confirmadas*). La vista del Administrador amplía la información mostrando: *Libre*, *Pendiente de Abono* (con datos del cliente y temporizador TTL), *Ocupado (Confirmado)* e *Inhabilitado por Mantenimiento*. Cuando el TTL expira, el bloque retorna automáticamente a *Libre* en ambas vistas.
+- **Módulo de Confirmación y Agendamiento de Reserva:** Interfaz para la selección de bloques horarios, revisión del desglose económico y registro formal de la orden preliminar (*Pendiente*). El cálculo financiero opera dinámicamente según la duración del turno: `Tarifa Total = Tarifa Base/hora × Horas reservadas`; el abono mínimo corresponde al 30 % de la tarifa total como valor fijo del sistema (`Abono 30 % = Tarifa Total × 0.30`); y el saldo pendiente a liquidar en caja es `Saldo = Tarifa Total − Abono`. Ejemplo de referencia para 1 hora con tarifa de $25.00/h: Tarifa total = $25.00, Abono mínimo (30 %) = $7.50, Saldo en caja = $17.50; si el turno es de 2 horas a $25.00/h: Tarifa total = $50.00, Abono mínimo (30 %) = $15.00 y Saldo en caja = $35.00. Al completar el registro preliminar, el sistema despliega un **resumen de reserva e instrucciones de abono** (no un comprobante financiero) con los datos de transferencia (cuenta bancaria, Yappy comercial) y botón a WhatsApp para remitir el comprobante. El sistema distingue dos comprobantes formales: la **constancia / comprobante digital de abono** (emitido al validar el abono del 30 % y pasar a *Confirmada*) y el **comprobante digital de liquidación final** (emitido en recepción al saldar el remanente en caja).
+- **Panel de Usuario ("Mi Cuenta"):** Interfaz para la consulta del historial de turnos (activos, completados y cancelados). Cada tarjeta de reserva incorpora un desglose financiero claro:
+  - *Estado del turno:* Pendiente / Confirmada / Completada / Cancelada (con registro del motivo, incluyendo *Vencimiento del TTL* si aplicó).
+  - *Tarifa total:* Monto estipulado de la cancha.
+  - *Abono registrado:* Importe validado por administración.
+  - *Saldo por pagar en caja:* Monto exacto a liquidar en ventanilla antes del inicio del turno.
+  - *Acción de cancelación:* Habilitada con registro obligatorio de motivo; cancelable únicamente si faltan más de 2 horas para el inicio del turno; a las 2 horas exactas o menos no se permite la cancelación.
+- **Panel Administrativo (Dashboard):**
+  - *Gestión de canchas precargadas:* El administrador puede consultar las canchas existentes y cambiar su estado entre Activa e Inactiva mediante un interruptor (*toggle switch*). No puede agregar, eliminar ni editar los datos de las canchas.
+  - *Control de Reservas y Validación de Abonos:* Supervisión global de turnos agendados, verificación manual de comprobantes remitidos por los clientes, cambio de estado de *Pendiente* a *Confirmada*, y acceso al módulo POS de liquidación.
+  - *Módulo POS de Liquidación en Sitio:* Interfaz tipo punto de venta que se dispara al presentarse el cliente a la instalación; muestra el saldo restante adeudado y permite registrar el método de cobro presencial (Efectivo o Yappy en ventanilla). Al registrar el pago, el saldo pendiente queda en cero ($0.00) y se emite el **comprobante digital de liquidación final** (diferenciado de la constancia digital de abono previa). La reserva permanece en estado *Confirmada* mientras se realiza el turno y pasa automáticamente a *Completada* cuando el turno termina.
+  - *Reserva Asistida:* Módulo para registrar turnos presenciales o telefónicos. Permite registrar un abono (30 %) o el pago completo (100 %). Si se recibe el pago completo, el saldo queda en cero ($0.00) y no se vuelve a cobrar en el POS; si se recibe un abono, solo se cobrará el saldo restante en caja al presentarse el cliente. En ambos casos, la reserva queda en estado *Confirmada* y permanece así hasta que termine el turno (momento en que pasa a *Completada*).
+  - *Bloqueo Preventivo de Horarios:* Inhabilitación manual de rangos horarios por mantenimiento, reparaciones o factores meteorológicos adversos.
+
+### C. Contenido Mixto
+
+- **Ficha de Detalle de Cancha:** Vista que integra la especificación técnica de la instalación (galería fotográfica, tipo de superficie, condición de cubierta, normativa de calzado, tarifa base por hora y abono mínimo obligatorio correspondiente al 30 % de la tarifa total acumulada según la duración del turno como valor fijo del sistema: ej. 1 hora a $25.00/h requiere $7.50 de abono; 2 horas requieren $15.00 de abono) con el componente interactivo de calendario para la consulta y selección de turnos.
 
 ---
 
-### 1.2 Agrupaciones, Categorías y Taxonomía del Catálogo
+## 1.2 Agrupaciones, Categorías y Taxonomía del Catálogo
 
-#### A. Agrupación Temática General
-1. **Exploración e Instalaciones:** Catálogo general, taxonomía deportiva y fichas individuales de cada cancha.
-2. **Agendamiento y Reservas:** Consulta de disponibilidad horaria, confirmación de turno y seguimiento personal en la sección de reservas.
-3. **Guía y Normativas:** Instrucciones operativas del sistema, reglamento general y especificaciones de indumentaria por cancha.
-4. **Administración y Control:** Gestión de catálogo (CRUD), control de turnos, registro asistido y bloqueo de horarios.
+### A. Agrupación Temática General
 
-#### B. Taxonomía Multidimensional del Catálogo
-Para garantizar una categorización normalizada que facilite tanto la experiencia de filtrado del usuario como la estructuración relacional en la base de datos, el catálogo desacopla la información en cuatro dimensiones independientes:
+1. **Exploración e Instalaciones:** Catálogo general, collage deportivo y fichas individuales de cada cancha.
+2. **Agendamiento y Reservas:** Consulta de disponibilidad horaria, generación de reserva preliminar, envío de comprobante y seguimiento personal en la sección de reservas.
+3. **Guía y Normativas:** Instrucciones operativas del sistema, reglas de anticipación para cancelaciones (el sistema no permite crear ni cancelar reservas cuando faltan 2 horas o menos para el inicio del turno; estas acciones solo se permiten con más de 2 horas de anticipación) y requerimientos de indumentaria por superficie.
+4. **Administración y Control:** Gestión de canchas precargadas (consulta y alternancia de estado Activa / Inactiva mediante interruptor, sin agregar, eliminar ni editar canchas), validación de abonos, control de turnos, liquidación presencial en caja (POS) con cierre al finalizar el turno, registro asistido y bloqueo de horarios.
 
-1. **Disciplina Deportiva:** Deporte principal practicado en la instalación (Fútbol, Pádel, Baloncesto, Tenis).
-2. **Modalidad y Formato:** Configuración de juego admitida por las dimensiones de la cancha:
-   * *Fútbol:* Fútbol 5, Fútbol 7, Fútbol 9.
-   * *Pádel / Tenis:* Individual, Dobles.
-   * *Baloncesto:* Media cancha (3x3), Cancha completa (5x5).
-3. **Tipo de Superficie:** Material constructivo del suelo, determinante para la normativa de calzado:
-   * Césped sintético (fibras con relleno de caucho/arena).
-   * Tabloncillo / Parqué de madera tratada.
-   * Concreto pulido / Cemento sintético.
-   * Arcilla / Tierra batida.
+### B. Taxonomía Multidimensional del Catálogo
+
+Para garantizar una categorización normalizada que facilite tanto el filtrado como la estructuración relacional en base de datos, el catálogo desacopla la información en cuatro dimensiones independientes:
+
+1. **Disciplina Deportiva:** Deporte principal practicado en la instalación:
+   - Fútbol
+   - Básquetbol
+   - Tenis
+   - Pádel
+   - Voleibol
+   - Bádminton
+2. **Modalidad y Formato:** Configuración de juego admitida según las dimensiones y marcación:
+   - *Fútbol:* Fútbol 5, Fútbol 7, Fútbol 9, Fútbol Sala.
+   - *Básquetbol:* Media cancha (3x3), Cancha completa (5x5).
+   - *Tenis:* Individual (Singles), Dobles.
+   - *Pádel:* Dobles (estándar), Individual.
+   - *Voleibol:* Voleibol de Sala 6v6, Voleibol Exterior / Recreativo (2v2 / 4v4).
+   - *Bádminton:* Individual, Dobles.
+3. **Tipo de Superficie:** Material constructivo del suelo, condicionante directo del calzado:
+   - Césped sintético (fibras con relleno de caucho/arena).
+   - Tabloncillo / Parqué de madera tratada.
+   - Concreto pulido / Cemento sintético.
+   - Arcilla / Tierra batida.
 4. **Entorno de la Instalación (Cubierta):** Condición estructural frente al clima:
-   * Techada / Cubierta cerrada.
-   * Al aire libre / Exterior.
+   - Techada / Cubierta cerrada.
+   - Al aire libre / Exterior.
 
-Cada cancha física representa una instancia concreta que combina estas cuatro dimensiones, vinculando un sector específico dentro del complejo deportivo y una tarifa horaria base.
-
----
-
-### 1.3 Jerarquía de la Información y Arquitectura de Pantallas
-
-La arquitectura de información distribuye el sistema en tres niveles de profundidad, diferenciando páginas independientes de componentes modales:
-
-* **Nivel 1 (Acceso Global - Páginas Independientes):**
-  * Inicio (Landing page), Catálogo / Explorar Canchas, ¿Cómo Funciona?, Normas de Cancha, e Iniciar Sesión / Registro.
-* **Nivel 2 (Vistas de Contenido y Gestión - Páginas Independientes):**
-  * *Vistas de Cliente:* Resultados del Buscador con Filtros, Ficha de Detalle de Cancha y Mis Reservas (Historial).
-  * *Vistas de Administrador:* Dashboard de Gestión, Formulario para Agregar / Editar Cancha y Listado General de Reservas.
-* **Nivel 3 (Componentes de Interacción Contextual - Modales en Capa de Interfaz):**
-  * Los modales no constituyen nodos de navegación ni poseen URLs independientes; operan como capas sobrepuestas en las pantallas de Nivel 2:
-    * **Modal de Confirmación de Reserva:** Disparado desde la Ficha de Detalle de Cancha al seleccionar un bloque horario; procesa el agendamiento sin abandonar la vista del calendario.
-    * **Modal de Cancelación:** Disparado desde Mis Reservas; solicita validación explícita antes de liberar el registro.
-    * **Modal de Bloqueo de Horarios:** Disparado desde Gestión de Canchas; define intervalos de inhabilitación por mantenimiento.
-    * **Modal de Cambio de Estado:** Disparado desde el Listado de Reservas; actualiza el ciclo de vida del turno.
-    * **Modal de Reserva Asistida:** Disparado desde el Listado de Reservas; permite al personal administrativo agendar turnos presenciales o telefónicos.
+Cada cancha física representa una instancia concreta que combina estas cuatro dimensiones, asociando un sector físico dentro del complejo deportivo y una tarifa horaria base.
 
 ---
 
-### 1.4 Sistema de Etiquetas, Accesibilidad y Disponibilidad Dinámica
+## 1.3 Jerarquía de la Información y Arquitectura de Pantallas
 
-#### A. Estandarización de Etiquetas
+La arquitectura de información distribuye el sistema en tres niveles de profundidad:
 
-| Etiqueta en Interfaz | Propósito / Acción | Tipo de Elemento | Nivel de Acceso |
-| :--- | :--- | :--- | :--- |
-| **Explorar Canchas** | Acceso al catálogo y cuadrícula visual de instalaciones. | Menú / Navegación | Público |
-| **¿Cómo Funciona?** | Guía de cuatro pasos para el proceso de reserva. | Enlace Informativo | Público |
-| **Normas de Cancha** | Requisitos de calzado y reglamento por tipo de superficie. | Enlace Informativo | Público |
-| **Consultar Disponibilidad** | Visualización de la matriz horaria por fecha. | Sección Funcional | Público |
-| **Reservar Horario** | Acción principal para confirmar el turno seleccionado. | Botón de Acción | Cliente autenticado |
-| **Mis Reservas** | Consulta de turnos vigentes e historial de reservas. | Menú de Cuenta | Cliente |
-| **Panel de Control** | Acceso al módulo de administración operativa. | Menú Privado | Administrador |
-| **Bloquear Horarios** | Acción para inhabilitar intervalos por mantenimiento. | Botón Funcional | Administrador |
+- **Nivel 1 (Acceso Global - Páginas Independientes):**
+  - Inicio (Landing page), Catálogo / Explorar Canchas, ¿Cómo Funciona?, Normas de Cancha, e Iniciar Sesión / Registro.
+- **Nivel 2 (Vistas de Contenido y Gestión - Páginas Independientes):**
+  - *Vistas de Cliente:* Resultados del Buscador con Filtros, Ficha de Detalle de Cancha y Mis Reservas (Historial con desglose financiero).
+  - *Vistas de Administrador:* Dashboard de Gestión, Gestión de Canchas Precargadas y Listado General de Reservas.
+- **Nivel 3 (Componentes de Interacción Contextual - Modales en Capa de Interfaz):**
+  - Los modales no constituyen nodos de navegación ni poseen URLs independientes; operan como capas sobrepuestas en las pantallas de Nivel 2:
+    - **Modal de Confirmación de Reserva:** Disparado desde la Ficha de Cancha al seleccionar un bloque horario; emite la reserva en estado *Pendiente* y muestra el resumen de reserva e instrucciones de abono con datos de transferencia Yappy/banco, desglose según duración y enlace a WhatsApp.
+    - **Modal de Validación de Abono:** Disparado desde el Listado de Reservas por el Administrador; permite corroborar el comprobante recibido, registrar la validación del 30 %, emitir la constancia digital de abono y actualizar la reserva de *Pendiente* a *Confirmada*.
+    - **Modal de Liquidación y Cobro en Sitio (POS):** Disparado desde el Listado de Reservas al presentarse el cliente; permite registrar el cobro del saldo restante adeudado (Efectivo o Yappy presencial), dejando el saldo en cero ($0.00) y emitiendo el comprobante digital de liquidación final. La reserva permanece en estado *Confirmada* mientras se realiza el turno y pasa a *Completada* cuando el turno termina.
+    - **Modal de Cancelación:** Disparado desde Mis Reservas; verifica que la reserva sea cancelable únicamente si faltan más de 2 horas para el inicio (a las 2 horas exactas o menos no se permite), solicita seleccionar o escribir el motivo obligatorio de la cancelación, registra el motivo en el sistema, cambia el estado a *Cancelada* y libera el turno.
+    - **Modal de Bloqueo de Horarios:** Disparado desde Gestión de Canchas Precargadas; define intervalos de inhabilitación por factores climáticos o reparaciones.
+    - **Modal de Reserva Asistida:** Disparado desde el Listado de Reservas; permite al personal administrativo registrar turnos presenciales o telefónicos, admitiendo abono (30 %) o pago completo (100 %). Si se recibe el pago completo, el saldo queda en cero ($0.00) y no se vuelve a cobrar en el POS; si se recibe un abono, solo se cobrará el saldo restante en caja al presentarse el cliente. En ambos casos, la reserva queda en estado *Confirmada* hasta que termine el turno (momento en que pasa a *Completada*).
 
-#### B. Accesibilidad Web (WCAG 2.1 Nivel AA) y Diseño Responsivo
-En cumplimiento del requisito RNF-01 (Usabilidad) y del estándar de accesibilidad WCAG 2.1 Nivel AA, la interfaz adopta las siguientes especificaciones técnicas:
+---
 
-1. **Contraste Cromático:** Todos los elementos textuales e indicadores de interfaz mantienen un contraste mínimo de 4.5:1 respecto a su fondo para texto estándar, y de 3:1 para componentes gráficos interactivos.
-2. **Identificación Multimodal de Estados:** La disponibilidad horaria no se transmite únicamente mediante color, combinando tres señales simultáneas:
-   * *Intervalo Libre:* Fondo verde accesible (#2E7D32), texto legible "Libre" e icono de confirmación con atributo `aria-label="Horario disponible"`.
-   * *Intervalo Ocupado:* Fondo gris neutro (#616161), texto "Ocupado", icono de bloqueo y atributo accesible `aria-disabled="true"`.
-   * *Intervalo en Mantenimiento:* Fondo amarillo advertencia (#F57F17) con trama rayada de alto contraste, texto "Mantenimiento" e icono de alerta.
+## 1.4 Sistema de Etiquetas, Accesibilidad y Disponibilidad Dinámica
+
+### A. Estandarización de Etiquetas
+
+| Etiqueta en Interfaz         | Propósito / Acción                                                                      | Tipo de Elemento   | Nivel de Acceso     |
+| :--------------------------- | :-------------------------------------------------------------------------------------- | :----------------- | :------------------ |
+| **Explorar Canchas**         | Acceso al catálogo y cuadrícula visual de instalaciones.                                | Menú / Navegación  | Público             |
+| **¿Cómo Funciona?**          | Guía de cuatro pasos para el proceso de reserva y abono.                                | Enlace Informativo | Público             |
+| **Normas de Cancha**         | Requisitos de calzado y reglamento por tipo de superficie.                              | Enlace Informativo | Público             |
+| **Consultar Disponibilidad** | Visualización de la matriz horaria por fecha.                                           | Sección Funcional  | Público             |
+| **Reservar Horario**         | Acción interactiva para iniciar el agendamiento del turno.                              | Botón de Acción    | Cliente autenticado |
+| **Mis Reservas**             | Consulta de turnos agendados, estados y desgloses de saldo.                             | Menú de Cuenta     | Cliente             |
+| **Panel de Control**         | Acceso al módulo de administración operativa (Dashboard).                               | Menú Privado       | Administrador       |
+| **Bloquear Horarios**        | Acción para inhabilitar intervalos por mantenimiento o lluvia.                          | Botón Funcional    | Administrador       |
+| **Validar Abono**            | Acción para confirmar la recepción del comprobante de abono.                            | Botón de Acción    | Administrador       |
+| **Cobrar Saldo / Liquidar**  | Interfaz POS para cobrar el remanente al recibir al cliente.                            | Botón de Acción    | Administrador       |
+| **Activa / Inactiva**        | Interruptor (*toggle*) para cambiar el estado de disponibilidad de canchas precargadas. | Control de Estado  | Administrador       |
+
+### B. Accesibilidad Web (WCAG 2.1 Nivel AA) y Diseño Responsivo
+
+En cumplimiento del requisito RNF-01 (Usabilidad) y del estándar WCAG 2.1 Nivel AA, la interfaz adopta las siguientes especificaciones técnicas:
+
+1. **Contraste Cromático:** Todos los elementos textuales e indicadores de interfaz mantienen un contraste mínimo de 4.5:1 respecto a su fondo para texto estándar, y de 3:1 para componentes interactivos.
+2. **Identificación Multimodal de Estados:** La disponibilidad horaria no se transmite únicamente mediante color, combinando tres señales simultáneas. Los estados visuales del calendario se corresponden con los estados internos de reserva de la siguiente forma:
+   - *Intervalo Libre (sin reserva):* Fondo verde accesible (#2E7D32), texto legible "Libre" e icono de confirmación con atributo `aria-label="Horario disponible"`.
+   - *Intervalo No Disponible Temporalmente (vista pública — estado interno: Pendiente):* Fondo ámbar/naranja (#E65100), texto "No disponible", icono de reloj de espera y atributo `aria-label="Horario reservado provisionalmente"`. No expone datos del cliente ni importes al público.
+   - *Intervalo Pendiente de Abono (solo vista administrativa — estado interno: Pendiente):* Fondo ámbar/naranja (#E65100), texto "Pendiente", icono de reloj con temporizador TTL visible y datos del solicitante.
+   - *Intervalo Ocupado (estado interno: Confirmada):* Fondo gris neutro (#616161), texto "Ocupado", icono de candado y atributo `aria-disabled="true"`.
+   - *Intervalo en Mantenimiento (bloqueo administrativo):* Fondo amarillo advertencia (#F57F17) con trama rayada diagonal de alto contraste, texto "Mantenimiento" e icono de alerta.
 3. **Navegación Asistida por Teclado:** Toda la matriz de turnos y formularios admiten navegación secuencial lógica mediante la tecla Tab, con indicadores visuales de foco activos (`:focus-visible`).
 4. **Adaptabilidad del Calendario en Dispositivos Móviles:**
-   * En resoluciones de escritorio (> 768px), el calendario se renderiza como una cuadrícula matricial de bloques horarios.
-   * En pantallas móviles (<= 768px), la vista colapsa a un carrusel selector de fecha superior combinado con un listado vertical de tarjetas horarias.
+   - En resoluciones de escritorio (> 768px), el calendario se renderiza como una cuadrícula matricial de bloques horarios.
+   - En pantallas móviles (<= 768px), la vista colapsa a un carrusel selector de fecha superior combinado con un listado vertical de tarjetas horarias.
 
-#### C. Dinámica de Disponibilidad y Control de Concurrencia
+### C. Dinámica de Disponibilidad y Control de Concurrencia
+
 La disponibilidad de los horarios opera bajo un modelo de sincronización y validación transaccional:
-1. **Consulta Asíncrona:** La carga de disponibilidad en la ficha de cancha se ejecuta mediante peticiones asíncronas al servidor (AJAX/Fetch) al seleccionar la fecha deseada.
-2. **Validación Transaccional en Dos Pasos:** Al presionar "Reservar Horario", el backend ejecuta una verificación de disponibilidad inmediata en la base de datos justo antes de asentar el registro (`COMMIT`).
-3. **Manejo de Condiciones de Carrera:** Si dos clientes intentan reservar el mismo intervalo simultáneamente, la transacción que se procese primero bloquea el registro; la segunda es rechazada de forma controlada por el backend, emitiendo un mensaje descriptivo conforme al flujo alterno de CU-05.
+
+1. **Consulta Asíncrona:** La carga de disponibilidad en la ficha de cancha se ejecuta mediante peticiones asíncronas al servidor (AJAX/Fetch) al seleccionar la fecha deseada, asegurando que el cliente visualice el estado más reciente del sistema.
+2. **Validación Transaccional en Dos Pasos:** Al presionar "Reservar Horario", el sistema no confía únicamente en la vista del cliente. El backend ejecuta una verificación de disponibilidad inmediata en la base de datos justo antes de asentar el registro (`COMMIT`), previniendo colisiones de horario.
+3. **Manejo de Condiciones de Carrera:** Si dos clientes intentan apartar el mismo bloque simultáneamente, la transacción que se complete primero registra el turno en estado *Pendiente*; la segunda es rechazada de forma controlada por el backend con el mensaje: *"El horario seleccionado acaba de ser reservado por otro usuario. Por favor, seleccione un bloque alternativo"*.
+4. **Política de Caducidad de Reservas Pendientes (Time-To-Live - TTL):** Para evitar bloqueos permanentes de canchas sin confirmación económica (reservas fantasma), toda reserva en estado *Pendiente* activa un temporizador de caducidad cuyas reglas son:
+   - **Inicio del temporizador:** El TTL comienza en el instante exacto en que el sistema registra la reserva preliminar (*timestamp* de creación).
+   - **Duración estándar:** 45 minutos desde la creación.
+   - **Regla de confirmación dentro del TTL:** La reserva permanece en estado *Pendiente* hasta que el administrador valide el abono en el sistema. Si no queda *Confirmada* dentro del TTL, se cancela y se libera el horario automáticamente. Si el cliente envía el comprobante a tiempo pero el administrador aún no lo valida antes de vencer el temporizador, el sistema cancela la reserva por expiración y libera la franja horaria para proteger la concurrencia; ante este escenario excepcional, el administrador atenderá al usuario mediante una reserva asistida acreditando el abono ya verificado.
+   - **Regla estricta de anticipación y tope máximo:** El sistema no permite crear ni cancelar reservas cuando faltan 2 horas o menos para el inicio del turno; estas acciones son cancelables o agendables únicamente si faltan más de 2 horas (a las 2 horas exactas o menos no se permite). Por ende, el temporizador nunca puede extenderse más allá del límite de 2 horas antes del inicio del turno. Si la reserva se crea cuando faltan entre 2 horas y 45 minutos para el turno, el TTL se reduce automáticamente al tiempo exacto que reste hasta el límite de 2 horas previas (`TTL = hora_inicio - 2 horas - hora_creación`).
+   - **Expiración automática:** Si no se convalida dentro de la ventana de tiempo, un proceso automático del sistema cambia el estado a **Cancelada**, registrando como motivo formal **Vencimiento del TTL**, y devuelve el bloque horario a estado *Libre*.
+   - **Cancelación voluntaria de reservas Pendientes:** El cliente puede cancelar una reserva en estado *Pendiente* únicamente si faltan más de 2 horas para el inicio del turno; a las 2 horas exactas o menos no se permite. Al cancelar, el sistema solicita y almacena obligatoriamente el motivo de la cancelación.
 
 ---
 
-### 1.5 Mecanismos de Acceso y Reglas de Autenticación
+## 1.5 Mecanismos de Acceso y Reglas de Autenticación
 
-#### A. Regla Operativa de Acceso: Refinamiento de Experiencia de Usuario (UX)
-El sistema implementa un modelo de acceso y navegación estructurado para optimizar la experiencia de usuario (UX):
-1. **Navegación y Consulta Pública (Visitante):** Cualquier usuario puede explorar el catálogo, utilizar el buscador facetado y consultar la disponibilidad horaria sin registro previo.
-2. **Intercepción de Autenticación en el Agendamiento:** Al pulsar "Reservar Horario", si no existe una sesión activa, el sistema intercepta el flujo y redirige al formulario de acceso, reteniendo en memoria los parámetros de la reserva para reanudar el proceso tras autenticarse (conforme a CU-05 y RF-06).
+### A. Regla Operativa de Acceso: Refinamiento de Experiencia de Usuario (UX)
 
-#### B. Mecanismos de Búsqueda y Navegación
+El sistema implementa un modelo de acceso optimizado:
+
+1. **Navegación y Consulta Pública (Visitante):** Cualquier usuario puede explorar el catálogo, utilizar el buscador facetado y consultar la disponibilidad de cualquier cancha sin necesidad de registro previo, reduciendo la fricción inicial.
+2. **Intercepción de Autenticación en el Agendamiento:** Al pulsar "Reservar Horario", si no existe sesión activa, el sistema intercepta el flujo y redirige al formulario de acceso/registro, reteniendo temporalmente en memoria los parámetros del turno para reanudar el agendamiento inmediatamente tras autenticarse con éxito.
+
+### B. Mecanismos de Búsqueda y Navegación
+
 1. **Navegación Jerárquica Visual:** Acceso estructurado a través del collage fotográfico principal.
 2. **Búsqueda Facetada:** Filtrado cruzado por disciplina, modalidad, superficie, entorno y precio, con opciones de ordenamiento por tarifa y sector.
-3. **Navegación Global (Barra Superior):** Menú persistente con enlaces directos a las páginas de Nivel 1 y control de sesión.
-4. **Navegación Contextual:** Menú lateral operativo en el panel administrativo y pestañas organizadoras dentro de la ficha de detalle de cancha.
+3. **Navegación Global Adaptativa (Barra Superior):** 
+   - *Visitantes y Clientes:* Menú público con enlaces directos a Inicio, Explorar Canchas, Normas, Contacto y *Mis Reservas*.
+   - *Administrador (Rol asignado mediante Código Corporativo al registrarse):* Tras el registro con código corporativo, el administrador inicia sesión exclusivamente con correo y contraseña, como cualquier usuario. La barra superior conmuta dinámicamente según el rol del usuario autenticado, sustituyendo las opciones de cliente por el acceso persistente al *Panel de Control (Dashboard)*.
+4. **Navegación Contextual:** Menú lateral operativo (*Sidebar*) exclusivo del Administrador para alternar entre Gestión de Canchas Precargadas, Listado de Reservas y Reportes de Liquidación; y pestañas organizadoras dentro de la ficha técnica de cancha.
 5. **Navegación Suplementaria:** Migas de pan estructurales (ejemplo: Inicio > Fútbol > Césped Sintético > Cancha 1) y pie de página institucional.
 
 ---
 
-## 2. Sitemap (Mapa del Sitio)
+# 2. Sitemap (Mapa del Sitio)
 
-### 2.1 Estructura Jerárquica del Sitio (Diagrama Mermaid)
+## 2.1 Estructura Jerárquica del Sitio (Diagrama Mermaid)
 
-El siguiente diagrama modela la estructura de páginas y rutas navegables del sistema (los componentes modales se integran en la capa de interfaz descrita en la sección 1.3):
+El siguiente diagrama modela la taxonomía formal de páginas navegables y rutas del sistema:
 
 ```mermaid
 graph TD
@@ -806,17 +855,15 @@ graph TD
     Auth -.->|Sesion Valida: Administrador| AdminPanel
 
     %% Nivel 2: Subpaginas de Mi Cuenta
-    MisReservas["7.1 Mis Reservas (Historial)"]
+    MisReservas["7.1 Mis Reservas (Historial y Desglose)"]
     MiCuenta --> MisReservas
 
     %% Nivel 2: Subpaginas de Administracion
-    CrudCanchas["8.1 Gestion de Canchas"]
-    ListadoReservas["8.2 Listado de Reservas"]
-    FormCancha["8.1.1 Formulario Agregar / Editar Cancha"]
+    AdminCanchas["8.1 Gestion de Canchas Precargadas (Activa/Inactiva)"]
+    ListadoReservas["8.2 Listado de Reservas y Liquidacion"]
 
-    AdminPanel --> CrudCanchas
+    AdminPanel --> AdminCanchas
     AdminPanel --> ListadoReservas
-    CrudCanchas --> FormCancha
 
     %% Estilos Graficos
     style Home fill:#2C3E50,stroke:#1A252F,color:#fff
@@ -831,32 +878,49 @@ graph TD
 
 ---
 
-### 2.2 Desglose Estructurado de Páginas y Secciones
+## 2.2 Desglose Estructurado de Páginas y Secciones
 
-#### Nivel 0: Raíz Pública
-* **1.0 Inicio (Landing Page):** Página principal. Presenta la identidad institucional, acceso al collage deportivo, llamadas a la acción para agendamiento y menús globales.
+### Nivel 0: Raíz Pública
 
-#### Nivel 1: Secciones Públicas y Catálogo
-* **2.0 Explorar Canchas:** Sección contenedora del catálogo general de instalaciones deportivas.
-* **3.0 ¿Cómo Funciona?:** Guía conceptual explicativa del proceso de reserva de canchas.
-* **4.0 Normas y Calzado:** Especificaciones reglamentarias de indumentaria y calzado admitido según la superficie.
-* **5.0 Contacto y Ubicación:** Mapa físico, canales de atención al cliente y horarios generales de funcionamiento.
-* **6.0 Autenticación:** Módulo de control de acceso y registro de cuentas de usuario.
-
-#### Nivel 2: Subpáginas y Vistas de Gestión
-* **2.1 Collage por Deportes:** Vista de navegación visual guiada que desglosa disciplinas e instalaciones.
-* **2.2 Buscador con Filtros:** Vista de catálogo con interfaz de búsqueda facetada por dimensiones técnicas y tarifarias.
-* **2.3 Ficha de Detalle de Cancha:** Página individual que integra las especificaciones de la cancha, fotos, requisitos de calzado y el componente interactivo de calendario de disponibilidad.
-* **6.1 Iniciar Sesión:** Formulario de autenticación mediante correo y contraseña, con redirección condicionada por rol.
-* **6.2 Registrarse:** Formulario de alta para clientes nuevos, con campo para código de acceso de empleados.
-* **7.1 Mis Reservas:** Interfaz de control del cliente que lista sus turnos activos e histórico de reservas pasadas.
-* **8.1 Gestión de Canchas:** Tabla de inventario de instalaciones con opciones operativas de edición y desactivación.
-  * **8.1.1 Formulario Agregar / Editar Cancha:** Página independiente para la captura y actualización de datos técnicos, fotos y tarifas de cada instalación.
-* **8.2 Listado de Reservas:** Vista cronológica y tabular de todas las reservas registradas en el sistema, permitiendo filtrado y supervisión operativa.
+- **1.0 Inicio (Landing Page):** Presenta la propuesta del complejo, acceso rápido al collage multideportivo, accesos directos al buscador y menús globales.
 
 ---
 
-### 2.3 Matriz de Accesibilidad por Tipo de Usuario
+### Nivel 1: Secciones Públicas y Catálogo
+
+- **2.0 Explorar Canchas:** Sección contenedora del catálogo general de instalaciones deportivas (Fútbol, Básquetbol, Tenis, Pádel, Voleibol y Bádminton).
+- **3.0 ¿Cómo Funciona?:** Guía conceptual explicativa del proceso de reserva web, políticas de abono y confirmación en caja.
+- **4.0 Normas y Calzado:** Requisitos reglamentarios de indumentaria y calzado admitido según la superficie.
+- **5.0 Contacto y Ubicación:** Mapa físico, canales de atención al cliente (WhatsApp para comprobantes) y horarios de servicio.
+- **6.0 Autenticación:** Módulo de control de acceso y registro de cuentas de usuario con opción de código de empleado.
+
+---
+
+### Nivel 2: Subpáginas y Vistas de Gestión
+
+#### Rama 2.0: Explorar Canchas
+
+- **2.1 Collage por Deportes:** Vista de navegación visual guiada organizada por las 6 disciplinas deportivas.
+- **2.2 Buscador con Filtros:** Vista de catálogo con interfaz facetada por deporte, modalidad, superficie, cubierta y precio.
+- **2.3 Ficha de Detalle de Cancha:** Ficha individual con especificaciones técnicas, fotos, tarifas, abono mínimo obligatorio correspondiente al 30 % de la tarifa total de la reserva (valor fijo del sistema) y calendario dinámico interactivo.
+
+#### Rama 6.0: Autenticación
+
+- **6.1 Iniciar Sesión:** Formulario de autenticación mediante correo y contraseña, con redirección condicionada por rol (Cliente o Administrador).
+- **6.2 Registrarse:** Formulario de alta para clientes nuevos, con campo opcional para código corporativo de acceso administrativo.
+
+#### Rama 7.0: Mi Cuenta (Área Privada - Rol: Cliente)
+
+- **7.1 Mis Reservas:** Panel que lista las reservas del cliente con desglose financiero detallado (Total, Abono, Saldo por pagar en sitio) y botón para cancelar reservas; cancelable únicamente si faltan más de 2 horas para el inicio del turno (a las 2 horas exactas o menos no se permite la cancelación). Registra y muestra el motivo obligatorio de cancelación.
+
+#### Rama 8.0: Panel de Control (Área Privada - Rol: Administrador)
+
+- **8.1 Gestión de Canchas Precargadas:** Tabla de inventario de canchas precargadas para consulta técnica y alternancia de estado (Activa / Inactiva) mediante un interruptor (*toggle switch*). No permite agregar, eliminar ni editar atributos de las instalaciones.
+- **8.2 Listado de Reservas:** Vista cronológica y tabular de todas las reservas registradas, permitiendo validar abonos, registrar reservas asistidas y abrir el modal POS de liquidación presencial.
+
+---
+
+## 2.3 Matriz de Accesibilidad por Tipo de Usuario
 
 | Código | Página / Sección | Visitante (Público) | Cliente Autenticado | Administrador |
 | :--- | :--- | :---: | :---: | :---: |
@@ -868,16 +932,15 @@ graph TD
 | **5.0** | Contacto y Ubicación | Permitido | Permitido | Permitido |
 | **6.0** | Autenticación (Login / Registro) | Permitido | Redirige a Perfil | Redirige a Panel |
 | **7.0** | Mi Cuenta (7.1 Mis Reservas) | Restringido | Permitido | Restringido |
-| **8.0** | Panel de Control (8.1 Canchas / 8.2 Reservas) | Restringido | Restringido | Permitido |
-| **8.1.1** | Formulario Agregar / Editar Cancha | Restringido | Restringido | Permitido |
+| **8.0** | Panel de Control (8.1 Canchas Precargadas / 8.2 Reservas) | Restringido | Restringido | Permitido |
 
 ---
 
-## 3. Modelo de Navegación Refinado
+# 3. Modelo de Navegación Refinado
 
-### 3.1 Diagrama de Navegación
+## 3.1 Diagrama de Navegación
 
-El siguiente diagrama modela las rutas disponibles, transiciones entre vistas y accesos según el rol del usuario:
+El siguiente diagrama modela las rutas, transiciones entre vistas y accesos según el rol del usuario:
 
 ```mermaid
 flowchart TD
@@ -888,11 +951,10 @@ flowchart TD
     Ficha["2.3 Ficha de Cancha\n(con Calendario)"]
     Login["6.1 Iniciar Sesión"]
     Registro["6.2 Registrarse"]
-    MisReservas["7.1 Mis Reservas\n(Cliente)"]
+    MisReservas["7.1 Mis Reservas\n(Cliente - Desglose y Cancelación)"]
     AdminDash["8.0 Panel de Control\n(Admin)"]
-    AdminCanchas["8.1 Gestión Canchas"]
-    AdminForm["8.1.1 Formulario Cancha"]
-    AdminReservas["8.2 Listado Reservas"]
+    AdminCanchas["8.1 Gestión Canchas Precargadas\n(Interruptor Activa/Inactiva)"]
+    AdminReservas["8.2 Listado Reservas\n(Abonos y Cobro POS)"]
 
     Home -->|Menú Global| Info
     Home -->|Menú Global / CTA| Catalogo
@@ -914,7 +976,7 @@ flowchart TD
     Login -->|Rol: Cliente| Catalogo
     Login -->|Rol: Administrador| AdminDash
 
-    Ficha -->|Autenticado: confirmar turno| MisReservas
+    Ficha -->|Autenticado: apartar turno| MisReservas
     Login -->|Venía de Mis Reservas| MisReservas
     MisReservas -->|Menú de usuario| Catalogo
     MisReservas -->|Menú Global| Home
@@ -925,59 +987,58 @@ flowchart TD
     AdminDash -->|Enlace Superior| Home
     AdminDash -->|Cerrar sesión| Home
 
-    AdminCanchas -->|Botón Agregar/Editar| AdminForm
-    AdminForm -->|Guardar / Cancelar| AdminCanchas
     AdminCanchas -->|Sidebar| AdminReservas
     AdminReservas -->|Sidebar| AdminCanchas
 ```
 
 ---
 
-### 3.2 Pantallas del Sistema
+## 3.2 Pantallas del Sistema
 
 | Código | Pantalla | Descripción | Acceso |
 | :--- | :--- | :--- | :--- |
-| **1.0** | Inicio | Página de entrada con llamada a la acción, collage deportivo y acceso a registro e inicio de sesión. | Público |
-| **2.0** | Catálogo / Explorar | Listado de canchas disponibles. | Público |
-| **2.2** | Buscador y Filtros | Barra de búsqueda y panel lateral de filtros (deporte, modalidad, superficie, entorno y precio). | Público |
-| **2.3** | Ficha de Cancha | Detalle de la cancha con calendario de disponibilidad. Para reservar se requiere sesión. | Público (reservar: Cliente) |
-| **3.0 / 4.0 / 5.0** | Info / Normas / Contacto | Páginas informativas del complejo. | Público |
-| **6.1** | Iniciar Sesión | Autenticación; redirige según el rol. | Público |
-| **6.2** | Registrarse | Creación de cuenta de cliente (o de administrador con código de acceso). | Público |
-| **7.1** | Mis Reservas | Historial de reservas y cancelación. | Cliente |
-| **8.0** | Panel de Control | Inicio del área administrativa. | Administrador |
-| **8.1** | Gestión de Canchas | Tabla del catálogo, alta, edición, desactivación y bloqueo de horarios. | Administrador |
-| **8.1.1** | Formulario de Cancha | Formulario para agregar o editar una cancha. | Administrador |
-| **8.2** | Listado de Reservas | Todas las reservas del complejo, cambio de estado y reserva asistida. | Administrador |
+| **1.0** | Inicio | Página de entrada con llamada a la acción, collage multideportivo y acceso a autenticación. | Público |
+| **2.0** | Catálogo / Explorar | Listado de instalaciones deportivas disponibles (6 disciplinas). | Público |
+| **2.2** | Buscador y Filtros | Barra de búsqueda y panel lateral facetado (deporte, modalidad, superficie, cubierta, precio). | Público |
+| **2.3** | Ficha de Cancha | Detalle de la cancha, fotos, condiciones y calendario de turnos. Para reservar requiere sesión. | Público (reservar: Cliente) |
+| **3.0 / 4.0 / 5.0** | Info / Normas / Contacto | Páginas informativas sobre funcionamiento, indumentaria requerida y canales de WhatsApp. | Público |
+| **6.1** | Iniciar Sesión | Autenticación mediante correo y clave; redirige según rol (Cliente o Administrador). | Público |
+| **6.2** | Registrarse | Creación de cuenta de cliente o de administrador mediante código de acceso corporativo. | Público |
+| **7.1** | Mis Reservas | Historial de turnos con desglose de abono y saldo, e intercepción de cancelación (> 2 horas). | Cliente |
+| **8.0** | Panel de Control | Dashboard del área administrativa con métricas operativas y accesos directos. | Administrador |
+| **8.1** | Gestión de Canchas Precargadas | Inventario de canchas precargadas para consulta y alternancia de estado (Activa / Inactiva) mediante interruptor. No permite agregar, eliminar ni editar datos. | Administrador |
+| **8.2** | Listado de Reservas | Supervisión de turnos, validación de comprobantes de abono, reserva asistida y módulo POS de caja. | Administrador |
 
 ---
 
-### 3.3 Navegación Principal y Secundaria por Rol
+## 3.3 Navegación Principal y Secundaria por Rol
 
-| Elemento | Visitante | Cliente | Administrador |
-| :--- | :--- | :--- | :--- |
-| **Navegación principal (menú global)** | Inicio, Catálogo, Info / Normas / Contacto | Inicio, Catálogo, Info / Normas / Contacto | Enlace superior a Inicio |
-| **Menú de usuario** | Botones Acceso (6.1) y Registro (6.2) | Mis Reservas (7.1) y Cerrar sesión | Cerrar sesión |
-| **Navegación secundaria** | Filtros y buscador (2.2); calendario de la Ficha (2.3) | Filtros y buscador (2.2); calendario; botón Cancelar reserva en 7.1 | Sidebar: Gestión de Canchas (8.1) y Listado de Reservas (8.2) |
-| **Migas de pan** | Inicio > Catálogo > Ficha | Inicio > Catálogo > Ficha | Panel > Gestión de Canchas > Formulario |
-| **Acciones contextuales (modales)** | Intercepción de sesión al reservar | Confirmación de turno; cancelación de reserva | Bloqueo de horarios; reserva asistida |
-| **Pantallas restringidas** | 7.1 y 8.x redirigen a Iniciar Sesión | 8.x no accesible | 7.1 no aplica |
+| Elemento                               | Visitante                                           | Cliente                                                     | Administrador                                                             |
+| :------------------------------------- | :-------------------------------------------------- | :---------------------------------------------------------- | :------------------------------------------------------------------------ |
+| **Navegación principal (menú global)** | Inicio, Catálogo, Info / Normas / Contacto          | Inicio, Catálogo, Info / Normas / Contacto                  | Enlace superior a Inicio / Dashboard                                      |
+| **Menú de usuario**                    | Botones Acceso (6.1) y Registro (6.2)               | Mis Reservas (7.1) y Cerrar sesión                          | Cerrar sesión y Perfil administrativo                                     |
+| **Navegación secundaria**              | Filtros y buscador (2.2); calendario de Ficha (2.3) | Filtros y buscador (2.2); calendario; botón Cancelar en 7.1 | Sidebar: Gestión de Canchas Precargadas (8.1) y Listado de Reservas (8.2) |
+| **Migas de pan**                       | Inicio > Catálogo > Ficha                           | Inicio > Catálogo > Ficha                                   | Panel > Gestión de Canchas Precargadas                                    |
+| **Acciones contextuales (modales)**    | Intercepción de sesión al reservar                  | Modal de Confirmación y datos de abono; cancelación (> 2h)  | Validación de abono; Cobro en sitio POS; Bloqueo; Asistida                |
+| **Pantallas restringidas**             | 7.1 y 8.x redirigen a Iniciar Sesión                | 8.x no accesible                                            | 7.1 no aplica (gestiona vía 8.2)                                          |
 
 ---
 
-## 4. Flujos de Navegación
+# 4. Flujos de Navegación
 
-Cada flujo modela el recorrido de una tarea crítica en 5 a 7 pasos principales, con nodos de decisión (rombos) para la sesión activa, los campos obligatorios y la colisión de reservas.
+Cada flujo modela el recorrido de una tarea crítica en 5 a 7 pasos principales, con nodos de decisión (rombos) para la sesión activa, los campos obligatorios, la colisión de reservas y las reglas de negocio temporales.
 
-### Flujo 1: Búsqueda, Selección y Agendamiento de una Cancha
+---
 
-| Campo | Descripción |
-| :--- | :--- |
-| **Actor** | Cliente (o visitante) |
-| **Objetivo** | Buscar una cancha, elegir un horario libre y confirmar la reserva. |
-| **Precondición** | El usuario está en el Catálogo (2.0). Si es visitante, el sistema lo intercepta antes de confirmar. |
-| **Resultado esperado** | La reserva queda registrada, el horario pasa a Ocupado y se muestra Mis Reservas (7.1). |
-| **Excepción principal** | Si otro usuario confirmó el mismo bloque antes, se muestra «Este horario ya no está disponible. Seleccione otro.» y se actualiza el calendario. |
+## 4.1 Flujo 1: Búsqueda, Selección y Agendamiento de una Cancha
+
+| Campo                   | Descripción                                                                                                                                                                                                                                                                                                               |
+| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Actor**               | Cliente (o visitante)                                                                                                                                                                                                                                                                                                     |
+| **Objetivo**            | Buscar una cancha, elegir un horario libre, generar la reserva web y obtener los datos para abonar por Yappy/banco.                                                                                                                                                                                                       |
+| **Precondición**        | El usuario está en el Catálogo (2.0) o Buscador (2.2). Si es visitante, el sistema lo intercepta antes de confirmar. Creación de reserva permitida únicamente si faltan más de 2 horas para el inicio del turno; a las 2 horas exactas o menos no se permite el agendamiento.                                |
+| **Resultado esperado**  | La reserva queda registrada en estado *Pendiente* con temporizador TTL activo, el horario se bloquea provisionalmente (en vista pública aparece como *No disponible temporalmente*), y se muestra el resumen de reserva e instrucciones para transferir el abono mínimo del 30 % (fijo del sistema calculado según la duración; ej. $7.50 para 1 hora a $25.00/h) con botón a WhatsApp. La reserva permanece *Pendiente* hasta que el administrador valide el abono. Si no queda *Confirmada* dentro del TTL, se cancela y se libera el horario. |
+| **Excepción principal** | Si otro usuario confirmó o apartó el mismo bloque de forma simultánea, se muestra «Este horario ya no está disponible. Seleccione otro.» y se recarga el calendario.                                                                                                                                                      |
 
 ```mermaid
 flowchart TD
@@ -986,162 +1047,204 @@ flowchart TD
     P3 --> D1{"¿Hay sesión\nactiva?"}
     
     D1 -->|No: visitante| P4["4. Intercepción: Iniciar Sesión 6.1 o\nRegistro 6.2 (reserva retenida en memoria)"]
-    D1 -->|Sí: cliente| P5["5. Modal de Confirmación: resumen\n(cancha, fecha, hora, precio) y Confirmar"]
+    D1 -->|Sí: cliente| P5["5. Modal de Confirmación: resumen\n(cancha, fecha, hora, tarifa total y abono fijo del 30 %)"]
     
     P4 --> D2{"¿Tiene\ncuenta?"}
-    D2 -->|No: Registro 6.2| P4a["Registro 6.2: completar nombre, correo,\nteléfono y contraseña. Cuenta creada,\nvuelve a Iniciar Sesión 6.1"]
+    D2 -->|No: Registro 6.2| P4a["Registro 6.2: completar datos.\nCuenta creada, pasa a Iniciar Sesión 6.1"]
     D2 -->|Sí: Iniciar Sesión 6.1| D3{"¿Credenciales\nválidas?"}
     
     P4a --> D4{"¿Campos\ncompletos?"}
-    D4 -->|No| E1["Error de campos requeridos\nSe conservan los datos escritos\n-> vuelve al paso 4"]
+    D4 -->|No| E1["Error de campos requeridos\nSe conservan los datos -> vuelve al paso 4"]
     D4 -->|Sí| D3
     
-    D3 -->|No| E2["Correo o contraseña incorrectos\nSe conserva el correo\n-> vuelve al paso 4"]
+    D3 -->|No| E2["Credenciales incorrectas\nSe conserva correo -> vuelve al paso 4"]
     D3 -->|Sí: regresa a 2.3| P5
     
-    P5 --> P6["6. El sistema verifica la disponibilidad\njusto antes de guardar la reserva"]
+    P5 --> P6["6. Pulsar Confirmar Turno:\nel sistema verifica disponibilidad en BD"]
     P6 --> D5{"¿El horario\nsigue libre?"}
     
-    D5 -->|No: otro usuario confirmó antes| E3["Este horario ya no está disponible.\nSeleccione otro.\n-> calendario actualizado (paso 2)"]
-    D5 -->|Sí| P7["7. Reserva registrada y confirmada\nSe muestra Mis Reservas 7.1"]
+    D5 -->|No: otro usuario apartó antes| E3["Este horario ya no está disponible.\nSeleccione otro -> calendario actualizado"]
+    D5 -->|Sí| P7["7. Reserva registrada en estado Pendiente (TTL activo)\nMuestra resumen e instrucciones de abono fijo del 30 %\ny enlace a WhatsApp. Redirige a Mis Reservas 7.1"]
 ```
 
 ---
 
-### Flujo 2: Consulta de Historial y Cancelación de una Reserva Vigente
+## 4.2 Flujo 2: Consulta de Historial y Cancelación de una Reserva Vigente
 
 | Campo | Descripción |
 | :--- | :--- |
 | **Actor** | Cliente |
-| **Objetivo** | Revisar el historial de reservas y cancelar una reserva vigente. |
-| **Precondición** | El cliente tiene sesión activa (si es visitante, se redirige a Iniciar Sesión 6.1 y regresa a Mis Reservas) y accede desde el menú de usuario. |
-| **Resultado esperado** | La reserva cambia a Cancelada, el horario queda libre y la tarjeta se actualiza en Mis Reservas (7.1). |
-| **Excepción principal** | Si el cliente no tiene reservas se muestra un mensaje informativo; si no confirma la cancelación, la reserva se mantiene sin cambios. |
+| **Objetivo** | Revisar el historial de reservas y cancelar una reserva vigente dentro de los plazos reglamentarios, registrando el motivo. |
+| **Precondición** | El cliente tiene sesión activa (si es visitante, se redirige a Iniciar Sesión 6.1) y accede a Mis Reservas (7.1). |
+| **Resultado esperado** | Cancelable únicamente si faltan más de 2 horas para el inicio del turno (a las 2 horas exactas o menos no se permite la cancelación). Si faltan más de 2 horas, el usuario selecciona o redacta el motivo obligatorio de cancelación; al confirmar, el sistema guarda el motivo, cambia el estado a *Cancelada*, libera el bloque horario de inmediato y actualiza la tarjeta en el historial. Si el turno expiró previamente por inacción del TTL, se muestra en estado *Cancelada* con motivo *Vencimiento del TTL*. |
+| **Excepción principal** | Si faltan 2 horas exactas o menos para el turno, el sistema bloquea la acción indicando: «Cancelable únicamente si faltan más de 2 horas; a las 2 horas exactas o menos no se permite la cancelación. Comuníquese con recepción». |
 
 ```mermaid
 flowchart TD
     P1["1. Acceder a Mis Reservas 7.1\ndesde el menú de usuario"] --> D1{"¿Hay sesión de\nCliente activa?"}
     D1 -->|No: visitante| E1["Visitante: redirige a Iniciar Sesión 6.1\n-> regresa a Mis Reservas al autenticarse"]
-    D1 -->|Sí: cliente| P2["2. Consultar el historial: reservas\nconfirmadas, completadas y canceladas"]
-    P2 --> D2{"¿Tiene reservas\nregistradas?"}
-    D2 -->|No| E2["Aún no tienes reservas registradas\nFin de la consulta"]
-    D2 -->|Sí| P3["3. Seleccionar la reserva vigente\ny pulsar Cancelar Reserva"]
-    P3 --> P4["4. Modal de Cancelación: ¿Está seguro de\nque desea cancelar esta reserva?"]
-    P4 --> D3{"¿Confirma la\ncancelación?"}
-    D3 -->|No| E3["La reserva se mantiene sin cambios\n-> vuelve a Mis Reservas 7.1"]
-    D3 -->|Sí| P5["5. El sistema cambia el estado a\nCancelada y libera el horario"]
-    P5 --> P6["6. Mis Reservas 7.1 actualizada:\nla tarjeta pasa a estado Cancelada"]
+    D1 -->|Sí: cliente| P2["2. Consultar historial: reservas\npendientes, confirmadas, completadas y canceladas"]
+    P2 --> D2{"¿Tiene reservas\nvigentes?"}
+    D2 -->|No| E2["No tienes reservas activas\nFin de la consulta"]
+    D2 -->|Sí| P3["3. Seleccionar turno y pulsar\nCancelar Reserva"]
+    P3 --> D3{"¿Faltan más de\n2 horas para\nel inicio?"}
+    
+    D3 -->|No: faltan 2 horas o menos| E3["Excepción: Cancelación rechazada\nNo se permite cancelar con 2 horas o menos de anticipación\nContactar directamente a recepción"]
+    D3 -->|Sí: más de 2 horas| P4["4. Modal de Cancelación: seleccionar\no escribir motivo de cancelación"]
+    
+    P4 --> P5["5. Revisar advertencia y confirmar cancelación"]
+    P5 --> D4{"¿Confirma la\ncancelación?"}
+    D4 -->|No| E4["La reserva se mantiene sin cambios\n-> vuelve a Mis Reservas 7.1"]
+    D4 -->|Sí| P6["6. El sistema registra el motivo, cambia el estado\na Cancelada y libera el bloque horario automáticamente"]
+    P6 --> P7["7. Mis Reservas 7.1 actualizada: la tarjeta pasa\na estado Cancelada mostrando el motivo registrado"]
 ```
 
 ---
 
-### Flujo 3: Registro de una Nueva Cancha en el Catálogo (CRUD)
+## 4.3 Flujo 3: Gestión de Canchas Precargadas (Activa / Inactiva)
 
-| Campo | Descripción |
-| :--- | :--- |
-| **Actor** | Administrador |
-| **Objetivo** | Agregar una nueva cancha con su información técnica y tarifa. |
-| **Precondición** | El administrador inició sesión y está en el Panel de Control (8.0). |
-| **Resultado esperado** | La nueva cancha aparece en la tabla de Gestión de Canchas (8.1) y en el catálogo público. |
-| **Excepción principal** | Si faltan campos obligatorios, se muestra el error sin borrar lo ya escrito. |
+| Campo                   | Descripción                                                                                                                                                                                                                                                                       |
+| :---------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Actor**               | Administrador                                                                                                                                                                                                                                                                     |
+| **Objetivo**            | Consultar las canchas precargadas existentes y alternar su estado entre Activa e Inactiva mediante un interruptor para controlar su visibilidad en el catálogo.                                                                                                                   |
+| **Precondición**        | El administrador inició sesión con su correo y contraseña; el sistema validó que su rol sea Administrador. El código corporativo se usa únicamente durante el registro para asignar ese rol.                                                                                      |
+| **Resultado esperado**  | La cancha seleccionada cambia su estado de disponibilidad en el sistema; si se conmuta a Inactiva, deja de mostrarse en el catálogo público y en los resultados del buscador, preservando su historial transaccional. No se agregan, eliminan ni editan los datos de las canchas. |
+| **Excepción principal** | Si se intenta cambiar a Inactiva una cancha con reservas activas (pendientes o confirmadas), el sistema emite una advertencia requiriendo resolver o reubicar dichos turnos previamente desde el Listado de Reservas (8.2).                                                       |
 
 ```mermaid
 flowchart TD
-    P1["1. Ingresar al Panel de\nControl 8.0 (Administrador)"] --> P2["2. Sidebar: abrir\nGestión de Canchas 8.1"]
-    P2 --> P3["3. Pulsar + Nueva Cancha\n(abre el formulario 8.1.1)"]
-    P3 --> P4["4. Completar los datos de la cancha\n(información técnica y tarifa)"]
-    P4 --> D1{"¿Guardar o\nCancelar?"}
-    D1 -->|Cancelar| E1["Retorno a 8.1 sin cambios"]
-    D1 -->|Guardar| P5["5. Pulsar Guardar"]
-    P5 --> D2{"¿Campos obligatorios\ncompletos?"}
-    D2 -->|No| E2["Complete todos los campos requeridos\nSe conserva lo ya escrito\n-> vuelve al paso 4"]
-    D2 -->|Sí| P6["6. El sistema valida y\nactualiza la base de datos"]
-    P6 --> P7["7. Retorno a 8.1: la nueva cancha aparece\nen la tabla y en el catálogo público"]
+    P1["1. Ingresar al Panel de\nControl 8.0 (Administrador)"] --> P2["2. Sidebar: abrir\nGestión de Canchas Precargadas 8.1"]
+    P2 --> P3["3. Consultar inventario de canchas precargadas\n(especificaciones técnicas, fotos, tarifas y estado)"]
+    P3 --> P4["4. Localizar cancha y conmutar interruptor\n(Toggle: Activa / Inactiva)"]
+    P4 --> D1{"¿La acción es\ndesactivar cancha?"}
+    
+    D1 -->|No: activar cancha| P5["5. El sistema activa la cancha\ny la habilita en el catálogo público"]
+    D1 -->|Sí: desactivar| D2{"¿Tiene reservas activas\npendientes o confirmadas?"}
+    
+    D2 -->|Sí: conflicto con turnos| E1["Advertencia: Cancha con reservas activas.\nReubicar o gestionar turnos en 8.2\nantes de desactivar"]
+    D2 -->|No: sin reservas| P6["6. El sistema desactiva la cancha (Inactiva)\nsin eliminar su registro ni historial"]
+    
+    P5 --> P7["7. Retorno a 8.1: el inventario refleja el nuevo estado\ny el catálogo público actualiza su disponibilidad"]
+    P6 --> P7
 ```
 
 ---
 
-### Flujo 4: Bloqueo Manual de Horarios por Mantenimiento o Lluvia
+## 4.4 Flujo 4: Bloqueo Manual de Horarios por Mantenimiento o Lluvia
 
-| Campo | Descripción |
-| :--- | :--- |
-| **Actor** | Administrador |
-| **Objetivo** | Bloquear un rango de fechas y horas de una cancha por mantenimiento o lluvia. |
-| **Precondición** | El administrador inició sesión y está en Gestión de Canchas (8.1). |
-| **Resultado esperado** | Los bloques quedan no disponibles y el calendario público (2.3) los muestra como Mantenimiento. |
-| **Excepción principal** | Si hay reservas activas en el rango, no se bloquea y se pide resolverlas primero en el Listado de Reservas (8.2). |
+| Campo                   | Descripción                                                                                                                                                                        |
+| :---------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Actor**               | Administrador                                                                                                                                                                      |
+| **Objetivo**            | Inhabilitar un rango de fechas y horas en una cancha por reparaciones o lluvia.                                                                                                    |
+| **Precondición**        | El administrador inició sesión con su correo y contraseña (rol Administrador validado) y se encuentra en Gestión de Canchas Precargadas (8.1).                                     |
+| **Resultado esperado**  | Los intervalos quedan marcados como no disponibles y el calendario público (2.3) los muestra con trama de *Mantenimiento*.                                                         |
+| **Excepción principal** | Si existen reservas activas (pendientes o confirmadas) en ese rango, el sistema bloquea la acción y solicita resolverlas o reubicarlas primero desde el Listado de Reservas (8.2). |
 
 ```mermaid
 flowchart TD
-    P1["1. Ingresar al Panel de\nControl 8.0 (Administrador)"] --> P2["2. Sidebar: abrir\nGestión de Canchas 8.1"]
+    P1["1. Ingresar al Panel de\nControl 8.0 (Administrador)"] --> P2["2. Sidebar: abrir\nGestión de Canchas Precargadas 8.1"]
     P2 --> P3["3. Elegir la cancha y pulsar\nBloquear Horarios"]
-    P3 --> P4["4. Modal de Bloqueo: definir el motivo\n(mantenimiento o lluvia) y el rango de fechas y horas"]
-    P4 --> P5["5. Pulsar Confirmar bloqueo"]
-    P5 --> D1{"¿Campos obligatorios\ncompletos?"}
-    D1 -->|No| E1["Mensaje de campos requeridos\nSe conserva lo ya escrito\n-> vuelve al paso 4"]
+    P3 --> P4["4. Modal de Bloqueo: definir motivo\n(lluvia o reparación) y rango de fechas/horas"]
+    P4 --> P5["5. Pulsar Confirmar Bloqueo"]
+    P5 --> D1{"¿Campos requeridos\ncompletos?"}
+    D1 -->|No| E1["Complete motivo y fechas\n-> vuelve al paso 4"]
     D1 -->|Sí| D2{"¿Hay reservas activas\nen el rango?"}
-    D2 -->|Sí| E2["Advertencia: hay reservas activas en el rango.\nNo se bloquea. Resolverlas en Listado de\nReservas 8.2 (CU-09) -> y reintentar (paso 3)"]
-    D2 -->|No| P6["6. El sistema marca los bloques como\nno disponibles (estado Mantenimiento)"]
-    P6 --> P7["7. El calendario público 2.3 muestra\nMantenimiento: no se puede reservar"]
+    D2 -->|Sí: conflicto con clientes| E2["Advertencia: Existen reservas activas en el rango.\nNo se puede bloquear. Resolverlas en Listado de\nReservas 8.2 (CU-09) y reintentar"]
+    D2 -->|No| P6["6. El sistema marca los bloques en estado Mantenimiento"]
+    P6 --> P7["7. El calendario público 2.3 muestra Mantenimiento:\nbloques inhabilitados para reservas"]
 ```
 
 ---
 
-### Flujo 5: Registro de una Reserva Asistida (Atención Presencial o Telefónica)
+## 4.5 Flujo 5: Registro de una Reserva Asistida (Atención Presencial o Telefónica)
 
-| Campo | Descripción |
-| :--- | :--- |
-| **Actor** | Administrador |
-| **Objetivo** | Registrar una reserva a nombre de un solicitante que llegó o llamó al complejo. |
-| **Precondición** | El administrador inició sesión y está en el Listado de Reservas (8.2). |
-| **Resultado esperado** | La reserva queda registrada, el horario pasa a Ocupado y aparece en el Listado de Reservas (8.2). |
-| **Excepción principal** | Si faltan campos obligatorios se conserva lo escrito; si el bloque ya fue reservado, se pide elegir otro. |
+| Campo                   | Descripción                                                                                                                                                                                                                                                                                                                                                                                        |
+| :---------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Actor**               | Administrador                                                                                                                                                                                                                                                                                                                                                                                      |
+| **Objetivo**            | Registrar un turno en el sistema a nombre de un solicitante que acude en persona o llama por teléfono.                                                                                                                                                                                                                                                                                             |
+| **Precondición**        | El administrador inició sesión con su correo y contraseña; el sistema validó que su rol sea Administrador. El código corporativo se usa únicamente durante el registro para asignar ese rol. Se encuentra en el Listado de Reservas (8.2).                                                                                                                                                         |
+| **Resultado esperado**  | El turno queda registrado formalmente como *Confirmada*. Si se recibe el pago completo (100 %), el saldo queda en cero ($0.00) y no se vuelve a cobrar en el POS; si se recibe un abono (30 %), solo se cobrará el saldo restante en caja antes de ingresar a jugar. En ambos casos, la reserva permanece *Confirmada* mientras se realiza el turno y pasa a *Completada* cuando el turno termina. |
+| **Excepción principal** | Si faltan los datos de contacto del cliente o el bloque fue tomado justo antes, el sistema alerta sin borrar la información.                                                                                                                                                                                                                                                                       |
 
 ```mermaid
 flowchart TD
-    P1["1. Ingresar al Panel de\nControl 8.0 (Administrador)"] --> P2["2. Sidebar: abrir\nListado de Reservas 8.2"]
-    P2 --> P3["3. Pulsar + Reserva Asistida\n(abre el modal)"]
-    P3 --> P4["4. Registrar los datos del solicitante\ny el canal (presencial o telefónico)"]
-    P4 --> P5["5. Elegir cancha, fecha y\nbloque horario libre"]
-    P5 --> D1{"¿Campos obligatorios\ncompletos?"}
-    D1 -->|No| E1["Mensaje de campos requeridos\nSe conserva lo ya escrito\n-> vuelve al paso 4"]
-    D1 -->|Sí| P6["6. Pulsar Confirmar: el sistema verifica\nla disponibilidad antes de guardar"]
-    P6 --> D2{"¿El horario\nsigue libre?"}
-    D2 -->|No: otro bloque ya fue reservado| E2["Este horario ya no está disponible.\nSeleccione otro.\n-> vuelve al paso 5"]
-    D2 -->|Sí| P7["7. Reserva registrada: el horario pasa\na Ocupado y aparece en 8.2"]
+    P1["1. Ingresar al Panel de Control 8.0 (Administrador)"] --> P2["2. Sidebar: abrir Listado de Reservas 8.2"]
+    P2 --> P3["3. Pulsar botón 'Reserva Asistida'<br/>(abre modal asistido)"]
+    P3 --> P4["4. Registrar datos del solicitante<br/>(nombre, teléfono y canal de atención)"]
+    P4 --> P5["5. Elegir cancha, fecha y bloque horario libre"]
+    P5 --> D1{"¿Campos obligatorios<br/>completos?"}
+    
+    D1 -->|No| E1["Error: campos requeridos incompletos<br/>Se conserva lo escrito y vuelve al paso 4"]
+    D1 -->|Sí| P6["6. Modal asistido: registrar cobro<br/>(Abono 30% o Pago Completo 100%)"]
+    
+    P6 --> D2{"¿Modalidad<br/>de cobro?"}
+    
+    D2 -->|Pago Completo 100%| P6a["Saldo pendiente queda en B/. 0.00<br/>(no se vuelve a cobrar en POS)"]
+    D2 -->|Abono 30%| P6b["Saldo restante pendiente por liquidar<br/>en caja antes de jugar"]
+    
+    P6a --> P7["7. Pulsar Guardar: el sistema valida<br/>disponibilidad atómica en el servidor"]
+    P6b --> P7
+    
+    P7 --> D3{"¿El horario<br/>sigue libre?"}
+    
+    D3 -->|No: colisión de turnos| E2["Horario no disponible<br/>Seleccione otro bloque y vuelve al paso 5"]
+    D3 -->|Sí| P8["8. Reserva registrada como Confirmada<br/>Horario pasa a Ocupado hasta culminar turno"]
 ```
 
 ---
 
-# Auditoría y Uso de la IA
+## 4.6 Flujo 6: Liquidación Presencial y Cobro de Saldo en Caja (Check-in / POS)
 
-## Tabla 1. Auditoría y Uso de la IA - Fase 1 (Mini Avance 1)
+| Campo                   | Descripción                                                                                                                                                                                                                                                                                                                                                                         |
+| :---------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Actor**               | Administrador (Recepcionista / Cajero)                                                                                                                                                                                                                                                                                                                                              |
+| **Objetivo**            | Recibir al cliente al llegar al complejo, cobrar el saldo pendiente si aplica, emitir el comprobante y autorizar el acceso; la reserva culminará como *Completada* al finalizar el turno.                                                                                                                                                                                           |
+| **Precondición**        | El cliente tiene una reserva previa en estado *Confirmada* y se presenta en ventanilla antes de ingresar a la cancha. El administrador inició sesión con su correo y contraseña (rol Administrador).                                                                                                                                                                                |
+| **Resultado esperado**  | Al registrar el pago, el saldo pendiente queda en cero ($0.00) y se emite el comprobante digital de liquidación. La reserva permanece en estado *Confirmada* mientras se realiza el turno y pasa automáticamente a *Completada* cuando el turno termina. Si el turno fue pagado al 100 % previamente en la reserva asistida, el saldo ya es $0.00 y únicamente se valida el acceso. |
+| **Excepción principal** | Si el cliente no cuenta con el saldo pendiente, el turno se retiene en espera y no se autoriza el ingreso a la cancha hasta su liquidación.                                                                                                                                                                                                                                         |
 
-| Sección | Integrante(s) | Herramienta y Link al prompt utilizado | Aporte de la IA | Aporte Intelectual del equipo |
-| :--- | :--- | :--- | :--- | :--- |
-| Repositorio, Despliegue y Descripción del Proyecto | Gonzalez, Walter | Antigravity / Gemini — [Ver prompts en Auditoria/prompts.md](./Auditoria/prompts.md) | Asistió en la estructuración del README en formato Markdown y corrección de coherencia en la redacción inicial. | Configuración del repositorio en GitHub, despliegue en GitHub Pages, y formulación del problema, propósito, objetivo general y alcance del sistema. |
-| Identificación de Usuarios | Sanchez, Jose | Ninguna | Ninguno | Análisis y caracterización de los perfiles de Cliente y Administrador, identificando sus necesidades y funciones clave en el sistema. |
-| Requisitos Funcionales | Rozette, Jose | Ninguna | Ninguno | Definición técnica y tabulación completa de los requisitos funcionales del sistema (RF-01 a RF-09). |
-| Requisitos No Funcionales y Escenarios de Uso | Meneses, Alexander | Ninguna | Ninguno | Formulación de los requisitos no funcionales (RNF-01 a RNF-08) y desarrollo estructurado de los escenarios de uso paso a paso. |
+```mermaid
+flowchart TD
+    P1["1. El cliente se presenta en recepción\npara ingresar a su partido"] --> P2["2. Administrador abre Listado de Reservas 8.2\ny localiza el turno por nombre, cancha o fecha"]
+    P2 --> P3["3. Abrir Modal POS de Liquidación\n(muestra Tarifa Total, Abono y Saldo)"]
+    P3 --> D1{"¿Tiene saldo\npendiente?"}
+    
+    D1 -->|No: pagó 100% en asistida| P4a["Saldo es $0.00: emitir comprobante\ny autorizar ingreso a la cancha"]
+    D1 -->|Sí: adeuda saldo| P4b["Seleccionar método de cobro presencial:\n[Efectivo] o [Yappy / Punto de Venta]"]
+    
+    P4b --> D2{"¿Pago recibido\ny verificado en caja?"}
+    D2 -->|No: fondos insuficientes| E1["Turno retenido en espera:\nno se autoriza el ingreso hasta liquidar saldo"]
+    D2 -->|Sí| P5["5. Confirmar liquidación: saldo pasa a $0.00\ny se emite el comprobante digital"]
+    
+    P4a --> P6["6. La reserva permanece en estado Confirmada\nmientras se desarrolla el juego"]
+    P5 --> P6
+    
+    P6 --> P7["7. Al culminar el bloque horario del turno,\nel sistema cambia el estado a 'Completada'"]
+```
 
 ---
 
-## Tabla 2. Auditoría y Uso de la IA - Fase 1 (Parte 2)
+# 5. Wire frames
 
-| Sección | Integrante(s) | Herramienta y Link al prompt utilizado | Aporte de la IA | Aporte Intelectual del equipo |
-| :--- | :--- | :--- | :--- | :--- |
-| Casos de Uso, Modelo de Clases, Navegación y Trazabilidad | Gonzalez, Walter | Antigravity / Gemini — [Ver prompts en Auditoria/prompts.md](./Auditoria/prompts.md) | Asistió en la estructuración técnica del README y en la revisión de coherencia de los modelos. | Diseño de casos de uso (flujo principal y excepciones), modelado de clases del dominio, arquitectura de navegación y matriz de trazabilidad. |
-| Revisión de Ortografía y Redacción | Sanchez, Jose | Ninguna | Ninguno | Revisión de ortografía, estilo y redacción técnica de los entregables de la parte 2. |
-| Validación de Requisitos | Rozette, Jose | Ninguna | Ninguno | Verificación cruzada para asegurar la cobertura de todos los requisitos funcionales en las clases y casos de uso. |
-| Control de Estructura | Meneses, Alexander | Ninguna | Ninguno | Inspección de la estructura documental conforme a los criterios de evaluación de la cátedra. |
+*(Espacio reservado para que Jose Rozette adjunte los wireframes estructurales de baja/media fidelidad de las Vistas 1 a 6).*
 
 ---
 
-## Tabla 3. Auditoría y Uso de la IA - Fase 2 (Avance Actual)
+# 6. Prototipo (Link)
+
+*(Espacio reservado para que Alexander Meneses adjunte el enlace interactivo público de Figma y las capturas en alta fidelidad).*
+
+- **Enlace al Prototipo Interactivo en Figma:** [Pendiente de adjuntar enlace público / Enlace Figma]
+
+---
+
+# 7. Auditoría y Uso de la IA
+
+### Tabla 3. Auditoría y Uso de la IA - Fase 2
 
 | Sección | Integrante(s) | Herramienta y Link al prompt utilizado | Aporte de la IA | Aporte Intelectual del equipo |
 | :--- | :--- | :--- | :--- | :--- |
-| Arquitectura de Información y Sitemap | Gonzalez, Walter | Antigravity / Gemini — [Ver prompts en Auditoria/prompts.md](./Auditoria/prompts.md) | Asistió en la maquetación del documento en formato Markdown y en la revisión de coherencia técnica entre las especificaciones de arquitectura y navegación. | Definición de las reglas de negocio, taxonomía multidimensional del catálogo, especificaciones de accesibilidad WCAG 2.1 AA, lógica de concurrencia y diseño jerárquico del sitemap. |
-| Modelo de Navegación Refinado y Flujos de Navegación | Sanchez, Jose | Gemini — [Ver prompts en Auditoria/prompts.md](./Auditoria/prompts.md) | Asistió en la estructuración de los diagramas de flujo de tareas críticas y en la depuración de pasos redundantes e inconsistencias lógicas. | Elaboración del diagrama de navegación general, estructuración de las matrices de pantallas y roles, y modelado detallado de los cinco flujos de tareas críticas con manejo de decisiones, intercepción de sesión y excepciones. |
-| Wireframes | Rozette, Jose | En desarrollo | En desarrollo | Asignado para el diseño estructural de las pantallas principales en media fidelidad. |
-| Prototipo de Alta Fidelidad | Meneses, Alexander | En desarrollo | En desarrollo | Asignado para la construcción visual interactiva y componentes en Figma. |
+| **Arquitectura de Información, Sitemap y Correcciones Integrales de Negocio** | Gonzalez, Walter | Antigravity / Gemini — [Ver prompts 3, 4, 5, 6, 9, 10, 11, 12 y 13 en prompts.md](./prompts.md) | Asistió en la maquetación técnica del documento en Markdown, estructuración de la taxonomía ampliada, generación de sintaxis Mermaid para diagramas de flujo y revisión de coherencia de reglas de negocio. | Análisis, formulación y orquestación de todas las correcciones integrales de la Fase 2: integración de 6 disciplinas y 9 canchas con normativas técnicas de calzado, solución del abono asíncrono vía Yappy/WhatsApp con abono mínimo fijo del 30 % del sistema, formulación de la política de caducidad TTL (45 min) con cancelación automática por motivo Vencimiento del TTL, regla estricta de anticipación cancelable únicamente si faltan más de 2 horas (bloqueando creación/cancelación a las 2 horas o menos), solicitud obligatoria de motivo de cancelación en Flujo 2, desglose financiero dinámico según duración de turno (ejemplos 1h y 2h), gestión de canchas precargadas con interruptor Activa/Inactiva (eliminando CRUD y formulario 8.1.1), autenticación administrativa mediante correo y contraseña (código corporativo restringido al registro), diferenciación formal entre constancia digital de abono y comprobante digital de liquidación final, y separación del cobro presencial (POS / Check-in) de la finalización del turno (Completada al concluir el bloque horario). (Terminado). |
+| **Modelo de Navegación Refinado, Flujos de Navegación y Auditoría Cruzada de Interfaces** | Sanchez, Jose | Gemini — [Ver prompts 7 y 8 en prompts.md](./prompts.md) | Asistió en la estructuración de los diagramas de flujo de tareas críticas y en la depuración de pasos redundantes e inconsistencias lógicas. | Elaboración del diagrama de navegación general, estructuración de las matrices de pantallas y roles, modelado detallado de los flujos de tareas críticas 1 al 6 con manejo de decisiones e intercepciones, y auditoría cruzada de consistencia entre los diagramas y los wireframes/prototipo (asegurando el cumplimiento de la regla de cancelación a >2h, la bifurcación de cobro en reservas asistidas y el enlace directo al catálogo precargado sin pantallas de edición). (Terminado). |
+| **Wireframes (Diseño Estructural de Baja / Media Fidelidad)** | Rozette, Jose | Figma / Draw.io — Ninguna | Ninguno | Diseño y corrección estructural de las 6 vistas clave en media fidelidad monocromática: Landing (1.0) con buscador de 6 disciplinas y aviso de abono 30 %, Catálogo (2.0/2.2) con filtros facetados por 4 superficies y comodidades, Ficha de Cancha Desktop (2.3) con matriz semanal completa, estado «No disponible temporalmente» y cálculo de tarifa según duración, Ficha Móvil (2.3) con carrusel táctil y modal de instrucciones de abono con TTL de 45 min, Panel de Cliente Mis Reservas (7.1) con tarjeta de 4 valores financieros y modal de cancelación con motivo obligatorio bajo la regla estricta de >2h, y Panel de Control Admin separando Gestión de Canchas Precargadas (8.1) con interruptor Toggle Activa/Inactiva del Listado de Reservas (8.2) con temporizador TTL, validación de abonos y cobro POS. (Terminado). |
+| **Prototipo de Interfaz de Alta Fidelidad y Sistema de Diseño** | Meneses, Alexander | Figma — Ninguna | Ninguno | Conceptualización y actualización del prototipo interactivo en alta fidelidad en Figma: definición de la guía de estilos con paleta cromática accesible WCAG 2.1 AA (azul institucional `#1B365D`, verde `#2E7D32`), tipografía, componentes UI interactivos, código multimodal de disponibilidad (Verde: Libre, Ámbar: No disponible temporalmente / Pendiente TTL, Gris: Ocupado, Amarillo rayado: Mantenimiento), construcción de flujos interactivos para el modal de Reserva Asistida (modalidades 30 % y 100 %) y Liquidación Presencial en Mostrador (POS con emisión de comprobante final de liquidación), y despliegue del enlace público interactivo. (Terminado). |
