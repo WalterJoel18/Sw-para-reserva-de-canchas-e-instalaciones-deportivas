@@ -1226,15 +1226,24 @@ flowchart TD
 
 # 5. Wire frames
 
-*(Espacio reservado para que Jose Rozette adjunte los wireframes estructurales de baja/media fidelidad de las Vistas 1 a 6).*
+<img width="1087" height="830" alt="image" src="https://github.com/user-attachments/assets/6c5aa460-db03-4320-953a-efe3843f2192" />
+<img width="921" height="742" alt="image" src="https://github.com/user-attachments/assets/e70096e5-7f1a-40c7-91d7-c0d19dadd9da" />
+<img width="921" height="844" alt="image" src="https://github.com/user-attachments/assets/2398ca0a-ff43-4893-bdf0-3ab479695683" />
+<img width="921" height="671" alt="image" src="https://github.com/user-attachments/assets/6eefde9a-61f6-4b22-88e5-bf14740e9da8" />
+<img width="921" height="627" alt="image" src="https://github.com/user-attachments/assets/1fc34179-76ea-48cc-9c1c-798bc79b06c0" />
+
+
+
+
+
+
 
 ---
 
 # 6. Prototipo (Link)
 
-*(Espacio reservado para que Alexander Meneses adjunte el enlace interactivo público de Figma y las capturas en alta fidelidad).*
 
-- **Enlace al Prototipo Interactivo en Figma:** [Pendiente de adjuntar enlace público / Enlace Figma]
+- **Enlace al Prototipo Interactivo en Figma:** https://www.figma.com/make/EEvgplJ9O26WOvQ37D1Pan/Prototipo-Sistema-Reserva-Canchas?t=h7o1avGJIt1v4Cdx-1
 
 ---
 
