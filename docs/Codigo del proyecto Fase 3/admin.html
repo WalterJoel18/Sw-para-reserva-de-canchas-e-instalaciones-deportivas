@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Control Administrativo - Birrias de One</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    /* Estructura específica del Layout del Panel de Administración */
+    .admin-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: calc(100vh - 72px);
+    }
+
+    .admin-sidebar {
+      background: #1a2634;
+      color: #cbd5e1;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid #334155;
+    }
+
+    .sidebar-seccion-titulo {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+      margin-bottom: 6px;
+    }
+
+    .sidebar-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+
+    .sidebar-btn.activo {
+      background: var(--color-verde);
+      color: #fff;
+    }
+
+    .admin-contenido {
+      padding: 32px 36px;
+      background: var(--color-fondo);
+      overflow-y: auto;
+    }
+
+    .tarjeta-metrica {
+      background: #fff;
+      border: 1px solid var(--color-borde);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--sombra-tarjeta);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .tarjeta-metrica:hover {
+      box-shadow: var(--sombra-verde);
+      transform: translateY(-2px);
+    }
+
+    .admin-empleado-card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .admin-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--color-verde);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .admin-tabla-card {
+      background: #fff;
+      border: 1px solid var(--color-borde);
+      border-radius: 18px;
+      box-shadow: var(--sombra-tarjeta);
+      overflow: hidden;
+    }
+
+    .btn-peligro {
+      color: var(--color-rojo) !important;
+      border-color: var(--color-rojo) !important;
+      text-decoration: none;
+    }
+
+    .btn-pos {
+      background: #1565c0 !important;
+      padding: 7px 14px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-validar {
+      font-size: 0.78rem;
+      padding: 6px 12px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-whatsapp-sm {
+      font-size: 0.78rem;
+      color: var(--color-verde);
+      border-color: var(--color-verde);
+      text-decoration: none;
+    }
+
+    .pos-saldo-box {
+      background: rgba(21, 101, 192, 0.08);
+      border: 1px solid rgba(21, 101, 192, 0.2);
+      padding: 14px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .admin-layout {
+        grid-template-columns: 1fr;
+      }
+      .admin-sidebar {
+        border-right: none;
+        border-bottom: 1px solid #334155;
+      }
+      .admin-contenido {
+        padding: 20px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Superior -->
+  <header class="header-principal">
+    <div class="contenedor nav-contenedor">
+      <a href="index.html" class="logo-marca">
+        <span class="logo-icono">
+          <img src="img/iconos/iconologomarca.svg" alt="Birrias de One" width="22" height="22">
+        </span>
+        <span>Birrias de One • Panel de Control</span>
+      </a>
+
+      <div style="display:flex; align-items:center; gap:14px;">
+        <a href="index.html" style="font-size:0.88rem; color:var(--color-texto-suave); text-decoration:none;">Ver sitio público</a>
+        <a href="login.html" class="btn-acceso btn-peligro">Cerrar Sesión</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Layout del Panel con Sidebar Moderno -->
+  <div class="admin-layout">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div>
+        <div style="margin-bottom: 24px;">
+          <div class="sidebar-seccion-titulo">Módulos de Gestión</div>
+          
+          <a href="#seccion-admin-canchas" class="sidebar-btn activo">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span>8.1 Canchas Precargadas</span>
+          </a>
+
+          <a href="#seccion-admin-reservas" class="sidebar-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <span>8.2 Reservas y Cobro POS</span>
+          </a>
+        </div>
+
+        <div>
+          <div class="sidebar-seccion-titulo">Atención Inmediata</div>
+          <a href="#modal-asistida" class="btn-primario" style="display:block; text-align:center; width:100%; padding:10px; font-size:0.85rem; border-radius:10px; text-decoration:none;">
+            + Reserva Asistida
+          </a>
+        </div>
+      </div>
+
+      <!-- Tarjeta de Empleado autenticado -->
+      <div class="admin-empleado-card">
+        <div class="admin-avatar">AD</div>
+        <div>
+          <strong style="color:#fff; font-size:0.85rem; display:block;">Recepción / Admin</strong>
+          <span style="font-size:0.75rem; color:#94a3b8;">UTP Complejo Central</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="admin-contenido">
+
+      <!-- Métricas Resumen Superior -->
+      <div class="grid-metricas">
+        <div class="tarjeta-metrica">
+          <span class="reserva-valor-etiqueta">Instalaciones Registradas</span>
+          <div class="tabular" style="font-size:1.8rem; font-weight:800; color:var(--color-primario);">15 Canchas</div>
+          <span style="font-size:0.8rem; color:var(--color-verde); font-weight:600;">100% Operativas</span>
+        </div>
+        <div class="tarjeta-metrica">
+          <span class="reserva-valor-etiqueta">Turnos Reservados Hoy</span>
+          <div class="tabular" style="font-size:1.8rem; font-weight:800; color:var(--color-primario);">8 Turnos</div>
+          <span style="font-size:0.8rem; color:var(--color-texto-suave);">Lunes 16 Noviembre</span>
+        </div>
+        <div class="tarjeta-metrica">
+          <span class="reserva-valor-etiqueta">Abonos por Validar</span>
+          <div class="tabular" style="font-size:1.8rem; font-weight:800; color:var(--color-ambar);">2 Pendientes</div>
+          <span style="font-size:0.8rem; color:var(--color-ambar); font-weight:600;">Tiempo límite 45 min</span>
+        </div>
+        <div class="tarjeta-metrica">
+          <span class="reserva-valor-etiqueta">Abonos 30% Recaudados</span>
+          <div class="tabular" style="font-size:1.8rem; font-weight:800; color:var(--color-verde);">$184.50</div>
+          <span style="font-size:0.8rem; color:var(--color-texto-suave);">Yappy 6351-6012 (@birriasdeone)</span>
+        </div>
+      </div>
+
+      <!-- SECCION 1: 8.1 GESTION DE CANCHAS PRECARGADAS -->
+      <section id="seccion-admin-canchas" style="margin-bottom: 40px;">
+        <div class="flex-between" style="margin-bottom: 20px;">
+          <div>
+            <h2>8.1 Gestión de Canchas Precargadas</h2>
+            <p style="font-size:0.9rem;">
+              Control de disponibilidad de las 15 instalaciones oficiales. Conmuta el interruptor para pausar o activar reservas públicas de forma inmediata.
+            </p>
+          </div>
+          <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">
+            + Programar Mantenimiento
+          </a>
+        </div>
+
+        <div class="admin-tabla-card">
+          <div class="tabla-responsive-wrapper">
+            <table class="tabla-admin">
+              <thead>
+                <tr>
+                  <th>Instalación y Ubicación (Provincia de Panamá)</th>
+                  <th>Disciplina</th>
+                  <th>Cubierta</th>
+                  <th>Tarifa / Abono 30%</th>
+                  <th class="col-center">Estado</th>
+                  <th class="col-right">Mantenimiento</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- 1 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchafutboltecho.jpg" alt="Cancha 1" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Cancha Sintética Centenario</strong>
+                        <div class="admin-cancha-sector">Vía Centenario, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Fútbol (Fútbol 7)</td>
+                  <td><span class="badge badge-techada">Techada</span></td>
+                  <td><strong>$35.00/h</strong> <span class="admin-tarifa-abono">(Abono $10.50)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 2 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchafutbolsalatecho.jpg" alt="Cancha 2" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Cancha Techada Juan Díaz</strong>
+                        <div class="admin-cancha-sector">Juan Díaz, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Fútbol (Fútbol Sala)</td>
+                  <td><span class="badge badge-techada">Techada</span></td>
+                  <td><strong>$28.00/h</strong> <span class="admin-tarifa-abono">(Abono $8.40)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 3 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchafutbolsintecho.jpg" alt="Cancha 3" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Cancha El Cangrejo Fútbol 5</strong>
+                        <div class="admin-cancha-sector">El Cangrejo, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Fútbol (Fútbol 5)</td>
+                  <td><span class="badge badge-airelibre">Al aire libre</span></td>
+                  <td><strong>$30.00/h</strong> <span class="admin-tarifa-abono">(Abono $9.00)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 4 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchafutbolsalasintecho.jpg" alt="Cancha 4" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Cancha San Francisco Maracaná</strong>
+                        <div class="admin-cancha-sector">San Francisco, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Fútbol (Fútbol 9)</td>
+                  <td><span class="badge badge-airelibre">Al aire libre</span></td>
+                  <td><strong>$45.00/h</strong> <span class="admin-tarifa-abono">(Abono $13.50)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 5 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchabaskettecho.jpg" alt="Cancha 5" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Domo de Básquetbol Centenario</strong>
+                        <div class="admin-cancha-sector">Vía Centenario, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Básquetbol</td>
+                  <td><span class="badge badge-techada">Techada</span></td>
+                  <td><strong>$32.00/h</strong> <span class="admin-tarifa-abono">(Abono $9.60)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 6 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchabasketsintecho.jpg" alt="Cancha 6" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Cancha Básquetbol Parque Bethania</strong>
+                        <div class="admin-cancha-sector">Bethania, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Básquetbol</td>
+                  <td><span class="badge badge-airelibre">Al aire libre</span></td>
+                  <td><strong>$22.00/h</strong> <span class="admin-tarifa-abono">(Abono $6.60)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 7 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchatenisarenasintecho.jpg" alt="Cancha 7" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Cancha Tenis Arcilla El Cangrejo</strong>
+                        <div class="admin-cancha-sector">El Cangrejo, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Tenis</td>
+                  <td><span class="badge badge-airelibre">Al aire libre</span></td>
+                  <td><strong>$25.00/h</strong> <span class="admin-tarifa-abono">(Abono $7.50)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 8 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchatenispisositecho.jpg" alt="Cancha 8" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Estadio Tenis Rápido San Francisco</strong>
+                        <div class="admin-cancha-sector">San Francisco, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Tenis</td>
+                  <td><span class="badge badge-airelibre">Al aire libre</span></td>
+                  <td><strong>$28.00/h</strong> <span class="admin-tarifa-abono">(Abono $8.40)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 9 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchatenispisotecho.jpg" alt="Cancha 9" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Cancha Tenis Playa Amador</strong>
+                        <div class="admin-cancha-sector">Calzada de Amador, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Tenis</td>
+                  <td><span class="badge badge-techada">Techada</span></td>
+                  <td><strong>$22.00/h</strong> <span class="admin-tarifa-abono">(Abono $6.60)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 10 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchapadeltecho.jpg" alt="Cancha 10" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Cancha Pádel Cristal San Francisco</strong>
+                        <div class="admin-cancha-sector">San Francisco, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Pádel</td>
+                  <td><span class="badge badge-techada">Techada</span></td>
+                  <td><strong>$38.00/h</strong> <span class="admin-tarifa-abono">(Abono $11.40)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 11 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchapadelsintecho.jpg" alt="Cancha 11" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Cancha Pádel Panorámica Costa del Este</strong>
+                        <div class="admin-cancha-sector">Costa del Este, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Pádel</td>
+                  <td><span class="badge badge-airelibre">Al aire libre</span></td>
+                  <td><strong>$40.00/h</strong> <span class="admin-tarifa-abono">(Abono $12.00)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 12 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchavolleyarena.jpg" alt="Cancha 12" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Cancha Voleibol Playa Amador</strong>
+                        <div class="admin-cancha-sector">Calzada de Amador, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Voleibol (Arena)</td>
+                  <td><span class="badge badge-airelibre">Al aire libre</span></td>
+                  <td><strong>$24.00/h</strong> <span class="admin-tarifa-abono">(Abono $7.20)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 13 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchavolleytecho.jpg" alt="Cancha 13" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Gimnasio Voleibol Sala Betania</strong>
+                        <div class="admin-cancha-sector">Bethania, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Voleibol (Sala)</td>
+                  <td><span class="badge badge-techada">Techada</span></td>
+                  <td><strong>$26.00/h</strong> <span class="admin-tarifa-abono">(Abono $7.80)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 14 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchavolleysintecho.jpg" alt="Cancha 14" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Cancha Voleibol Recreativo Juan Díaz</strong>
+                        <div class="admin-cancha-sector">Juan Díaz, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Voleibol</td>
+                  <td><span class="badge badge-airelibre">Al aire libre</span></td>
+                  <td><strong>$20.00/h</strong> <span class="admin-tarifa-abono">(Abono $6.00)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+
+                <!-- 15 -->
+                <tr>
+                  <td>
+                    <div class="admin-cancha-item">
+                      <img src="img/canchabadmintontecho.jpg" alt="Cancha 15" class="admin-cancha-thumb">
+                      <div>
+                        <strong class="admin-cancha-nombre">Coliseo Bádminton Indoor Centenario</strong>
+                        <div class="admin-cancha-sector">Vía Centenario, Panamá</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Bádminton</td>
+                  <td><span class="badge badge-techada">Techada</span></td>
+                  <td><strong>$20.00/h</strong> <span class="admin-tarifa-abono">(Abono $6.00)</span></td>
+                  <td class="col-center">
+                    <label class="switch-cancha"><input type="checkbox" checked><span class="slider-cancha"></span></label>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-bloqueo" class="btn-acceso btn-mantenimiento">Inhabilitar</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCION 2: 8.2 LISTADO GENERAL DE RESERVAS Y COBRO POS -->
+      <section id="seccion-admin-reservas">
+        <div class="flex-between" style="margin-bottom:20px;">
+          <div>
+            <h2>8.2 Listado General de Reservas y Cobro POS</h2>
+            <p style="font-size:0.9rem;">Supervisa comprobantes de abono recibidos por WhatsApp/Yappy, valida transferencias y liquida pagos en ventanilla.</p>
+          </div>
+
+          <a href="#modal-asistida" class="btn-primario" style="padding:10px 18px; font-size:0.9rem; text-decoration:none;">
+            + Nueva Reserva Asistida
+          </a>
+        </div>
+
+        <div class="admin-tabla-card">
+          <div class="tabla-responsive-wrapper">
+            <table class="tabla-admin">
+              <thead>
+                <tr>
+                  <th>Reserva / Cancha</th>
+                  <th>Cliente</th>
+                  <th>Fecha y Horario</th>
+                  <th class="col-center">Estado</th>
+                  <th>Finanzas (Total / Abono / Saldo)</th>
+                  <th class="col-right">Acción Requerida</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Fila 1: Pendiente por Validar -->
+                <tr class="admin-fila-alerta">
+                  <td>
+                    <strong style="color:var(--color-primario); display:block;">#REC-102</strong>
+                    <span style="font-size:0.85rem; color:var(--color-texto-suave);">Cancha Tenis Arcilla El Cangrejo</span>
+                  </td>
+                  <td>
+                    <strong>Carlos Méndez</strong>
+                    <div style="font-size:0.78rem; color:var(--color-texto-muted);">6351-6012 • cliente@birrias.com</div>
+                  </td>
+                  <td>
+                    <strong>2026-11-17</strong>
+                    <div style="color:var(--color-texto-suave);">16:00 - 17:00 (1 h)</div>
+                  </td>
+                  <td class="col-center">
+                    <span class="badge-pendiente">Pendiente (45 min)</span>
+                  </td>
+                  <td>
+                    <div>Total: <strong class="tabular">$25.00</strong></div>
+                    <div style="color:var(--color-ambar);">Abono req: <strong class="tabular">$7.50</strong></div>
+                    <div style="color:var(--color-texto-muted);">Saldo: <span class="tabular">$17.50</span></div>
+                  </td>
+                  <td class="col-right">
+                    <div style="display:flex; justify-content:flex-end; gap:6px; flex-wrap:wrap;">
+                      <a href="https://wa.me/50763516012" target="_blank" class="btn-acceso btn-whatsapp-sm">
+                        WhatsApp
+                      </a>
+                      <a href="#modal-validado" class="btn-primario btn-validar">
+                        Validar Abono
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+
+                <!-- Fila 2: Confirmada, pendiente de cobro en sitio -->
+                <tr>
+                  <td>
+                    <strong style="color:var(--color-primario); display:block;">#REC-101</strong>
+                    <span style="font-size:0.85rem; color:var(--color-texto-suave);">Cancha Sintética Centenario</span>
+                  </td>
+                  <td>
+                    <strong>Carlos Méndez</strong>
+                    <div style="font-size:0.78rem; color:var(--color-texto-muted);">6351-6012 • cliente@birrias.com</div>
+                  </td>
+                  <td>
+                    <strong>2026-11-16</strong>
+                    <div style="color:var(--color-texto-suave);">18:00 - 19:00 (1 h)</div>
+                  </td>
+                  <td class="col-center">
+                    <span class="badge-confirmada">Confirmada</span>
+                  </td>
+                  <td>
+                    <div>Total: <strong class="tabular">$35.00</strong></div>
+                    <div style="color:var(--color-verde);">Abonado: <strong class="tabular">$10.50</strong></div>
+                    <div style="color:var(--color-ambar); font-weight:700;">Saldo: <span class="tabular">$24.50</span></div>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-pos" class="btn-primario btn-pos">
+                      Cobro POS ($24.50)
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- Fila 3: Confirmada 2 -->
+                <tr>
+                  <td>
+                    <strong style="color:var(--color-primario); display:block;">#REC-103</strong>
+                    <span style="font-size:0.85rem; color:var(--color-texto-suave);">Cancha Pádel Cristal San Francisco</span>
+                  </td>
+                  <td>
+                    <strong>José Rozette</strong>
+                    <div style="font-size:0.78rem; color:var(--color-texto-muted);">6789-0123 • jrozette@birrias.com</div>
+                  </td>
+                  <td>
+                    <strong>2026-11-18</strong>
+                    <div style="color:var(--color-texto-suave);">17:00 - 18:00 (1 h)</div>
+                  </td>
+                  <td class="col-center">
+                    <span class="badge-confirmada">Confirmada</span>
+                  </td>
+                  <td>
+                    <div>Total: <strong class="tabular">$38.00</strong></div>
+                    <div style="color:var(--color-verde);">Abonado: <strong class="tabular">$11.40</strong></div>
+                    <div style="color:var(--color-ambar); font-weight:700;">Saldo: <span class="tabular">$26.60</span></div>
+                  </td>
+                  <td class="col-right">
+                    <a href="#modal-pos" class="btn-primario btn-pos">
+                      Cobro POS ($26.60)
+                    </a>
+                  </td>
+                </tr>
+
+                <!-- Fila 4: Completada y Liquidada -->
+                <tr>
+                  <td>
+                    <strong style="color:var(--color-primario); display:block;">#COMP-100</strong>
+                    <span style="font-size:0.85rem; color:var(--color-texto-suave);">Domo de Básquetbol Centenario</span>
+                  </td>
+                  <td>
+                    <strong>Alexander Meneses</strong>
+                    <div style="font-size:0.78rem; color:var(--color-texto-muted);">6234-5678 • alex@birrias.com</div>
+                  </td>
+                  <td>
+                    <strong>2026-11-10</strong>
+                    <div style="color:var(--color-texto-suave);">19:00 - 20:00 (1 h)</div>
+                  </td>
+                  <td class="col-center">
+                    <span class="badge-completada">Completada</span>
+                  </td>
+                  <td>
+                    <div>Total: <strong class="tabular">$32.00</strong></div>
+                    <div style="color:var(--color-verde);">Abono: <strong class="tabular">$9.60</strong></div>
+                    <div style="color:var(--color-verde); font-weight:700;">Saldo: <span class="tabular">$0.00</span></div>
+                  </td>
+                  <td class="col-right">
+                    <span style="font-size:0.82rem; color:var(--color-verde); font-weight:700;">Liquidado (Yappy)</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL POS: LIQUIDACION EN SITIO (CSS Puro :target) -->
+  <div id="modal-pos" class="modal-overlay">
+    <div class="modal-caja">
+      <div class="modal-cabecera">
+        <h3 class="modal-titulo">Módulo POS - Cobro en Sitio</h3>
+        <a href="#" class="modal-cerrar">&times;</a>
+      </div>
+
+      <form action="admin.html" method="GET" class="modal-cuerpo">
+        <div>
+          <span class="form-label-muted">Detalle del partido</span>
+          <strong style="display:block; color:var(--color-primario); font-size:1.05rem;">Cancha Sintética Centenario (#REC-101)</strong>
+          <span style="color:var(--color-texto-suave); font-size:0.82rem;">2026-11-16 • 18:00 - 19:00</span>
+        </div>
+
+        <div>
+          <span class="form-label-muted">Cliente</span>
+          <strong style="display:block;">Carlos Méndez (6351-6012)</strong>
+        </div>
+
+        <div class="pos-saldo-box">
+          <span style="font-weight:700; color:#1e40af;">Saldo restante a liquidar:</span>
+          <div style="font-size:1.5rem; font-weight:800; color:#1e40af;" class="tabular">$24.50</div>
+        </div>
+
+        <div>
+          <label for="pos-metodo-pago" class="form-label">Método de cobro recibido:</label>
+          <select id="pos-metodo-pago" class="form-control">
+            <option value="efectivo">Efectivo en ventanilla</option>
+            <option value="yappy">Yappy Presencial (al número 6351-6012)</option>
+            <option value="clave">Tarjeta Clave / POS Físico</option>
+          </select>
+        </div>
+
+        <div class="modal-pie">
+          <a href="#" class="btn-acceso" style="text-decoration:none;">Cancelar</a>
+          <button type="submit" class="btn-primario" style="background:#1565c0; border:none; cursor:pointer;">
+            Registrar Cobro y Emitir Recibo
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL RESERVA ASISTIDA (CSS Puro :target) -->
+  <div id="modal-asistida" class="modal-overlay">
+    <div class="modal-caja modal-caja-lg">
+      <div class="modal-cabecera">
+        <h3 class="modal-titulo">+ Registrar Reserva Asistida</h3>
+        <a href="#" class="modal-cerrar">&times;</a>
+      </div>
+
+      <form action="admin.html" method="GET" class="modal-cuerpo">
+        <div>
+          <label class="form-label">Cancha</label>
+          <select required class="form-control form-control-sm">
+            <option value="1">Cancha Sintética Centenario (Vía Centenario) - $35/h</option>
+            <option value="2">Cancha Techada Juan Díaz (Juan Díaz) - $28/h</option>
+            <option value="3">Cancha El Cangrejo Fútbol 5 (El Cangrejo) - $30/h</option>
+            <option value="4">Cancha San Francisco Maracaná (San Francisco) - $45/h</option>
+            <option value="5">Domo de Básquetbol Centenario (Vía Centenario) - $32/h</option>
+            <option value="7">Cancha Tenis Arcilla El Cangrejo (El Cangrejo) - $25/h</option>
+            <option value="10">Cancha Pádel Cristal San Francisco (San Francisco) - $38/h</option>
+            <option value="12">Cancha Voleibol Playa Amador (Calzada de Amador) - $24/h</option>
+            <option value="15">Coliseo Bádminton Indoor Centenario (Vía Centenario) - $20/h</option>
+          </select>
+        </div>
+
+        <div class="form-grid-2">
+          <div>
+            <label class="form-label">Nombre del Cliente</label>
+            <input type="text" required placeholder="Carlos Méndez" class="form-control form-control-sm">
+          </div>
+          <div>
+            <label class="form-label">Teléfono de Contacto</label>
+            <input type="tel" required placeholder="6351-6012" class="form-control form-control-sm">
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div>
+            <label class="form-label">Fecha</label>
+            <input type="date" value="2026-11-18" required class="form-control form-control-sm">
+          </div>
+          <div>
+            <label class="form-label">Bloque Horario</label>
+            <select required class="form-control form-control-sm">
+              <option value="18:00 - 19:00">18:00 - 19:00</option>
+              <option value="19:00 - 20:00">19:00 - 20:00</option>
+              <option value="20:00 - 21:00">20:00 - 21:00</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-aviso">
+          <label class="form-label">Modalidad de Pago Recibido:</label>
+          <select class="form-control form-control-sm">
+            <option value="abono">Cobrar Abono 30% (Saldo restante en POS al llegar)</option>
+            <option value="completo">Cobrar Pago Completo 100% (Saldo queda en $0.00)</option>
+          </select>
+        </div>
+
+        <div class="modal-pie">
+          <a href="#" class="btn-acceso" style="text-decoration:none;">Cancelar</a>
+          <button type="submit" class="btn-primario" style="border:none; cursor:pointer;">Confirmar Reserva</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL BLOQUEO POR MANTENIMIENTO (CSS Puro :target) -->
+  <div id="modal-bloqueo" class="modal-overlay">
+    <div class="modal-caja">
+      <div class="modal-cabecera">
+        <h3 class="modal-titulo modal-titulo-alerta">
+          <img src="img/iconos/iconomantenimiento.svg" alt="Mantenimiento" width="20" height="20">
+          <span>Inhabilitar por Mantenimiento</span>
+        </h3>
+        <a href="#" class="modal-cerrar">&times;</a>
+      </div>
+
+      <form action="admin.html" method="GET" class="modal-cuerpo">
+        <div>
+          <span class="form-label-muted">Instalación a programar:</span>
+          <strong style="display:block; font-size:1rem; color:var(--color-primario);">Cancha Sintética Centenario (Vía Centenario)</strong>
+        </div>
+
+        <div>
+          <label class="form-label">Fecha del bloqueo</label>
+          <input type="date" value="2026-11-19" required class="form-control form-control-sm">
+        </div>
+
+        <div>
+          <label class="form-label">Horario a inhabilitar</label>
+          <select required class="form-control form-control-sm">
+            <option value="08:00 - 12:00">Jornada Mañana (08:00 - 12:00)</option>
+            <option value="14:00 - 18:00">Jornada Tarde (14:00 - 18:00)</option>
+            <option value="06:00 - 22:00">Día Completo (06:00 - 22:00)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="form-label">Motivo del cierre</label>
+          <input type="text" value="Mantenimiento preventivo de césped y luminarias LED" required class="form-control form-control-sm">
+        </div>
+
+        <div class="modal-pie">
+          <a href="#" class="btn-acceso" style="text-decoration:none;">Regresar</a>
+          <button type="submit" class="btn-primario" style="background:#b78103; border:none; cursor:pointer;">Bloquear Horario</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL ABONO VALIDADO (CSS Puro :target) -->
+  <div id="modal-validado" class="modal-overlay">
+    <div class="modal-caja" style="text-align:center;">
+      <div class="modal-icono-exito">
+        <img src="img/iconos/iconoverificado.svg" alt="Validado" width="26" height="26">
+      </div>
+      <h3 style="color:var(--color-verde); margin-bottom:8px;">¡Abono Validado con Éxito!</h3>
+      <p style="font-size:0.88rem; color:var(--color-texto-suave); margin-bottom:16px;">
+        Se confirmó el abono del 30% ($7.50) para la reserva <strong>#REC-102</strong>. El estado se ha actualizado a <strong>Confirmada</strong> y se notificó al cliente.
+      </p>
+      <a href="admin.html" class="btn-primario" style="display:inline-block; padding:10px 24px; text-decoration:none;">
+        Aceptar y Volver al Panel
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto y Canales de Atención - Birrias de One</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header-principal">
+    <div class="contenedor nav-contenedor">
+      <a href="index.html" class="logo-marca">
+        <span class="logo-icono">
+          <img src="img/iconos/iconologomarca.svg" alt="Birrias de One" width="22" height="22">
+        </span>
+        <span>Birrias de One</span>
+      </a>
+
+      <nav aria-label="Navegacion principal">
+        <!-- Control de menu hamburguesa con CSS puro (sin JS) -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" aria-label="Abrir menu de navegacion">
+        <label for="nav-toggle" class="btn-hamburguesa" aria-label="Menu principal">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </label>
+        <ul class="nav-enlaces">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="catalogo.html">Explorar Canchas</a></li>
+          <li><a href="normas.html">Normas y Calzado</a></li>
+          <li><a href="contacto.html" class="activo">Contacto</a></li>
+          <li><a href="reservas.html">Mis Reservas</a></li>
+        </ul>
+      </nav>
+
+      <div id="nav-usuario-box" class="nav-usuario">
+        <a href="login.html" class="btn-acceso">
+          <img src="img/iconos/iconousuario.svg" alt="Usuario" width="18" height="18">
+          <span>Acceso</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <div class="contenedor container-max-md">
+      
+      <!-- Migas de pan -->
+      <nav aria-label="Migas de pan" class="migas">
+        <a href="index.html">Inicio</a>
+        <span>/</span>
+        <span aria-current="page">Contacto y Canales de Atención</span>
+      </nav>
+
+      <div style="margin-bottom: 32px;">
+        <h1>Canales de Atención y Ubicación</h1>
+        <p style="font-size: 1.05rem; margin-top: 6px;">
+          Comunícate con recepción para consultas, asistencia en sitio o remisión de comprobantes de abono.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+        
+        <!-- Canales directos e información institucional -->
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          
+          <!-- Tarjeta de WhatsApp Oficial sin emojis -->
+          <div class="contacto-whatsapp-box">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+              <div class="contacto-icono-circulo">
+                <img src="img/iconos/iconowhatsapp.svg" alt="WhatsApp" width="24" height="24">
+              </div>
+              <h3 style="color: #166534; font-size: 1.2rem; margin: 0;">WhatsApp y Yappy Oficial</h3>
+            </div>
+            <p style="font-size: 0.9rem; color: #14532d; margin-bottom: 12px; line-height: 1.5;">
+              Canal directo para consultas, atención inmediata y recepción de comprobantes de abono del 30%.
+            </p>
+            <div class="contacto-datos-box">
+              <div>• <strong>Teléfono / WhatsApp:</strong> (+507) 6351-6012</div>
+              <div>• <strong>Yappy Comercial:</strong> al número 6351-6012 (@birriasdeone)</div>
+            </div>
+            <a href="https://wa.me/50763516012" target="_blank" class="btn-whatsapp-confirmar" style="max-width: 280px; text-decoration: none;">
+              <img src="img/iconos/iconowhatsapp.svg" alt="WhatsApp" width="18" height="18">
+              <span>Abrir chat de WhatsApp</span>
+            </a>
+          </div>
+
+          <div class="contacto-card">
+            <h3 style="font-size: 1.15rem; color: var(--color-primario); margin-bottom: 14px;">Horarios y Sedes Deportivas</h3>
+            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.9rem;">
+              <div>
+                <strong>Ámbito de Cobertura:</strong><br>
+                <span style="color: var(--color-texto-suave);">Instalaciones ubicadas exclusivamente en la Provincia de Panamá (sectores: Vía Centenario, Juan Díaz, El Cangrejo, San Francisco, Costa del Este, Bethania y Calzada de Amador).</span>
+              </div>
+              <div>
+                <strong>Sede Central y Recepción:</strong><br>
+                <span style="color: var(--color-texto-suave);">Complejo Deportivo UTP, Campus Central Dr. Víctor Levi Sasso, Vía Centenario, Ancón, Ciudad de Panamá.</span>
+              </div>
+              <div>
+                <strong>Horario de Operación:</strong><br>
+                <span style="color: var(--color-texto-suave);">Lunes a Domingo: 06:00 a 22:00 (Jornada continua).</span>
+              </div>
+              <div>
+                <strong>Teléfono Directo:</strong><br>
+                <span style="color: var(--color-texto-suave);">(+507) 6351-6012</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Formulario de Mensajería / Contacto -->
+        <div class="contacto-card">
+          <h3 style="font-size: 1.2rem; color: var(--color-primario); margin-bottom: 16px;">Envíanos un Mensaje</h3>
+
+          <form action="#modal-contacto-enviado" method="GET" class="modal-cuerpo">
+            <div>
+              <label for="contacto-nombre" class="form-label">Nombre completo</label>
+              <input type="text" id="contacto-nombre" name="nombre" required placeholder="Tu nombre y apellido" class="form-control">
+            </div>
+
+            <div>
+              <label for="contacto-correo" class="form-label">Correo electrónico</label>
+              <input type="email" id="contacto-correo" name="correo" required placeholder="correo@ejemplo.com" class="form-control">
+            </div>
+
+            <div>
+              <label for="contacto-asunto" class="form-label">Asunto de la consulta</label>
+              <select id="contacto-asunto" name="asunto" class="form-control">
+                <option value="consulta">Consulta de tarifas e instalaciones</option>
+                <option value="abono">Duda con comprobante de abono (30%)</option>
+                <option value="torneo">Organización de torneos o eventos</option>
+                <option value="otro">Otro tema</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="contacto-mensaje" class="form-label">Mensaje</label>
+              <textarea id="contacto-mensaje" name="mensaje" required placeholder="Escribe aquí tu consulta o mensaje..." class="form-control" style="height: 100px;"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primario" style="padding: 12px; margin-top: 6px; border: none; cursor: pointer; border-radius: 10px; font-size: 0.95rem;">
+              Enviar Consulta
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Modal de confirmación de envío (CSS Puro :target) -->
+  <div id="modal-contacto-enviado" class="modal-overlay">
+    <div class="modal-caja" style="text-align: center;">
+      <div class="modal-icono-exito">
+        <img src="img/iconos/iconoverificado.svg" alt="Enviado" width="26" height="26">
+      </div>
+      <h3 style="color: var(--color-verde); margin-bottom: 8px;">¡Consulta Recibida!</h3>
+      <p style="font-size: 0.9rem; color: var(--color-texto-suave); margin-bottom: 16px;">
+        Tu mensaje ha sido remitido al equipo de recepción y administración. Te contactaremos a la brevedad posible o al teléfono indicado.
+      </p>
+      <a href="contacto.html" class="btn-primario" style="display: inline-block; padding: 10px 24px; text-decoration: none;">
+        Aceptar
+      </a>
+    </div>
+  </div>
+
+  <!-- Pie de Página con Redes Sociales -->
+  <footer class="footer-principal">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo-header">
+            <span class="logo-icono">
+              <img src="img/iconos/iconologomarca.svg" alt="Birrias de One" width="22" height="22">
+            </span>
+            <h3 class="footer-logo-texto">Birrias de One</h3>
+          </div>
+          <p>Sistema web centralizado para reserva y control de canchas e instalaciones deportivas de la Universidad Tecnológica de Panamá.</p>
+          
+          <!-- 
+            Redes Sociales
+            // usamos este codigo como guia para el diseno de iconos sociales interactivos:
+            // From Uiverse.io by Faizuddinq (.social-icons-lista)
+          -->
+          <ul class="social-icons-lista" style="margin-top: 16px;">
+            <li class="social-item">
+              <span class="social-tooltip">WhatsApp Comprobantes</span>
+              <a href="https://wa.me/50763516012" target="_blank" data-red="whatsapp" aria-label="Enviar comprobante por WhatsApp al 63516012">
+                <img src="img/iconos/iconowhatsapp.svg" alt="WhatsApp">
+              </a>
+            </li>
+            <!-- //espacio para el link paa cuando creemos las cuentas -->
+            <li class="social-item">
+              <span class="social-tooltip">Instagram Oficial</span>
+              <a href="#" data-red="instagram" aria-label="Instagram">
+                <img src="img/iconos/iconoinstagram.svg" alt="Instagram">
+              </a>
+            </li>
+            <!-- //espacio para el link paa cuando creemos las cuentas -->
+            <li class="social-item">
+              <span class="social-tooltip">Facebook</span>
+              <a href="#" data-red="facebook" aria-label="Facebook">
+                <img src="img/iconos/iconofacebook.svg" alt="Facebook">
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="catalogo.html">Catálogo Completo</a></li>
+            <li><a href="normas.html">Normas de Cancha</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Disciplinas</h4>
+          <ul>
+            <li><a href="catalogo.html">Fútbol (5, 7, 9, Sala)</a></li>
+            <li><a href="catalogo.html">Básquetbol</a></li>
+            <li><a href="catalogo.html">Tenis</a></li>
+            <li><a href="catalogo.html">Pádel</a></li>
+            <li><a href="catalogo.html">Voleibol</a></li>
+            <li><a href="catalogo.html">Bádminton</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Atención y Abonos</h4>
+          <p><strong>Teléfono / WhatsApp:</strong> (+507) 6351-6012</p>
+          <p><strong>Yappy Comercial:</strong> 6351-6012 (@birriasdeone)</p>
+          <p><strong>Horario:</strong> Lunes a Domingo de 06:00 a 22:00</p>
+          <p><strong>Abono confirmatorio:</strong> 30% obligatorio en línea.</p>
+          <p><strong>Política:</strong> Cancelable únicamente con más de 2 horas de anticipación.</p>
+        </div>
+      </div>
+
+      <div class="footer-inferior">
+        <p>&copy; 2026 Birrias de One • Universidad Tecnológica de Panamá (UTP). Proyecto de Ingeniería Web.</p>
+        <p>Integrantes: Walter Gonzalez, Jose Sanchez, Jose Rozette, Alexander Meneses</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Normas de Cancha, Calzado y Convivencia - Birrias de One</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header-principal">
+    <div class="contenedor nav-contenedor">
+      <a href="index.html" class="logo-marca">
+        <span class="logo-icono">
+          <img src="img/iconos/iconologomarca.svg" alt="Birrias de One" width="22" height="22">
+        </span>
+        <span>Birrias de One</span>
+      </a>
+
+      <nav aria-label="Navegacion principal">
+        <!-- Control de menu hamburguesa con CSS puro (sin JS) -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" aria-label="Abrir menu de navegacion">
+        <label for="nav-toggle" class="btn-hamburguesa" aria-label="Menu principal">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </label>
+        <ul class="nav-enlaces">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="catalogo.html">Explorar Canchas</a></li>
+          <li><a href="normas.html" class="activo">Normas y Calzado</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="reservas.html">Mis Reservas</a></li>
+        </ul>
+      </nav>
+
+      <div id="nav-usuario-box" class="nav-usuario">
+        <a href="login.html" class="btn-acceso">
+          <img src="img/iconos/iconousuario.svg" alt="Usuario" width="18" height="18">
+          <span>Acceso</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <div class="contenedor container-max-md">
+      
+      <!-- Migas de pan -->
+      <nav aria-label="Migas de pan" class="migas">
+        <a href="index.html">Inicio</a>
+        <span>/</span>
+        <span aria-current="page">Normas, Calzado y Convivencia</span>
+      </nav>
+
+      <div style="margin-bottom: 32px;">
+        <h1>Reglamento Oficial y Guía de Calzado</h1>
+        <p style="font-size: 1.05rem; margin-top: 6px;">
+          Para garantizar la durabilidad de las instalaciones del complejo deportivo y prevenir lesiones articulares, el calzado reglamentario es estrictamente obligatorio para ingresar al terreno de juego.
+        </p>
+      </div>
+
+      <!-- 
+        Tarjetas Interactivas de Calzado por Superficie
+        // usamos este codigo como guia para el diseno estructural de tarjetas interactivas de superficies:
+        // From Uiverse.io by adamgiebl (.card)
+      -->
+      <section style="margin-bottom: 48px;">
+        <h2 style="font-size: 1.35rem; margin-bottom: 18px; color: var(--color-primario);">Especificaciones de Calzado por Superficie</h2>
+        
+        <div class="calzado-grid">
+          
+          <!-- Tarjeta 1: Cesped Sintetico -->
+          <article class="tarjeta-norma">
+            <div class="tarjeta-norma-icono">
+              <img src="img/iconos/iconocesped.svg" alt="Cesped Sintetico" width="28" height="28">
+            </div>
+            <h3 style="font-size:1.15rem; color:var(--color-primario); margin-bottom:4px;">Césped Sintético</h3>
+            <p style="font-size:0.85rem; color:var(--color-texto-muted); margin-bottom:12px;">Fútbol 5, 7, 9 y Pádel</p>
+            <div style="font-size:0.88rem; line-height: 1.5; color:var(--color-texto-suave);">
+              <div style="margin-bottom: 6px;">
+                <strong style="color: var(--color-verde);">Permitido:</strong> Zapatillas multitaco (suela tipo turf TF) o suela omni con microtacos de goma blanda.
+              </div>
+              <div>
+                <strong style="color: var(--color-rojo);">Prohibido:</strong> Tacos largos de aluminio (SG), tacos moldeados duros (FG agresivos) o suelas lisas resbaladizas.
+              </div>
+            </div>
+          </article>
+
+          <!-- Tarjeta 2: Tabloncillo / Madera -->
+          <article class="tarjeta-norma">
+            <div class="tarjeta-norma-icono">
+              <img src="img/iconos/iconomadera.svg" alt="Tabloncillo" width="28" height="28">
+            </div>
+            <h3 style="font-size:1.15rem; color:var(--color-primario); margin-bottom:4px;">Tabloncillo / Madera</h3>
+            <p style="font-size:0.85rem; color:var(--color-texto-muted); margin-bottom:12px;">Futsal, Básquetbol, Voleibol y Bádminton</p>
+            <div style="font-size:0.88rem; line-height: 1.5; color:var(--color-texto-suave);">
+              <div style="margin-bottom: 6px;">
+                <strong style="color: var(--color-verde);">Permitido:</strong> Zapatillas de duela con suela de goma limpia non-marking (que no deja marcas oscuras en la madera).
+              </div>
+              <div>
+                <strong style="color: var(--color-rojo);">Prohibido:</strong> Calzado sucio con lodo o arena de la calle, tacos o suelas con marcas negras abrasivas.
+              </div>
+            </div>
+          </article>
+
+          <!-- Tarjeta 3: Arcilla / Tierra Batida -->
+          <article class="tarjeta-norma">
+            <div class="tarjeta-norma-icono">
+              <img src="img/iconos/iconotierrabatida.svg" alt="Tierra Batida" width="28" height="28">
+            </div>
+            <h3 style="font-size:1.15rem; color:var(--color-primario); margin-bottom:4px;">Arcilla / Tierra Batida</h3>
+            <p style="font-size:0.85rem; color:var(--color-texto-muted); margin-bottom:12px;">Tenis Tradicional</p>
+            <div style="font-size:0.88rem; line-height: 1.5; color:var(--color-texto-suave);">
+              <div style="margin-bottom: 6px;">
+                <strong style="color: var(--color-verde);">Permitido:</strong> Calzado especializado con patrón de suela espiga completa (herringbone / clay court) para deslizamiento controlado.
+              </div>
+              <div>
+                <strong style="color: var(--color-rojo);">Prohibido:</strong> Zapatillas de correr tipo running con surcos transversales agresivos que rompan la arcilla compacta.
+              </div>
+            </div>
+          </article>
+
+          <!-- Tarjeta 4: Arena de Cuarzo -->
+          <article class="tarjeta-norma">
+            <div class="tarjeta-norma-icono">
+              <img src="img/iconos/iconoarena.svg" alt="Arena de Cuarzo" width="28" height="28">
+            </div>
+            <h3 style="font-size:1.15rem; color:var(--color-primario); margin-bottom:4px;">Arena de Cuarzo</h3>
+            <p style="font-size:0.85rem; color:var(--color-texto-muted); margin-bottom:12px;">Voleibol de Playa</p>
+            <div style="font-size:0.88rem; line-height: 1.5; color:var(--color-texto-suave);">
+              <div style="margin-bottom: 6px;">
+                <strong style="color: var(--color-verde);">Permitido:</strong> Pies descalzos, vendajes de sujeción deportiva o calcetines térmicos elásticos especiales para arena.
+              </div>
+              <div>
+                <strong style="color: var(--color-rojo);">Prohibido:</strong> Todo tipo de zapatillas rígidas o calzado cerrado que contamine la arena fina con tierra externa.
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- SECCION DE REGLAMENTO DE CAMPUS: PROHIBICIONES Y CONVIVENCIA -->
+      <section style="background:#fff; border:1px solid var(--color-borde); border-radius:20px; padding:32px; box-shadow:var(--sombra-tarjeta); margin-bottom:44px;">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 22px;">
+          <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(198, 40, 40, 0.1); color: var(--color-rojo); display: flex; align-items: center; justify-content: center;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+            </svg>
+          </div>
+          <div>
+            <h2 style="font-size: 1.35rem; color: var(--color-primario); margin:0 0 4px 0;">Normas de Convivencia y Prohibiciones del Complejo</h2>
+            <p style="font-size: 0.88rem; color: var(--color-texto-muted); margin:0;">Reglamento institucional de estricto cumplimiento para todos los usuarios y acompañantes</p>
+          </div>
+        </div>
+
+        <div class="prohibiciones-grid">
+          
+          <div class="prohibicion-card">
+            <img src="img/iconos/icononobocinas.svg" alt="Prohibido bocinas">
+            <div>
+              <strong class="prohibicion-titulo">Prohibido el ingreso de bocinas y altavoces:</strong>
+              <span class="prohibicion-desc">Queda estrictamente prohibido introducir bocinas portátiles, parlantes bluetooth o equipos de sonido con volumen alto que perturben a los jugadores de canchas aledañas.</span>
+            </div>
+          </div>
+
+          <div class="prohibicion-card">
+            <img src="img/iconos/icononocomida.svg" alt="Prohibida comida">
+            <div>
+              <strong class="prohibicion-titulo">Prohibida comida externa y coolers:</strong>
+              <span class="prohibicion-desc">No se permite el ingreso de alimentos externos preparados, snacks grasosos o coolers al área de juego. Solo se autoriza hidratación personal (agua o isotónicos).</span>
+            </div>
+          </div>
+
+          <div class="prohibicion-card">
+            <img src="img/iconos/icononovidrio.svg" alt="Prohibido vidrio">
+            <div>
+              <strong class="prohibicion-titulo">Prohibidas botellas y recipientes de vidrio:</strong>
+              <span class="prohibicion-desc">Por motivos de seguridad física y prevención de cortes graves, todo envase debe ser de plástico reutilizable o aluminio deportivo termoaislante.</span>
+            </div>
+          </div>
+
+          <div class="prohibicion-card">
+            <img src="img/iconos/icononoalcohol.svg" alt="Cero alcohol">
+            <div>
+              <strong class="prohibicion-titulo">Cero alcohol y sustancias ilícitas:</strong>
+              <span class="prohibicion-desc">El campus universitario mantiene política de tolerancia cero respecto al consumo de alcohol, estupefacientes o sustancias psicotrópicas.</span>
+            </div>
+          </div>
+
+          <div class="prohibicion-card">
+            <img src="img/iconos/icononofumar.svg" alt="Prohibido fumar">
+            <div>
+              <strong class="prohibicion-titulo">Prohibido fumar y vapear:</strong>
+              <span class="prohibicion-desc">Todas las instalaciones deportivas, gradas, techados y vestidores son áreas 100% libres de humo y vaporizadores electrónicos.</span>
+            </div>
+          </div>
+
+          <div class="prohibicion-card">
+            <img src="img/iconos/icononomascotas.svg" alt="Mascotas restringidas">
+            <div>
+              <strong class="prohibicion-titulo">Mascotas restringidas:</strong>
+              <span class="prohibicion-desc">No se permite el ingreso de mascotas al césped sintético, tabloncillo de madera ni canchas techadas (única excepción: perros guía y asistencia acreditada).</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Sección Acordeón de Preguntas Frecuentes FAQ -->
+      <section style="background:#fff; border:1px solid var(--color-borde); border-radius:20px; padding:32px; box-shadow:var(--sombra-tarjeta);">
+        <h2 style="font-size:1.35rem; margin-bottom:20px; color:var(--color-primario);">Preguntas Frecuentes sobre el Servicio</h2>
+
+        <div class="faq-lista">
+          
+          <details class="faq-item">
+            <summary class="faq-summary">
+              ¿Por qué es obligatorio el abono del 30%?
+            </summary>
+            <p class="faq-desc">
+              El abono mínimo del 30% funciona como una garantía económica de asistencia. Al transferirlo mediante Yappy (al número 6351-6012, @birriasdeone) y remitir el comprobante, el administrador asegura tu horario y evita que otros usuarios aparten la misma cancha. El 70% restante se liquida tranquilamente en recepción al presentarte a jugar.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">
+              ¿Hasta qué momento puedo cancelar una reserva?
+            </summary>
+            <p class="faq-desc">
+              La política oficial de la plataforma establece que la cancelación es admisible <strong>únicamente si faltan más de 2 horas</strong> para el inicio del turno. A las 2 horas exactas o menos, el sistema bloquea automáticamente la opción de cancelación para evitar turnos desaprovechados en el complejo.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">
+              ¿Qué ocurre si expira el temporizador de 45 minutos (TTL)?
+            </summary>
+            <p class="faq-desc">
+              Toda reserva web preliminar nace en estado *Pendiente* y dispone de 45 minutos (tiempo de vida o TTL) para ser confirmada con el comprobante de abono. Si vence dicho temporizador sin validación en el sistema, la reserva cambia automáticamente a *Cancelada* por "Vencimiento del TTL" y el horario vuelve a quedar libre en el calendario.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-summary">
+              ¿Cómo funcionan las canchas de Fútbol 5, 7 y 9?
+            </summary>
+            <p class="faq-desc">
+              Nuestras instalaciones cuentan con canchas de césped sintético modulares. Los trabajadores del complejo se encargan de unir sectores y acondicionar las redes divisorias retráctiles según la modalidad que hayas reservado (5, 7 o 9 jugadores por equipo).
+            </p>
+          </details>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Pie de Página con Redes Sociales -->
+  <footer class="footer-principal">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo-header">
+            <span class="logo-icono">
+              <img src="img/iconos/iconologomarca.svg" alt="Birrias de One" width="22" height="22">
+            </span>
+            <h3 class="footer-logo-texto">Birrias de One</h3>
+          </div>
+          <p>Sistema web centralizado para reserva y control de canchas e instalaciones deportivas de la Universidad Tecnológica de Panamá.</p>
+          
+          <!-- 
+            Redes Sociales
+            // usamos este codigo como guia para el diseno de iconos sociales interactivos:
+            // From Uiverse.io by Faizuddinq (.social-icons-lista)
+          -->
+          <ul class="social-icons-lista" style="margin-top: 16px;">
+            <li class="social-item">
+              <span class="social-tooltip">WhatsApp Comprobantes</span>
+              <a href="https://wa.me/50763516012" target="_blank" data-red="whatsapp" aria-label="Enviar comprobante por WhatsApp al 63516012">
+                <img src="img/iconos/iconowhatsapp.svg" alt="WhatsApp">
+              </a>
+            </li>
+            <!-- //espacio para el link paa cuando creemos las cuentas -->
+            <li class="social-item">
+              <span class="social-tooltip">Instagram Oficial</span>
+              <a href="#" data-red="instagram" aria-label="Instagram">
+                <img src="img/iconos/iconoinstagram.svg" alt="Instagram">
+              </a>
+            </li>
+            <!-- //espacio para el link paa cuando creemos las cuentas -->
+            <li class="social-item">
+              <span class="social-tooltip">Facebook</span>
+              <a href="#" data-red="facebook" aria-label="Facebook">
+                <img src="img/iconos/iconofacebook.svg" alt="Facebook">
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="catalogo.html">Catálogo Completo</a></li>
+            <li><a href="normas.html">Normas de Cancha</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Disciplinas</h4>
+          <ul>
+            <li><a href="catalogo.html">Fútbol (5, 7, 9, Sala)</a></li>
+            <li><a href="catalogo.html">Básquetbol</a></li>
+            <li><a href="catalogo.html">Tenis</a></li>
+            <li><a href="catalogo.html">Pádel</a></li>
+            <li><a href="catalogo.html">Voleibol</a></li>
+            <li><a href="catalogo.html">Bádminton</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Atención y Abonos</h4>
+          <p><strong>Teléfono / WhatsApp:</strong> (+507) 6351-6012</p>
+          <p><strong>Yappy Comercial:</strong> 6351-6012 (@birriasdeone)</p>
+          <p><strong>Horario:</strong> Lunes a Domingo de 06:00 a 22:00</p>
+          <p><strong>Abono confirmatorio:</strong> 30% obligatorio en línea.</p>
+          <p><strong>Política:</strong> Cancelable únicamente con más de 2 horas de anticipación.</p>
+        </div>
+      </div>
+
+      <div class="footer-inferior">
+        <p>&copy; 2026 Birrias de One • Universidad Tecnológica de Panamá (UTP). Proyecto de Ingeniería Web.</p>
+        <p>Integrantes: Walter Gonzalez, Jose Sanchez, Jose Rozette, Alexander Meneses</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
