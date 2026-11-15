@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explorar Canchas - Birrias de One</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Cabecera Principal -->
+  <header class="header-principal">
+    <div class="contenedor nav-contenedor">
+      <a href="index.html" class="logo-marca">
+        <span class="logo-icono">
+          <img src="img/iconos/iconologomarca.svg" alt="Birrias de One" width="22" height="22">
+        </span>
+        <span>Birrias de One</span>
+      </a>
+
+      <nav aria-label="Navegacion principal">
+        <!-- Control de menu hamburguesa con CSS puro (sin JS) -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" aria-label="Abrir menu de navegacion">
+        <label for="nav-toggle" class="btn-hamburguesa" aria-label="Menu principal">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </label>
+        <ul class="nav-enlaces">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="catalogo.html" class="activo">Explorar Canchas</a></li>
+          <li><a href="normas.html">Normas y Calzado</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="reservas.html">Mis Reservas</a></li>
+        </ul>
+      </nav>
+
+      <div id="nav-usuario-box" class="nav-usuario">
+        <a href="login.html" class="btn-acceso">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>Acceso</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <div class="contenedor">
+      
+      <!-- Migas de pan -->
+      <nav aria-label="Migas de pan" class="migas">
+        <a href="index.html">Inicio</a>
+        <span>/</span>
+        <span aria-current="page">Explorar Canchas</span>
+      </nav>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px;">
+        <div>
+          <h1>Catálogo de Instalaciones</h1>
+          <p id="contador-canchas" style="font-size:0.95rem; margin-top:4px; color:var(--color-texto-suave);">15 instalaciones oficiales disponibles en Provincia de Panamá</p>
+        </div>
+
+        <!-- Ordenamiento -->
+        <div style="display:flex; align-items:center; gap:8px;">
+          <label for="ordenar-por" style="font-size:0.85rem; font-weight:600; color:var(--color-texto-suave);">Ordenar por:</label>
+          <select id="ordenar-por" style="padding:6px 12px; border-radius:8px; border:1px solid var(--color-borde); background:#fff; font-size:0.9rem; color:var(--color-texto); cursor:pointer;">
+            <option value="defecto">Predeterminado</option>
+            <option value="precio-asc">Tarifa: Menor a Mayor</option>
+            <option value="precio-desc">Tarifa: Mayor a Menor</option>
+            <option value="nombre">Nombre alfabético</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Layout: Sidebar de Filtros (2.2) y Grid de Canchas -->
+      <div class="catalogo-layout" style="display: grid; grid-template-columns: 260px 1fr; gap: 30px; align-items: start;">
+        
+        <!-- Sidebar de Filtros Facetados con Checkboxes (Selección Múltiple) -->
+        <aside id="sidebar-filtros" class="sidebar-filtros" style="background:#fff; border:1px solid var(--color-borde); border-radius:16px; padding:22px; box-shadow:var(--sombra-tarjeta);">
+          
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+            <h3 style="font-size:1.05rem;">Filtros de búsqueda</h3>
+            
+            <!-- 
+              usamos este codigo como guia para el diseno del boton de limpiar filtros:
+              From Uiverse.io by andrew-demchenk0 (.button)
+            -->
+            <a href="catalogo.html" class="btn-limpiar-filtros" title="Quitar todos los filtros" style="text-decoration:none;">
+              <svg viewBox="0 0 24 24"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+              <span>Limpiar</span>
+            </a>
+          </div>
+
+          <!-- Filtro 1: Disciplina (Checkboxes múltiples) -->
+          <div style="margin-bottom: 20px;">
+            <h4 class="filtro-titulo">Disciplina</h4>
+            <div class="filtro-opciones">
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-deporte" value="Futbol"> Futbol (5, 7, 9, Sala)
+              </label>
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-deporte" value="Basquetbol"> Basquetbol
+              </label>
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-deporte" value="Tenis"> Tenis
+              </label>
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-deporte" value="Padel"> Padel
+              </label>
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-deporte" value="Voleibol"> Voleibol
+              </label>
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-deporte" value="Badminton"> Badminton
+              </label>
+            </div>
+          </div>
+
+          <!-- Filtro 2: Cubierta (Checkboxes múltiples) -->
+          <div style="margin-bottom: 20px; border-top: 1px solid var(--color-borde); padding-top: 16px;">
+            <h4 class="filtro-titulo">Cubierta</h4>
+            <div class="filtro-opciones">
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-cubierta" value="Techada"> Techada
+              </label>
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-cubierta" value="Al aire libre"> Al aire libre
+              </label>
+            </div>
+          </div>
+
+          <!-- Filtro 3: Superficie (Checkboxes múltiples) -->
+          <div class="filtro-seccion">
+            <h4 class="filtro-titulo">Tipo de Superficie</h4>
+            <div class="filtro-opciones">
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-superficie" value="Cesped sintetico"> Césped sintético
+              </label>
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-superficie" value="Tabloncillo"> Tabloncillo / Madera
+              </label>
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-superficie" value="Concreto pulido"> Concreto pulido
+              </label>
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-superficie" value="Arcilla"> Arcilla / Tierra batida
+              </label>
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-superficie" value="Arena"> Arena de cuarzo
+              </label>
+              <label class="filtro-label">
+                <input type="checkbox" name="filtro-superficie" value="Cemento sintetico"> Cemento sintético
+              </label>
+            </div>
+          </div>
+
+        </aside>
+
+        <!-- Cuadrícula de Canchas (Renderizadas estáticamente en HTML puro) -->
+        <section>
+          <div id="grid-catalogo" class="grid-catalogo">
+            
+            <!-- Cancha 1: Centenario -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchafutboltecho.jpg" alt="Cancha Sintética Centenario" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Fútbol</span>
+                <span class="tarjeta-badge-modular">Modular (5, 7, 9)</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Cancha Sintética Centenario</h3>
+                <div class="tarjeta-specs">
+                  <span>Vía Centenario</span>
+                  <span>Césped sintético</span>
+                  <span>Techada</span>
+                </div>
+                <p class="tarjeta-desc">Cancha principal techada con grama monofilamento shock-pad y graderías...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$35.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $10.50</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 2: Costa Sur -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchafutbolsintecho.jpg" alt="Cancha Sintética Costa Sur" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Fútbol</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Cancha Sintética Costa Sur</h3>
+                <div class="tarjeta-specs">
+                  <span>Juan Díaz</span>
+                  <span>Césped sintético</span>
+                  <span>Al aire libre</span>
+                </div>
+                <p class="tarjeta-desc">Cancha abierta para fútbol 7 con iluminación LED nocturna de alta potencia...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$28.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $8.40</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 3: Futsal El Cangrejo -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchafutbolsalatecho.jpg" alt="Cancha Futsal El Cangrejo" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Fútbol</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Cancha Futsal El Cangrejo</h3>
+                <div class="tarjeta-specs">
+                  <span>El Cangrejo</span>
+                  <span>Tabloncillo</span>
+                  <span>Techada</span>
+                </div>
+                <p class="tarjeta-desc">Pista techada de tabloncillo de madera con amortiguación para futsal profesional...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$30.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $9.00</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 4: Futsal San Francisco -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchafutbolsalasintecho.jpg" alt="Cancha Futsal San Francisco" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Fútbol</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Cancha Futsal San Francisco</h3>
+                <div class="tarjeta-specs">
+                  <span>San Francisco</span>
+                  <span>Concreto pulido</span>
+                  <span>Al aire libre</span>
+                </div>
+                <p class="tarjeta-desc">Superficie de microcemento pulido antideslizante con delimitación reglamentaria...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$22.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $6.60</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 5: Domo Centenario -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchabaskettecho.jpg" alt="Domo de Básquetbol Centenario" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Básquetbol</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Domo de Básquetbol Centenario</h3>
+                <div class="tarjeta-specs">
+                  <span>Vía Centenario</span>
+                  <span>Tabloncillo</span>
+                  <span>Techada</span>
+                </div>
+                <p class="tarjeta-desc">Tabloncillo de arce importado de alto rebote con aros hidráulicos regulables...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$32.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $9.60</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 6: Básquetbol Bethania -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchabasketsintecho.jpg" alt="Cancha de Básquetbol Bethania" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Básquetbol</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Cancha de Básquetbol Bethania</h3>
+                <div class="tarjeta-specs">
+                  <span>Bethania</span>
+                  <span>Concreto pulido</span>
+                  <span>Al aire libre</span>
+                </div>
+                <p class="tarjeta-desc">Cancha comunitaria al aire libre con tableros de fibra de vidrio y rejas metálicas...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$20.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $6.00</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 7: Tenis Arcilla El Cangrejo -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchatenisarenasintecho.jpg" alt="Cancha Tenis Arcilla El Cangrejo" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Tenis</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Cancha Tenis Arcilla El Cangrejo</h3>
+                <div class="tarjeta-specs">
+                  <span>El Cangrejo</span>
+                  <span>Arcilla</span>
+                  <span>Al aire libre</span>
+                </div>
+                <p class="tarjeta-desc">Tierra batida clásica con mantenimiento y regado diario para tenis tradicional...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$25.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $7.50</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 8: Tenis Rápida Costa del Este -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchatenispisotecho.jpg" alt="Cancha Tenis Rápida Costa del Este" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Tenis</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Cancha Tenis Rápida Costa del Este</h3>
+                <div class="tarjeta-specs">
+                  <span>Costa del Este</span>
+                  <span>Cemento sintético</span>
+                  <span>Techada</span>
+                </div>
+                <p class="tarjeta-desc">Pista techada con resina acrílica acolchada tipo US Open que reduce el impacto...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$34.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $10.20</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 9: Tenis San Francisco -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchatenispisositecho.jpg" alt="Cancha Tenis San Francisco" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Tenis</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Cancha Tenis San Francisco</h3>
+                <div class="tarjeta-specs">
+                  <span>San Francisco</span>
+                  <span>Cemento sintético</span>
+                  <span>Al aire libre</span>
+                </div>
+                <p class="tarjeta-desc">Pista rápida abierta con pintura acrílica y excelente iluminación LED...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$26.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $7.80</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 10: Pádel Centenario -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchapadeltecho.jpg" alt="Cancha Pádel Cristal Centenario" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Pádel</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Cancha Pádel Cristal Centenario</h3>
+                <div class="tarjeta-specs">
+                  <span>Vía Centenario</span>
+                  <span>Césped sintético</span>
+                  <span>Techada</span>
+                </div>
+                <p class="tarjeta-desc">Pista panorámica con vidrio templado de 12 mm y césped texturizado con arena de sílice...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$38.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $11.40</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 11: Pádel Costa del Este -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchapadelsintecho.jpg" alt="Cancha Pádel Costa del Este" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Pádel</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Cancha Pádel Costa del Este</h3>
+                <div class="tarjeta-specs">
+                  <span>Costa del Este</span>
+                  <span>Césped sintético</span>
+                  <span>Al aire libre</span>
+                </div>
+                <p class="tarjeta-desc">Pista exterior con césped sintético fibrilado y estructura de acero galvanizado...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$32.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $9.60</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 12: Voleibol Playa Amador -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchavolleyarena.jpg" alt="Cancha Voleibol Playa Amador" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Voleibol</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Cancha Voleibol Playa Amador</h3>
+                <div class="tarjeta-specs">
+                  <span>Calzada de Amador</span>
+                  <span>Arena</span>
+                  <span>Al aire libre</span>
+                </div>
+                <p class="tarjeta-desc">Cancha oficial de arena blanca de cuarzo cribada, ideal para vóley de playa...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$24.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $7.20</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 13: Voleibol Sala Centenario -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchavolleytecho.jpg" alt="Cancha Voleibol Sala Centenario" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Voleibol</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Cancha Voleibol Sala Centenario</h3>
+                <div class="tarjeta-specs">
+                  <span>Vía Centenario</span>
+                  <span>Tabloncillo</span>
+                  <span>Techada</span>
+                </div>
+                <p class="tarjeta-desc">Pabellón techado con postes anclados y protección acolchada reglamentaria...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$30.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $9.00</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 14: Voleibol Bethania -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchavolleysintecho.jpg" alt="Cancha Voleibol Bethania" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Voleibol</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Cancha Voleibol Bethania</h3>
+                <div class="tarjeta-specs">
+                  <span>Bethania</span>
+                  <span>Concreto pulido</span>
+                  <span>Al aire libre</span>
+                </div>
+                <p class="tarjeta-desc">Cancha multifuncional exterior demarcada para partidos amistosos de voleibol...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$18.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $5.40</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Cancha 15: Bádminton Centenario -->
+            <article class="tarjeta-cancha">
+              <div class="tarjeta-imagen-wrapper">
+                <img src="img/canchabadmintontecho.jpg" alt="Pabellón de Bádminton Centenario" class="tarjeta-imagen">
+                <span class="tarjeta-badge">Bádminton</span>
+              </div>
+              <div class="tarjeta-cuerpo">
+                <h3>Pabellón de Bádminton Centenario</h3>
+                <div class="tarjeta-specs">
+                  <span>Vía Centenario</span>
+                  <span>Tabloncillo</span>
+                  <span>Techada</span>
+                </div>
+                <p class="tarjeta-desc">Área climatizada sin corrientes de aire que desvíen el volante, con suelo flotante...</p>
+                <div class="tarjeta-precio-box">
+                  <div>
+                    <div class="precio-monto tabular">$26.00<small>/hora</small></div>
+                    <div class="precio-abono-aviso">Abono 30%: $7.80</div>
+                  </div>
+                  <a href="detalle.html" class="btn-primario btn-cancha">
+                    Ver turnos
+                  </a>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Pie de Página con Redes Sociales -->
+  <footer class="footer-principal">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
+            <span class="logo-icono">
+              <img src="img/iconos/iconologomarca.svg" alt="Birrias de One" width="22" height="22">
+            </span>
+            <h3 style="color:#fff; font-size:1.2rem;">Birrias de One</h3>
+          </div>
+          <p>Sistema web centralizado para reserva y control de canchas e instalaciones deportivas de la Universidad Tecnológica de Panamá.</p>
+          
+          <!-- 
+            Redes Sociales
+            // usamos este codigo como guia para el diseno de iconos sociales interactivos:
+            // From Uiverse.io by Faizuddinq (.social-icons-lista)
+          -->
+          <ul class="social-icons-lista" style="margin-top: 16px;">
+            <li class="social-item">
+              <span class="social-tooltip">WhatsApp Comprobantes</span>
+              <a href="https://wa.me/50763516012" target="_blank" data-red="whatsapp" aria-label="Enviar comprobante por WhatsApp al 63516012">
+                <img src="img/iconos/iconowhatsapp.svg" alt="WhatsApp">
+              </a>
+            </li>
+            <!-- //espacio para el link paa cuando creemos las cuentas -->
+            <li class="social-item">
+              <span class="social-tooltip">Instagram Oficial</span>
+              <a href="#" data-red="instagram" aria-label="Instagram">
+                <img src="img/iconos/iconoinstagram.svg" alt="Instagram">
+              </a>
+            </li>
+            <!-- //espacio para el link paa cuando creemos las cuentas -->
+            <li class="social-item">
+              <span class="social-tooltip">Facebook</span>
+              <a href="#" data-red="facebook" aria-label="Facebook">
+                <img src="img/iconos/iconofacebook.svg" alt="Facebook">
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="catalogo.html">Catálogo Completo</a></li>
+            <li><a href="normas.html">Normas de Cancha</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Disciplinas</h4>
+          <ul>
+            <li><a href="catalogo.html">Fútbol (5, 7, 9, Sala)</a></li>
+            <li><a href="catalogo.html">Básquetbol</a></li>
+            <li><a href="catalogo.html">Tenis</a></li>
+            <li><a href="catalogo.html">Pádel</a></li>
+            <li><a href="catalogo.html">Voleibol</a></li>
+            <li><a href="catalogo.html">Bádminton</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Atención y Abonos</h4>
+          <p><strong>Teléfono / WhatsApp:</strong> (+507) 6351-6012</p>
+          <p><strong>Yappy Comercial:</strong> 6351-6012 (@birriasdeone)</p>
+          <p><strong>Horario:</strong> Lunes a Domingo de 06:00 a 22:00</p>
+          <p><strong>Abono confirmatorio:</strong> 30% obligatorio en línea.</p>
+          <p><strong>Política:</strong> Cancelable únicamente con más de 2 horas de anticipación.</p>
+        </div>
+      </div>
+
+      <div class="footer-inferior">
+        <p>&copy; 2026 Birrias de One • Universidad Tecnológica de Panamá (UTP). Proyecto de Ingeniería Web.</p>
+        <p>Integrantes: Walter Gonzalez, Jose Sanchez, Jose Rozette, Alexander Meneses</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

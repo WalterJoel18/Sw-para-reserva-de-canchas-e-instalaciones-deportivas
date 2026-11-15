@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Reservas - Birrias de One</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/componentes.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header-principal">
+    <div class="contenedor nav-contenedor">
+      <a href="index.html" class="logo-marca">
+        <span class="logo-icono">
+          <img src="img/iconos/iconologomarca.svg" alt="Birrias de One" width="22" height="22">
+        </span>
+        <span>Birrias de One</span>
+      </a>
+
+      <nav aria-label="Navegacion principal">
+        <!-- Control de menu hamburguesa con CSS puro (sin JS) -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle-checkbox" aria-label="Abrir menu de navegacion">
+        <label for="nav-toggle" class="btn-hamburguesa" aria-label="Menu principal">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </label>
+        <ul class="nav-enlaces">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="catalogo.html">Explorar Canchas</a></li>
+          <li><a href="normas.html">Normas y Calzado</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="reservas.html" class="activo">Mis Reservas</a></li>
+        </ul>
+      </nav>
+
+      <div id="nav-usuario-box" class="nav-usuario">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="btn-acceso" style="cursor:default;">
+            <img src="img/iconos/iconousuario.svg" alt="Usuario" width="18" height="18">
+            <span>Carlos Méndez (Cliente)</span>
+          </span>
+          <a href="login.html" class="btn-acceso" style="color:var(--color-rojo); border-color:var(--color-rojo); text-decoration:none;" title="Cerrar sesión">
+            Salir
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-main">
+    <div class="contenedor">
+      
+      <!-- Migas de pan -->
+      <nav aria-label="Migas de pan" class="migas">
+        <a href="index.html">Inicio</a>
+        <span>/</span>
+        <span aria-current="page">Mis Reservas</span>
+      </nav>
+
+      <div class="flex-between" style="margin-bottom: 24px;">
+        <div>
+          <h1>Historial de Mis Reservas</h1>
+          <p id="subtitulo-cliente" style="font-size: 0.95rem;">Reservas registradas a nombre de Carlos Méndez (cliente@birrias.com)</p>
+        </div>
+
+        <a href="catalogo.html" class="btn-primario" style="padding: 10px 18px; font-size: 0.9rem; text-decoration: none;">
+          + Apartar nueva cancha
+        </a>
+      </div>
+
+      <!-- Filtro rápido por estado -->
+      <div style="display: flex; gap: 8px; overflow-x: auto; margin-bottom: 24px; padding-bottom: 4px;">
+        <a href="reservas.html" class="btn-acceso" style="background: var(--color-primario); color:#fff; border-color: var(--color-primario); text-decoration: none;">Todas (3)</a>
+        <a href="#tarjeta-pendiente" class="btn-acceso" style="text-decoration: none;">Pendientes (1)</a>
+        <a href="#tarjeta-confirmada" class="btn-acceso" style="text-decoration: none;">Confirmadas (1)</a>
+        <a href="#tarjeta-completada" class="btn-acceso" style="text-decoration: none;">Completadas (1)</a>
+        <span class="btn-acceso" style="color: var(--color-texto-muted); cursor: not-allowed; border-color: var(--color-borde);">Canceladas (0)</span>
+      </div>
+
+      <!-- Listado de tarjetas de reservas (HTML Puro) -->
+      <div id="contenedor-mis-reservas" style="display: flex; flex-direction: column; gap: 18px;">
+
+        <!-- 1. Reserva Confirmada -->
+        <article id="tarjeta-confirmada" class="tarjeta-reserva">
+          <div class="tarjeta-reserva-header">
+            <div>
+              <span class="badge-confirmada" style="margin-bottom: 6px;">Estado: Confirmada</span>
+              <h3 class="tarjeta-reserva-titulo">Cancha Sintética Centenario</h3>
+              <div class="tarjeta-reserva-info">
+                Ubicación: <strong>Vía Centenario, Provincia de Panamá</strong> • Fecha: <strong>2026-11-16</strong> • Turno(s): <strong>18:00 - 19:00 (1 h)</strong>
+              </div>
+            </div>
+
+            <div class="tarjeta-reserva-acciones">
+              <a href="#modal-constancia" class="btn-acceso" style="font-size:0.85rem; color:var(--color-verde); border-color:var(--color-verde); text-decoration:none;">
+                Constancia de Abono
+              </a>
+              <a href="#modal-cancelacion" class="btn-acceso" style="font-size:0.85rem; color:var(--color-rojo); border-color:rgba(198,40,40,0.3); text-decoration:none;">
+                Cancelar Turno
+              </a>
+            </div>
+          </div>
+
+          <!-- Desglose de los 4 valores obligatorios -->
+          <div class="reserva-valores-grid">
+            <div>
+              <span class="reserva-valor-etiqueta">Tarifa Total</span>
+              <div class="reserva-valor-monto tabular" style="color:var(--color-primario);">$35.00</div>
+            </div>
+            <div>
+              <span class="reserva-valor-etiqueta">Abono Registrado (30%)</span>
+              <div class="reserva-valor-monto tabular" style="color:var(--color-verde);">$10.50</div>
+            </div>
+            <div>
+              <span class="reserva-valor-etiqueta">Saldo en Caja (70%)</span>
+              <div class="reserva-valor-monto tabular" style="color:var(--color-ambar);">$24.50</div>
+            </div>
+            <div>
+              <span class="reserva-valor-etiqueta">Comprobante ID</span>
+              <div class="reserva-valor-monto">#REC-101</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Reserva Pendiente de Abono -->
+        <article id="tarjeta-pendiente" class="tarjeta-reserva">
+          <div class="tarjeta-reserva-header">
+            <div>
+              <span class="badge-pendiente" style="margin-bottom: 6px;">Estado: Pendiente (Por confirmar)</span>
+              <h3 class="tarjeta-reserva-titulo">Cancha Tenis Arcilla El Cangrejo</h3>
+              <div class="tarjeta-reserva-info">
+                Ubicación: <strong>El Cangrejo, Provincia de Panamá</strong> • Fecha: <strong>2026-11-17</strong> • Turno(s): <strong>16:00 - 17:00 (1 h)</strong>
+              </div>
+            </div>
+
+            <div class="tarjeta-reserva-acciones">
+              <a href="#modal-instrucciones" class="btn-acceso" style="font-size:0.85rem; color:var(--color-ambar); border-color:var(--color-ambar); text-decoration:none;">
+                Instrucciones de Abono
+              </a>
+              <a href="#modal-cancelacion" class="btn-acceso" style="font-size:0.85rem; color:var(--color-rojo); border-color:rgba(198,40,40,0.3); text-decoration:none;">
+                Cancelar Turno
+              </a>
+            </div>
+          </div>
+
+          <!-- Desglose de valores -->
+          <div class="reserva-valores-grid">
+            <div>
+              <span class="reserva-valor-etiqueta">Tarifa Total</span>
+              <div class="reserva-valor-monto tabular" style="color:var(--color-primario);">$25.00</div>
+            </div>
+            <div>
+              <span class="reserva-valor-etiqueta">Abono Requerido (30%)</span>
+              <div class="reserva-valor-monto tabular" style="color:var(--color-ambar);">$7.50</div>
+            </div>
+            <div>
+              <span class="reserva-valor-etiqueta">Saldo en Caja (70%)</span>
+              <div class="reserva-valor-monto tabular" style="color:var(--color-texto-muted);">$17.50</div>
+            </div>
+            <div>
+              <span class="reserva-valor-etiqueta">Comprobante ID</span>
+              <div class="reserva-valor-monto">#REC-102</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Reserva Completada y Liquidada -->
+        <article id="tarjeta-completada" class="tarjeta-reserva">
+          <div class="tarjeta-reserva-header">
+            <div>
+              <span class="badge-completada" style="margin-bottom: 6px;">Estado: Completada</span>
+              <h3 class="tarjeta-reserva-titulo">Domo de Básquetbol Centenario</h3>
+              <div class="tarjeta-reserva-info">
+                Ubicación: <strong>Vía Centenario, Provincia de Panamá</strong> • Fecha: <strong>2026-11-10</strong> • Turno(s): <strong>19:00 - 20:00 (1 h)</strong>
+              </div>
+            </div>
+
+            <div class="tarjeta-reserva-acciones">
+              <a href="#modal-comprobante-pago" class="btn-acceso" style="font-size:0.85rem; color:#1565c0; border-color:#1565c0; text-decoration:none;">
+                Comprobante de Pago
+              </a>
+            </div>
+          </div>
+
+          <!-- Desglose de valores -->
+          <div class="reserva-valores-grid">
+            <div>
+              <span class="reserva-valor-etiqueta">Tarifa Total</span>
+              <div class="reserva-valor-monto tabular" style="color:var(--color-primario);">$32.00</div>
+            </div>
+            <div>
+              <span class="reserva-valor-etiqueta">Abono Registrado (30%)</span>
+              <div class="reserva-valor-monto tabular" style="color:var(--color-verde);">$9.60</div>
+            </div>
+            <div>
+              <span class="reserva-valor-etiqueta">Saldo en Caja</span>
+              <div class="reserva-valor-monto tabular" style="color:var(--color-verde);">$0.00 (Liquidado)</div>
+            </div>
+            <div>
+              <span class="reserva-valor-etiqueta">Comprobante ID</span>
+              <div class="reserva-valor-monto">#COMP-100</div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Modales con CSS Puro (:target) -->
+
+  <!-- Modal 1: Instrucciones de Abono (Reserva Pendiente #REC-102) -->
+  <div id="modal-instrucciones" class="modal-overlay">
+    <div class="modal-caja">
+      <div class="modal-cabecera">
+        <h4 class="modal-titulo">Instrucciones de Abono</h4>
+        <a href="#" class="modal-cerrar">&times;</a>
+      </div>
+
+      <div class="modal-cuerpo">
+        <div>
+          <span class="form-label-muted">Cancha</span>
+          <strong style="display:block; color:var(--color-primario); font-size:1.1rem;">Cancha Tenis Arcilla El Cangrejo</strong>
+          <span style="color:var(--color-texto-suave); font-size:0.85rem;">2026-11-17 • 16:00 - 17:00</span>
+        </div>
+
+        <div class="modal-aviso-alerta">
+          <div style="display:flex; justify-content:space-between;">
+            <span>Abono mínimo requerido (30%):</span>
+            <strong class="tabular" style="color:var(--color-ambar); font-size:1.15rem;">$7.50</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:4px; font-size:0.82rem; color:var(--color-texto-muted);">
+            <span>Saldo en caja al llegar (70%):</span>
+            <span class="tabular">$17.50</span>
+          </div>
+        </div>
+
+        <div class="modal-aviso">
+          <strong>Datos oficiales para transferir:</strong><br>
+          • <strong>Yappy Comercial:</strong> al número <strong>6351-6012</strong> (@birriasdeone)<br>
+          • <strong>Titular:</strong> Birrias de One UTP
+        </div>
+
+        <div style="font-size:0.82rem; color:var(--color-ambar); font-weight:600; display:flex; align-items:center; gap:6px;">
+          <img src="img/iconos/iconoreloj.svg" alt="Reloj" width="16" height="16">
+          <span>Dispones de 45 minutos para enviar el comprobante antes de que el turno se libere.</span>
+        </div>
+
+        <a href="https://wa.me/50763516012?text=Hola%2C%20adjunto%20comprobante%20del%2030%25%20(%247.50)%20para%20mi%20reserva%20%23REC-102%20de%20Cancha%20Tenis%20Arcilla%20El%20Cangrejo" target="_blank" class="btn-whatsapp-confirmar" style="margin-top:6px; text-decoration:none;">
+          <img src="img/iconos/iconowhatsapp.svg" alt="WhatsApp" width="18" height="18">
+          <span>Enviar Comprobante por WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Constancia Digital de Abono Validado (#REC-101) -->
+  <div id="modal-constancia" class="modal-overlay">
+    <div class="modal-caja">
+      <div class="modal-cabecera">
+        <h4 class="modal-titulo">Constancia Digital de Abono</h4>
+        <a href="#" class="modal-cerrar">&times;</a>
+      </div>
+
+      <div class="modal-cuerpo">
+        <div class="modal-aviso-exito">
+          <div style="display:flex; align-items:center; justify-content:center; gap:6px; font-size:0.82rem; color:var(--color-verde); font-weight:700; text-transform:uppercase;">
+            <img src="img/iconos/iconoverificado.svg" alt="Verificado" width="16" height="16">
+            <span>Reserva Confirmada Oficialmente</span>
+          </div>
+          <strong style="font-size:1.2rem; color:var(--color-primario); display:block; margin-top:4px;">#REC-101</strong>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:8px; font-size:0.88rem; line-height:1.4;">
+          <div><strong>Cancha:</strong> Cancha Sintética Centenario (Vía Centenario)</div>
+          <div><strong>Fecha y Turno:</strong> 2026-11-16 • 18:00 - 19:00</div>
+          <div><strong>Cliente:</strong> Carlos Méndez (6351-6012)</div>
+          <div><strong>Monto abonado y validado (30%):</strong> <span class="tabular" style="color:var(--color-verde); font-weight:700;">$10.50</span></div>
+          <div><strong>Saldo pendiente a pagar en caja (70%):</strong> <span class="tabular" style="color:var(--color-ambar); font-weight:700;">$24.50</span></div>
+        </div>
+
+        <p class="modal-aviso" style="margin:0;">
+          Preséntate 10 minutos antes en la recepción del complejo con calzado reglamentario para liquidar el saldo y disfrutar tu turno.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Comprobante Digital de Liquidación Final (#COMP-100) -->
+  <div id="modal-comprobante-pago" class="modal-overlay">
+    <div class="modal-caja">
+      <div class="modal-cabecera">
+        <h4 class="modal-titulo">Comprobante de Liquidación Final</h4>
+        <a href="#" class="modal-cerrar">&times;</a>
+      </div>
+
+      <div class="modal-cuerpo">
+        <div class="modal-aviso" style="background:rgba(21,101,192,0.08); border:1px solid rgba(21,101,192,0.2); text-align:center;">
+          <div style="font-size:0.82rem; color:#1565c0; font-weight:700; text-transform:uppercase;">Liquidado en Recepción (Saldo $0.00)</div>
+          <strong style="font-size:1.2rem; color:var(--color-primario); display:block; margin-top:4px;">#COMP-100</strong>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:8px; font-size:0.88rem; line-height:1.4;">
+          <div><strong>Instalación:</strong> Domo de Básquetbol Centenario</div>
+          <div><strong>Fecha de Partido:</strong> 2026-11-10 a las 19:00</div>
+          <div><strong>Tarifa Total:</strong> <span class="tabular">$32.00</span></div>
+          <div><strong>Abono 30% Previo:</strong> <span class="tabular">$9.60</span></div>
+          <div><strong>Liquidación en Ventanilla (70%):</strong> <span class="tabular" style="color:var(--color-verde); font-weight:700;">$22.40</span> (Yappy)</div>
+          <div><strong>Saldo pendiente:</strong> <span class="tabular" style="color:var(--color-verde); font-weight:800;">$0.00</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Modal de Cancelación con Motivo Obligatorio -->
+  <div id="modal-cancelacion" class="modal-overlay">
+    <div class="modal-caja">
+      <div class="modal-cabecera">
+        <h3 class="modal-titulo modal-titulo-peligro">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>Cancelar Reserva</span>
+        </h3>
+        <a href="#" class="modal-cerrar">&times;</a>
+      </div>
+
+      <p style="font-size: 0.9rem; color: var(--color-texto-suave); margin-bottom: 16px;">
+        Esta acción liberará el horario de forma inmediata para que otro usuario pueda agendarlo.
+      </p>
+
+      <form action="reservas.html" method="GET">
+        <div class="form-grupo">
+          <label for="cancelar-motivo-select" class="form-label">
+            Motivo de la cancelación (Obligatorio)
+          </label>
+          <select id="cancelar-motivo-select" required class="form-control" style="margin-bottom: 8px;">
+            <option value="">Selecciona una razón...</option>
+            <option value="salud">Inconveniente personal o de salud</option>
+            <option value="equipo">Falta de jugadores para el equipo</option>
+            <option value="transporte">Problemas de transporte / movilidad</option>
+            <option value="lluvia">Condiciones meteorológicas / lluvia</option>
+            <option value="otro">Otro motivo</option>
+          </select>
+          <textarea placeholder="Detalle adicional (opcional)..." class="form-control" style="height: 60px;"></textarea>
+        </div>
+
+        <div class="modal-aviso" style="margin-bottom: 18px;">
+          Recuerda que las cancelaciones solo son válidas con <strong>más de 2 horas</strong> de anticipación al inicio del turno.
+        </div>
+
+        <div class="modal-pie">
+          <a href="#" class="btn-acceso" style="text-decoration: none;">Regresar</a>
+          <button type="submit" class="btn-primario" style="background: var(--color-rojo); border: none; cursor: pointer;">
+            Confirmar Cancelación
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Pie de Página con Redes Sociales -->
+  <footer class="footer-principal">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo-header">
+            <span class="logo-icono">
+              <img src="img/iconos/iconologomarca.svg" alt="Birrias de One" width="22" height="22">
+            </span>
+            <h3 class="footer-logo-texto">Birrias de One</h3>
+          </div>
+          <p>Sistema web centralizado para reserva y control de canchas e instalaciones deportivas de la Universidad Tecnológica de Panamá.</p>
+          
+          <!-- 
+            Redes Sociales
+            // usamos este codigo como guia para el diseno de iconos sociales interactivos:
+            // From Uiverse.io by Faizuddinq (.social-icons-lista)
+          -->
+          <ul class="social-icons-lista" style="margin-top: 16px;">
+            <li class="social-item">
+              <span class="social-tooltip">WhatsApp Comprobantes</span>
+              <a href="https://wa.me/50763516012" target="_blank" data-red="whatsapp" aria-label="Enviar comprobante por WhatsApp al 63516012">
+                <img src="img/iconos/iconowhatsapp.svg" alt="WhatsApp">
+              </a>
+            </li>
+            <!-- //espacio para el link paa cuando creemos las cuentas -->
+            <li class="social-item">
+              <span class="social-tooltip">Instagram Oficial</span>
+              <a href="#" data-red="instagram" aria-label="Instagram">
+                <img src="img/iconos/iconoinstagram.svg" alt="Instagram">
+              </a>
+            </li>
+            <!-- //espacio para el link paa cuando creemos las cuentas -->
+            <li class="social-item">
+              <span class="social-tooltip">Facebook</span>
+              <a href="#" data-red="facebook" aria-label="Facebook">
+                <img src="img/iconos/iconofacebook.svg" alt="Facebook">
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="catalogo.html">Catálogo Completo</a></li>
+            <li><a href="normas.html">Normas de Cancha</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Disciplinas</h4>
+          <ul>
+            <li><a href="catalogo.html">Fútbol (5, 7, 9, Sala)</a></li>
+            <li><a href="catalogo.html">Básquetbol</a></li>
+            <li><a href="catalogo.html">Tenis</a></li>
+            <li><a href="catalogo.html">Pádel</a></li>
+            <li><a href="catalogo.html">Voleibol</a></li>
+            <li><a href="catalogo.html">Bádminton</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Atención y Abonos</h4>
+          <p><strong>Teléfono / WhatsApp:</strong> (+507) 6351-6012</p>
+          <p><strong>Yappy Comercial:</strong> 6351-6012 (@birriasdeone)</p>
+          <p><strong>Horario:</strong> Lunes a Domingo de 06:00 a 22:00</p>
+          <p><strong>Abono confirmatorio:</strong> 30% obligatorio en línea.</p>
+          <p><strong>Política:</strong> Cancelable únicamente con más de 2 horas de anticipación.</p>
+        </div>
+      </div>
+
+      <div class="footer-inferior">
+        <p>&copy; 2026 Birrias de One • Universidad Tecnológica de Panamá (UTP). Proyecto de Ingeniería Web.</p>
+        <p>Integrantes: Walter Gonzalez, Jose Sanchez, Jose Rozette, Alexander Meneses</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
