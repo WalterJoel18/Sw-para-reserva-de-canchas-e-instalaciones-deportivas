@@ -121,3 +121,44 @@ El siguiente documento recopila los prompts representativos utilizados durante e
 * **Prompt representativo:**
   > "Ajusta la regla del TTL para que quede inequívoca: la reserva permanece Pendiente hasta que el administrador valide el abono; si no queda Confirmada dentro del TTL, se cancela y se libera el horario, aclarando qué pasa si el comprobante se envía a tiempo pero no se valida antes de expirar. Cambia 'Cancelable hasta 2 h' por 'Cancelable únicamente si faltan más de 2 horas; a las 2 horas exactas o menos no se permite'. Distingue formalmente el comprobante de abono (constancia) del comprobante de liquidación final (saldo en $0.00). Indica que el desglose económico depende de la duración del turno y da ejemplos para 1 y 2 horas. Finalmente, estructura formalmente la Sección 5 de Wireframes y la Sección 6 de Prototipo de Interfaz con su enlace a Figma, cerrando con la Sección 7 de Auditoría según la rúbrica oficial."
 * **Uso y aporte intelectual:** Se actualizaron las especificaciones en las secciones 1.1, 1.3, 1.4, 2.2, y 4 (Flujos 1 y 2), y se redactaron formalmente las secciones 5 (Wireframes), 6 (Prototipo de Interfaz en Figma) y 7 (Auditoría y Declaración de IA con Tabla 3), asegurando la concordancia total entre el documento escrito, los wireframes y el prototipo interactivo.
+
+
+---
+
+## Fase 3: Implementación Front-End (HTML5 Semántico y CSS3 Puro)
+
+### Consulta 14: Corrección de Botones, Modales y Navegación sin JavaScript
+
+* **Integrante:** Gonzalez, Walter / Meneses, Alexander
+* **Herramienta:** Gemini / Antigravity IDE
+* **Objetivo:** Resolver problemas en botones interactivos que no respondían o no navegaban adecuadamente al eliminar JavaScript, e implementar modales accesibles mediante CSS puro.
+* **Prompt representativo:**
+  > "Estamos migrando todo el proyecto a HTML5 y CSS3 puro sin JavaScript para la entrega de la Fase 3. Algunos botones como 'Inhabilitar horario', 'Constancia de Abono' y 'Salir' dejaron de funcionar o no abren las ventanas modales. ¿Cómo podemos implementar la apertura y cierre de ventanas modales usando la pseudo-clase `:target` de CSS, y cómo asegurar que los botones de navegación y cierre funcionen de forma nativa sin eventos `onclick`?"
+* **Uso y aporte intelectual:** Se implementó la técnica de modales con `#id` y `:target` en `admin.html`, `detalle.html` y `reservas.html`, habilitando la apertura y cierre con enlaces nativos, y se restableció el botón 'Salir' enlazado formalmente a `login.html`.
+
+### Consulta 15: Unificación y Limpieza de Contenedores `<div>` Fragmentados
+
+* **Integrante:** Sanchez, Jose / Rozette, Jose
+* **Herramienta:** Gemini / Antigravity IDE
+* **Objetivo:** Refactorizar el código HTML eliminando `<div>` innecesarios, anidados o dispersos, sustituyéndolos por elementos semánticos de HTML5.
+* **Prompt representativo:**
+  > "En las tarjetas del catálogo y en la vista de detalle tenemos muchos `<div>` anidados y separados para mostrar precios, botones y badges, lo que hace el código difícil de mantener y poco semántico. Ayúdanos a unificar estos contenedores, agrupar las secciones lógicas y reemplazar los `<div>` genéricos por etiquetas semánticas como `<main>`, `<section>`, `<article>`, `<aside>`, `<header>` y `<footer>`."
+* **Uso y aporte intelectual:** Se consolidaron estructuras fragmentadas en contenedores semánticos cohesivos (`.tarjeta-reserva`, `.deporte-card`, `.grid-catalogo`), reduciendo la profundidad del árbol DOM y mejorando la legibilidad del código.
+
+### Consulta 16: Propuesta de Modularización y División de Archivos CSS
+
+* **Integrante:** Gonzalez, Walter
+* **Herramienta:** Gemini / Antigravity IDE
+* **Objetivo:** Reestructurar los estilos de una hoja monolítica hacia una arquitectura limpia y modular de archivos CSS.
+* **Prompt representativo:**
+  > "Inicialmente teníamos los estilos concentrados en un solo archivo grande con estilos en línea dispersos. Propon una mejor división y organización de archivos CSS para un proyecto web académico robusto, separando los estilos globales, los componentes modulares y el diseño responsivo."
+* **Uso y aporte intelectual:** Se adoptó la división arquitectónica en tres archivos especializados: `estilos.css` (variables de color, tipografía, reset y accesibilidad), `componentes.css` (botones, tarjetas, tablas, formularios, modales y microinteracciones) y `responsive.css` (media queries y adaptabilidad para dispositivos móviles y tabletas).
+
+### Consulta 17: Fuentes de Inspiración de Diseño, Botones Modernos y Microinteracciones
+
+* **Integrante:** Gonzalez, Walter
+* **Herramienta:** Gemini / Antigravity IDE
+* **Objetivo:** Obtener referencias de diseño web y patrones visuales modernos para botones, tarjetas y estados interactivos sin dependencias externas.
+* **Prompt representativo:**
+  > "Recomienda plataformas y recursos web para inspirarnos en el diseño de botones modernos, tarjetas de productos y efectos hover atractivos en CSS puro (como Uiverse.io). Además, ¿cómo podemos diseñar microinteracciones con sombras verdes institucionalmente coherentes (`#2E7D32`) y elevaciones suaves al pasar el cursor sobre las tarjetas de deportes y pasos del proceso?"
+* **Uso y aporte intelectual:** Se exploraron patrones de diseño en Uiverse.io y repositorios de componentes UI, adoptando la guía para el botón de limpieza de filtros, las tarjetas con esquinas redondeadas (`border-radius: 24px`), las sombras difusas multicapa (`--sombra-verde`, `--sombra-verde-hover`) y las transiciones con curvas Bézier cúbicas.
