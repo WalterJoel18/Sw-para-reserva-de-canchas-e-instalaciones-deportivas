@@ -1257,3 +1257,82 @@ flowchart TD
 | **Modelo de Navegación Refinado, Flujos de Navegación y Auditoría Cruzada de Interfaces** | Sanchez, Jose | Gemini — [Ver prompts 7 y 8 en prompts.md](./prompts.md) | Asistió en la estructuración de los diagramas de flujo de tareas críticas y en la depuración de pasos redundantes e inconsistencias lógicas. | Elaboración del diagrama de navegación general, estructuración de las matrices de pantallas y roles, modelado detallado de los flujos de tareas críticas 1 al 6 con manejo de decisiones e intercepciones, y auditoría cruzada de consistencia entre los diagramas y los wireframes/prototipo (asegurando el cumplimiento de la regla de cancelación a >2h, la bifurcación de cobro en reservas asistidas y el enlace directo al catálogo precargado sin pantallas de edición). (Terminado). |
 | **Wireframes (Diseño Estructural de Baja / Media Fidelidad)** | Rozette, Jose | Figma / Draw.io — Ninguna | Ninguno | Diseño y corrección estructural de las 6 vistas clave en media fidelidad monocromática: Landing (1.0) con buscador de 6 disciplinas y aviso de abono 30 %, Catálogo (2.0/2.2) con filtros facetados por 4 superficies y comodidades, Ficha de Cancha Desktop (2.3) con matriz semanal completa, estado «No disponible temporalmente» y cálculo de tarifa según duración, Ficha Móvil (2.3) con carrusel táctil y modal de instrucciones de abono con TTL de 45 min, Panel de Cliente Mis Reservas (7.1) con tarjeta de 4 valores financieros y modal de cancelación con motivo obligatorio bajo la regla estricta de >2h, y Panel de Control Admin separando Gestión de Canchas Precargadas (8.1) con interruptor Toggle Activa/Inactiva del Listado de Reservas (8.2) con temporizador TTL, validación de abonos y cobro POS. (Terminado). |
 | **Prototipo de Interfaz de Alta Fidelidad y Sistema de Diseño** | Meneses, Alexander | Figma — Ninguna | Ninguno | Conceptualización y actualización del prototipo interactivo en alta fidelidad en Figma: definición de la guía de estilos con paleta cromática accesible WCAG 2.1 AA (azul institucional `#1B365D`, verde `#2E7D32`), tipografía, componentes UI interactivos, código multimodal de disponibilidad (Verde: Libre, Ámbar: No disponible temporalmente / Pendiente TTL, Gris: Ocupado, Amarillo rayado: Mantenimiento), construcción de flujos interactivos para el modal de Reserva Asistida (modalidades 30 % y 100 %) y Liquidación Presencial en Mostrador (POS con emisión de comprobante final de liquidación), y despliegue del enlace público interactivo. (Terminado). |
+
+
+---
+
+# Fase 3: Implementación Front-End (HTML5 Semántico y CSS3 Puro)
+
+## 8. Descripción de la Fase 3 y Arquitectura Web
+
+La **Fase 3** del proyecto *Birrias de One* corresponde a la codificación y maquetación completa del prototipo funcional interactivo, implementado bajo los más rigurosos estándares de la web moderna: **HTML5 semántico, CSS3 modular (Pure CSS) y accesibilidad WCAG 2.1 Nivel AA**.
+
+Para dar estricto y total cumplimiento a la directriz académica de la asignatura de **Ingeniería Web (Grupo 1SF-133)**, la versión oficial del sistema entregada en el directorio `Codigo del proyecto Fase 3/` ha sido desarrollada **100% libre de JavaScript** (0 archivos `.js`, 0 etiquetas `<script>` y 0 manejadores de eventos inline). Toda la interactividad —incluyendo navegación por pestañas, modales de confirmación, interruptores toggle de administración, microinteracciones de estado y adaptabilidad responsiva— se sustenta en selectores y pseudo-clases avanzadas de CSS (`:target`, `:checked`, `:hover`, transiciones cúbicas y variables personalizadas).
+
+> **Nota académica sobre interactividad complementaria:** De forma paralela y como valor agregado para demostrar la evolución del sistema hacia la reactividad en el cliente antes de la conexión con el backend en PHP/MySQL, el equipo desarrolló una versión complementaria con JavaScript Vanilla (almacenamiento en `localStorage`, cálculo reactivo del abono y filtrado en memoria). La versión evaluable oficial de la Fase 3 permanece en HTML5/CSS3 puro.
+
+### 8.1 Estructura del Directorio del Proyecto
+
+El código fuente de la Fase 3 se encuentra organizado de manera modular e intuitiva:
+
+```text
+Codigo del proyecto Fase 3/
+├── admin.html               # Panel de control de administración y cobro POS
+├── catalogo.html            # Catálogo general con las 15 canchas y filtros facetados
+├── contacto.html            # Formulario de soporte y canales oficiales de atención
+├── detalle.html             # Ficha técnica, matriz de disponibilidad y modal de abono
+├── index.html               # Landing page institucional con buscador rápido
+├── login.html               # Módulo unificado de inicio de sesión y registro (CSS tabs)
+├── normas.html              # Normativas de calzado, prohibiciones y FAQ académica
+├── reservas.html            # Historial de turnos del cliente con desglose económico
+├── css/
+│   ├── estilos.css          # Variables globales, reset, paleta y accesibilidad base
+│   ├── componentes.css      # Componentes modulares (botones, tarjetas, modales, tablas)
+│   └── responsive.css       # Adaptabilidad responsiva para móviles y tabletas
+└── img/
+    ├── canchas*.jpg         # Galería fotográfica de las 15 instalaciones en Panamá
+    └── iconos/              # Set completo de 24 iconos vectoriales SVG oficiales
+```
+
+---
+
+## 9. Vistas Principales Desarrolladas
+
+1. **Página de Inicio (`index.html`):** Hero banner con propuesta de valor del abono del 30% vía Yappy, buscador rápido nativo por disciplina y cubierta mediante método `GET`, collage interactivo de 6 disciplinas deportivas con balones resaltados y microinteracciones hover envolventes con sombras verdes, guía paso a paso del proceso de reserva en 4 etapas y pie de página institucional.
+2. **Catálogo de Canchas (`catalogo.html`):** Despliegue de las 15 instalaciones deportivas ubicadas exclusivamente en la Provincia de Panamá (Centenario, El Cangrejo, Juan Díaz, San Francisco, Costa del Este, Bethania, Calzada de Amador), acompañadas de panel lateral de filtros facetados multicriterio y barra de ordenamiento.
+3. **Detalle de Cancha y Disponibilidad (`detalle.html`):** Ficha técnica completa de la instalación seleccionada, especificaciones de superficie y comodidades, matriz semanal de disponibilidad por bloques horarios, leyenda de estados multimodal accesible (Libre, Por confirmar, Ocupado, Mantenimiento) y ventana modal `:target` con instrucciones oficiales de abono del 30% mediante Yappy al **6351-6012** (`@birriasdeone`) con botón de enlace a WhatsApp.
+4. **Historial de Mis Reservas (`reservas.html`):** Panel privado para el cliente autenticado Carlos Méndez, pestañas de filtrado por estado de reserva, tarjetas de turnos con el desglose económico exacto de 4 valores (Tarifa Total, Abono Registrado 30%, Saldo Pendiente en Caja 70% y Comprobante ID), modal de constancia digital de abono y botón de cierre de sesión (`Salir`).
+5. **Panel de Control y Recepción (`admin.html`):** Módulo administrativo con métricas operativas en tiempo real, sección 8.1 de Gestión de Canchas Precargadas con interruptores toggle activos/inactivos para pausar disponibilidad al instante, sección 8.2 de Reservas y Cobro POS con validación de abonos y registro de pagos presenciales, y modales para programar inhabilitación por mantenimiento o reserva asistida.
+6. **Normativas y Calzado Técnico (`normas.html`):** Guía visual de compatibilidad de calzado según la superficie de juego (suela plana non-marking en tabloncillo, tacos turf/multitaco en césped sintético, espiga en tierra batida), catálogo ilustrado de prohibiciones mediante iconografía SVG y sección de preguntas frecuentes (FAQ) sobre políticas de reserva y caducidad de turnos preliminares.
+7. **Atención y Contacto (`contacto.html`):** Canales de comunicación directa y soporte técnico (teléfono/WhatsApp y Yappy comercial al número oficial **6351-6012**), formulario accesible de consultas y mapa de cobertura en la Provincia de Panamá.
+8. **Acceso y Registro Unificado (`login.html`):** Formulario de autenticación modular que conmuta limpiamente entre Iniciar Sesión y Registrarse mediante radio buttons y etiquetas CSS puro (sin casillas redundantes de "Recordarme"), incorporando accesos rápidos de prueba con perfiles preconfigurados de Cliente y Administrador para facilitar la evaluación docente.
+
+---
+
+## 10. Auditoría y Uso de la IA - Fase 3
+
+### Tabla 4. Auditoría y Uso de la IA - Fase 3 (Implementación Web HTML5 / CSS3)
+
+| Sección / Componente | Integrante(s) | Herramienta y Link al prompt | Aporte de la IA | Aporte Intelectual del equipo |
+| :--- | :--- | :--- | :--- | :--- |
+| **Arquitectura Global de Estilos, Multimedia y Diseño Visual** | Gonzalez, Walter (25%) | Antigravity / Gemini — [Ver prompts 14, 16 y 17 en prompts.md](./Auditoria/prompts.md) | Recomendó fuentes y plataformas de inspiración visual para botones y componentes modernos (como Uiverse.io), propuso una arquitectura y división de archivos CSS modular (`estilos.css`, `componentes.css` y `responsive.css`) superando la estructura monolítica previa, y asistió en la calibración matemática de variables para sombras verdes multicapa (`--sombra-verde`, `--sombra-verde-hover`) y curvas Bézier de transición. | **Liderazgo integral del 100% del diseño y arquitectura CSS del proyecto:** Creación de las tres hojas de estilo (`estilos.css`, `componentes.css`, `responsive.css`), normalización de tipografías, sistema de diseño responsivo y contraste accesible WCAG 2.1 AA. **Selección, curaduría, edición y optimización del 100% de los recursos multimedia:** Búsqueda y preparación de las imágenes de alta definición de las 15 canchas deportivas en la Provincia de Panamá y recopilación, ajuste y estandarización del set completo de iconos vectoriales SVG oficiales (deportes, superficies, comodidades, estados y navegación), garantizando cero uso de emojis en toda la plataforma. |
+| **Maquetación Semántica de Vistas Públicas y Catálogo** | Sanchez, Jose (25%) | Gemini — [Ver prompt 15 en prompts.md](./Auditoria/prompts.md) | Asistió en la depuración y unificación de elementos `<div>` que se encontraban fragmentados y dispersos en la estructura del catálogo, sugiriendo su sustitución por etiquetas de bloque semántico HTML5 estándar. | Maquetación HTML5 semántica y estructuración de la página de inicio (`index.html`) con el hero banner y el collage interactivo de 6 disciplinas deportivas con balones resaltados; maquetación del catálogo general (`catalogo.html`) con las 15 canchas deportivas precargadas y sidebar de filtros facetados por checkboxes y barra de ordenamiento; y estructuración de la página de normativas técnicas y calzado reglamentario (`normas.html`). |
+| **Maquetación Semántica de Vistas Transaccionales del Cliente** | Rozette, Jose (25%) | Gemini — [Ver prompts 14 y 15 en prompts.md](./Auditoria/prompts.md) | Asistió en la corrección de enlaces y modales de confirmación e instrucciones de abono que presentaban fallas de apertura al remover JavaScript, recomendando el uso de la pseudo-clase `:target`, y en la unificación de estructuras `<div>` anidadas en las tarjetas de turnos. | Maquetación HTML5 semántica de la ficha técnica de cancha (`detalle.html`), implementando la galería de imágenes, características técnicas y la matriz semanal de disponibilidad horaria con leyenda multimodal accesible; estructuración del panel del cliente "Mis Reservas" (`reservas.html`) con tarjetas de turnos, desglose económico de 4 valores (tarifa, abono 30%, saldo en caja 70% y comprobante ID), filtros de estado y botón Salir; y maquetación de la página de contacto y soporte (`contacto.html`) con canales oficiales de Yappy y WhatsApp (6351-6012). |
+| **Maquetación Semántica de Autenticación y Panel Administrativo** | Meneses, Alexander (25%) | Gemini — [Ver prompt 14 en prompts.md](./Auditoria/prompts.md) | Asistió en la corrección de botones de acción y estado (incluyendo el botón "Salir", enlaces de inhabilitación horaria y modales administrativos `:target`), además de la unificación de contenedores repetitivos en las tablas del panel administrativo. | Maquetación HTML5 semántica del módulo unificado de acceso y registro (`login.html`), implementando la alternancia interactiva entre pestañas de Iniciar Sesión y Registrarse mediante radio buttons y etiquetas vinculadas en CSS puro (sin casillas redundantes de "Recordarme"); maquetación del panel integral de control y recepción (`admin.html`), integrando métricas en tarjetas, tabla 8.1 de Gestión de Canchas Precargadas con switch de activación y tabla 8.2 de Reservas con validación de abonos y cobro en sitio POS. |
+
+### Distribución Equitativa de Responsabilidades del Equipo (Fase 3)
+
+El trabajo técnico de la Fase 3 fue distribuido de manera **exacta y proporcional (25% cada integrante)**:
+
+* **Walter Gonzalez (25%):** Creación y arquitectura del **100% del código CSS** (`estilos.css`, `componentes.css`, `responsive.css`), microinteracciones, sombras y accesibilidad; y **selección, edición y curaduría del 100% de los elementos multimedia** (fotografías de las 15 canchas e iconografía vectorial SVG oficial).
+* **Jose Sanchez (25%):** Maquetación y estructura HTML5 semántica de las **vistas públicas y catálogo** (`index.html`, `catalogo.html`, `normas.html`).
+* **Jose Rozette (25%):** Maquetación y estructura HTML5 semántica de las **vistas transaccionales del cliente** (`detalle.html`, `reservas.html`, `contacto.html`).
+* **Alexander Meneses (25%):** Maquetación y estructura HTML5 semántica del **módulo de autenticación y panel de administración** (`login.html`, `admin.html`).
+
+### Declaración Institucional del Uso de Inteligencia Artificial (IA)
+
+En estricta observancia de los lineamientos de integridad académica y ética universitaria de la Universidad Tecnológica de Panamá (UTP), se hace constar que los modelos de Inteligencia Artificial (Antigravity IDE / Google Gemini) fueron empleados exclusivamente como herramientas de apoyo técnico, asistencia y consultoría en los siguientes puntos:
+1. **Depuración de interactividad nativa y botones:** Asistencia en la resolución de fallos en botones, enlaces y modales que originalmente requerían JavaScript, guiando su implementación mediante patrones nativos de HTML5 y selectores CSS avanzados (`:target`, enlaces de navegación y botón "Salir").
+2. **Unificación y saneamiento del DOM:** Fusión y reorganización de contenedores `<div>` que se encontraban innecesariamente fragmentados o separados en las tarjetas y tablas, consolidando una jerarquía limpia y semántica con etiquetas estándar (`<header>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`).
+3. **Propuesta arquitectónica de modularización CSS:** Asesoría en la estructuración de hojas de estilo independientes (`estilos.css`, `componentes.css`, `responsive.css`) para sustituir la estructura monolítica previa, garantizando orden y escalabilidad de cara a la Fase 4.
+4. **Recomendación de fuentes de inspiración visual y UI:** Sugerencia de plataformas de referencia visual (como Uiverse.io y repositorios de accesibilidad web) para la concepción de botones modernos, tarjetas con esquinas redondeadas y microinteracciones hover enriquecidas con sombras verdes personalizadas.
